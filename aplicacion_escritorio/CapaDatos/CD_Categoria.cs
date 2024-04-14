@@ -22,11 +22,8 @@ namespace CapaDatos
             {
                 try
                 {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT IdCategoria, Descripcion, estado FROM Categoria");
-
-                    SqlCommand cmd = new SqlCommand(query.ToString(), con);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("SP_OBTENERCATEGORIAS", con); // Nombre del procedimiento almacenado
+                    cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -44,12 +41,13 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                     lista = new List<Categoria>();
                 }
             }
             return lista;
         }
+
 
         public bool AgregarCategoria(Categoria categoria)
         {
@@ -57,24 +55,33 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "INSERT INTO Categoria (Descripcion, estado) VALUES (@Descripcion, @Estado)";
+                    SqlCommand cmd = new SqlCommand("SP_AGREGARCATEGORIA", con); // Nombre del procedimiento almacenado
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    // Agregar parámetros al procedimiento almacenado
                     cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", categoria.estado);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    // Agregar parámetro de salida para indicar el éxito de la operación
+                    SqlParameter successParameter = new SqlParameter("@Success", SqlDbType.Bit);
+                    successParameter.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(successParameter);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                    // Obtener el valor del parámetro de salida
+                    bool success = (bool)successParameter.Value;
+                    return success;
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
             }
         }
+
 
         public bool EditarCategoria(Categoria categoria)
         {
@@ -82,21 +89,29 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "UPDATE Categoria SET Descripcion = @Descripcion, estado = @Estado WHERE IdCategoria = @IdCategoria";
+                    SqlCommand cmd = new SqlCommand("SP_EDITARCATEGORIA", con); // Nombre del procedimiento almacenado
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    // Agregar parámetros al procedimiento almacenado
+                    cmd.Parameters.AddWithValue("@IdCategoria", categoria.IdCategoria);
                     cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", categoria.estado);
-                    cmd.Parameters.AddWithValue("@IdCategoria", categoria.IdCategoria);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    // Agregar parámetro de salida para indicar el éxito de la operación
+                    SqlParameter successParameter = new SqlParameter("@Success", SqlDbType.Bit);
+                    successParameter.Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add(successParameter);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                    // Obtener el valor del parámetro de salida
+                    bool success = (bool)successParameter.Value;
+                    return success;
                 }
                 catch (Exception ex)
                 {
-                   
+                    // Manejar la excepción si es necesario
                     return false;
                 }
             }
@@ -108,41 +123,39 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT IdCategoria, Descripcion, Estado " +
-                                   "FROM CATEGORIA " +
-                                   "WHERE IdCategoria = @IdCategoria";
+                    SqlCommand cmd = new SqlCommand("SP_OBTENERCATEGORIAPORID", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
+                    cmd.Parameters.Add("@Descripcion", SqlDbType.NVarChar, 100).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@Estado", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                    // Recuperar los valores de salida de los parámetros
+                    string descripcion = cmd.Parameters["@Descripcion"].Value.ToString();
+                    bool estado = Convert.ToBoolean(cmd.Parameters["@Estado"].Value);
+
+                    // Crear y devolver la instancia de Categoria
+                    Categoria categoria = new Categoria
                     {
-                        if (reader.Read())
-                        {
-                            Categoria categoria = new Categoria
-                            {
-                                IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
-                                Descripcion = reader["Descripcion"].ToString(),
-                                estado = Convert.ToBoolean(reader["Estado"])
-                            };
-                            return categoria;
-                        }
-                        else
-                        {
-                            
-                            return null;
-                        }
-                    }
+                        IdCategoria = idCategoria,
+                        Descripcion = descripcion,
+                        estado = estado
+                    };
+
+                    return categoria;
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                     return null;
                 }
             }
         }
+
+
 
         public List<Categoria> ObtenerCategoriasMasVendidas(int topN, DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -150,19 +163,13 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT TOP (@TopN) c.IdCategoria, SUM(dv.Cantidad) AS TotalVendido " +
-                                   "FROM CATEGORIA c " +
-                                   "INNER JOIN PRODUCTO p ON c.IdCategoria = p.IdCategoria " +
-                                   "INNER JOIN DETALLE_VENTA dv ON p.IdProducto = dv.IdProducto " +
-                                   "WHERE dv.FechaRegistro BETWEEN @FechaDesde AND @FechaHasta " +
-                                   "GROUP BY c.IdCategoria " +
-                                   "ORDER BY TotalVendido DESC";
+                    SqlCommand cmd = new SqlCommand("SP_OBTENERCATEGORIASMASVENDIDAS", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                    SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@TopN", topN);
                     cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
                     cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
-                    cmd.CommandType = CommandType.Text;
+
                     con.Open();
 
                     List<Categoria> categoriasMasVendidas = new List<Categoria>();
@@ -171,12 +178,13 @@ namespace CapaDatos
                     {
                         while (reader.Read())
                         {
-                            int idCategoria = Convert.ToInt32(reader["IdCategoria"]);
-                            Categoria categoria = ObtenerCategoriaPorId(idCategoria);
-                            if (categoria != null)
+                            Categoria categoria = new Categoria
                             {
-                                categoriasMasVendidas.Add(categoria);
-                            }
+                                IdCategoria = Convert.ToInt32(reader["IdCategoria"]),
+                                Descripcion = reader["Descripcion"].ToString(),
+                                estado = Convert.ToBoolean(reader["Estado"])
+                            };
+                            categoriasMasVendidas.Add(categoria);
                         }
                     }
 
@@ -184,10 +192,12 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                     return new List<Categoria>();
                 }
             }
         }
+
+
     }
 }
