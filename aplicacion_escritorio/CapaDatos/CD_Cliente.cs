@@ -21,9 +21,8 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT IdCliente, DNI, Nombre, Apellido FROM Cliente";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("SP_OBTENERCLIENTES", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -42,8 +41,8 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
                     lista = new List<Cliente>();
+                    // Manejar la excepción si es necesario
                 }
             }
             return lista;
@@ -55,25 +54,23 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "INSERT INTO Cliente (DNI, Nombre, Apellido) VALUES (@DNI, @Nombre, @Apellido)";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand("SP_AGREGARCLIENTE", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@DNI", cliente.DNI);
                     cmd.Parameters.AddWithValue("@Nombre", cliente.Nombre);
                     cmd.Parameters.AddWithValue("@Apellido", cliente.Apellido);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
 
+                    con.Open();
                     int rowsAffected = cmd.ExecuteNonQuery();
                     return rowsAffected > 0;
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                     return false;
                 }
             }
-
-
         }
 
         public Cliente BuscarClientePorDNI(int dni)
@@ -84,10 +81,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT IdCliente, DNI, Nombre, Apellido FROM Cliente WHERE DNI = @DNI";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand("SP_BUSCARCLIENTEPORDNI", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@DNI", dni);
-                    cmd.CommandType = CommandType.Text;
+
                     con.Open();
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -106,9 +104,10 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                 }
             }
+
             return clienteEncontrado;
         }
 
@@ -120,10 +119,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT IdCliente FROM Cliente WHERE DNI = @DNI";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand("SP_OBTENERIDCLIENTEPORDNI", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@DNI", dni);
-                    cmd.CommandType = CommandType.Text;
+
                     con.Open();
 
                     object result = cmd.ExecuteScalar();
@@ -135,7 +135,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción si es necesario
                 }
             }
 

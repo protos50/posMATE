@@ -23,12 +23,9 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT dc.IdDetalleCompra, dc.IdProducto, dc.PrecioCompra, dc.PrecioVenta, dc.Cantidad, dc.MontoTotal, dc.FechaRegistro, p.Nombre AS NombreProducto " +
-                                                           "FROM DETALLE_COMPRA dc " +
-                                                           "INNER JOIN PRODUCTO p ON dc.IdProducto = p.IdProducto " +
-                                                           "WHERE dc.IdCompra = @IdCompra", con))
+                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERDETALLESCOMPRA", con))
                     {
-                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@IdCompra", idCompra);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -55,7 +52,6 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
                     lista = new List<DetalleCompra>();
                 }
             }
@@ -63,35 +59,38 @@ namespace CapaDatos
             return lista;
         }
 
+
         public bool AgregarDetalleCompra(DetalleCompra detalleCompra)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
-                    string query = "INSERT INTO DETALLE_COMPRA(IdCompra, IdProducto, PrecioCompra, PrecioVenta, Cantidad, MontoTotal, FechaRegistro) " +
-                        "VALUES(@IdCompra, @IdProducto, @PrecioCompra, @PrecioVenta, @Cantidad, @MontoTotal, @FechaRegistro)";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@IdCompra", detalleCompra.IdCompra);
-                    cmd.Parameters.AddWithValue("@IdProducto", detalleCompra.oProducto.IdProducto);
-                    cmd.Parameters.AddWithValue("@PrecioCompra", detalleCompra.PrecioCompra);
-                    cmd.Parameters.AddWithValue("@PrecioVenta", detalleCompra.PrecioVenta);
-                    cmd.Parameters.AddWithValue("@Cantidad", detalleCompra.Cantidad);
-                    cmd.Parameters.AddWithValue("@MontoTotal", detalleCompra.MontoTotal);
-                    cmd.Parameters.AddWithValue("@FechaRegistro", detalleCompra.FechaRegistro);
-                    cmd.CommandType = CommandType.Text;
-                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand("SP_AGREGARDETALLECOMPRA", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdCompra", detalleCompra.IdCompra);
+                        cmd.Parameters.AddWithValue("@IdProducto", detalleCompra.oProducto.IdProducto);
+                        cmd.Parameters.AddWithValue("@PrecioCompra", detalleCompra.PrecioCompra);
+                        cmd.Parameters.AddWithValue("@PrecioVenta", detalleCompra.PrecioVenta);
+                        cmd.Parameters.AddWithValue("@Cantidad", detalleCompra.Cantidad);
+                        cmd.Parameters.AddWithValue("@MontoTotal", detalleCompra.MontoTotal);
+                        cmd.Parameters.AddWithValue("@FechaRegistro", detalleCompra.FechaRegistro);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                        con.Open();
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejo de excepciones
                     return false;
                 }
             }
         }
+
     }
 
 
