@@ -1,17 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\posMate\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|c:\\users\\gonza\\desktop\\nueva carpeta\\posmate\\aplicacion_escritorio\\capadatos\\cd_categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|c:\\users\\gonza\\desktop\\nueva carpeta\\posmate\\aplicacion_escritorio\\capadatos\\cd_cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|c:\\users\\gonza\\desktop\\nueva carpeta\\posmate\\aplicacion_escritorio\\capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -19,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -28,45 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CD_Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
-              "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Usuario.cs",
-              "ToolTip": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
-              "RelativeToolTip": "..\\CapaDatos\\CD_Usuario.cs",
-              "ViewState": "AQIAAIwAAAAAAAAAAAAIwMQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T19:22:13.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CD_Cliente.cs",
-              "DocumentMoniker": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Cliente.cs",
-              "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Cliente.cs",
-              "ToolTip": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Cliente.cs",
-              "RelativeToolTip": "..\\CapaDatos\\CD_Cliente.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAIwJIAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T19:22:00.645Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CD_Categoria.cs",
-              "DocumentMoniker": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Categoria.cs",
-              "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Categoria.cs",
-              "ToolTip": "C:\\Users\\Gonza\\Desktop\\Nueva carpeta\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Categoria.cs",
-              "RelativeToolTip": "..\\CapaDatos\\CD_Categoria.cs",
-              "ViewState": "AQIAAJMAAAAAAAAAAAAIwKoAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T19:18:32.509Z",
-              "EditorCaption": ""
             }
           ]
         }

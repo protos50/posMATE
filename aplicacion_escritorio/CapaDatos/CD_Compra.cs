@@ -14,6 +14,7 @@ namespace CapaDatos
     public class CD_Compra
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
         public List<Compra> ObtenerCompras(int? IdUsuario = null)
         {
             List<Compra> lista = new List<Compra>();
@@ -23,14 +24,11 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT c.IdCompra, u.Nombre AS NombreUsuario, p.Nombre AS NombreProveedor, c.MontoTotal, c.FechaRegistro FROM COMPRA c " +
-                                                           "INNER JOIN USUARIO u ON c.IdUsuario = u.IdUsuario " +
-                                                           "INNER JOIN PROVEEDOR p ON c.IdProveedor = p.IdProveedor" +
-                                                           (IdUsuario.HasValue ? " WHERE c.IdUsuario = @IdUsuario" : ""), con))
-
+                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERCOMPRAS", con))
                     {
-                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandType = CommandType.StoredProcedure;
 
+                        // Agregar parámetro si es necesario
                         if (IdUsuario.HasValue)
                         {
                             cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario.Value);
@@ -60,7 +58,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción según sea necesario
                     lista = new List<Compra>();
                 }
             }
@@ -68,33 +66,32 @@ namespace CapaDatos
             return lista;
         }
 
+
         public bool AgregarCompra(Compra compra)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
-                    string query = "INSERT INTO compra(IdUsuario,IdProveedor,MontoTotal,FechaRegistro)" +
-                        "VALUES(@IdUsuario,@IdProveedor,@MontoTotal,@FechaRegistro)";
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand("SP_AGREGARCOMPRA", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@IdUsuario", compra.oUsuario.IdUsuario);
                     cmd.Parameters.AddWithValue("@IdProveedor", compra.oProveedor.IdProveedor);
                     cmd.Parameters.AddWithValue("@MontoTotal", compra.MontoTotal);
                     cmd.Parameters.AddWithValue("@FechaRegistro", compra.FechaRegistro);
-                    cmd.CommandType = CommandType.Text;
+
                     con.Open();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    int success = (int)cmd.ExecuteScalar();
+                    return success == 1;
                 }
                 catch (Exception ex)
                 {
-                    
                     return false;
                 }
-
             }
         }
+
 
         public int ObtenerUltimoIDCompra()
         {
@@ -105,9 +102,9 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT TOP 1 IdCompra FROM COMPRA ORDER BY IdCompra DESC", con))
+                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERULTIMOIDCOMPRA", con)) 
                     {
-                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandType = CommandType.StoredProcedure;
 
                         object result = cmd.ExecuteScalar();
 
@@ -119,12 +116,14 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejo de excepciones
                 }
             }
 
             return ultimoID;
         }
+
+
 
         public decimal CalcularMontoTotalComprasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -134,30 +133,29 @@ namespace CapaDatos
             {
                 try
                 {
+                    SqlCommand cmd = new SqlCommand("SP_CALCULARMONTOTOTALCOMPRASPORFECHA", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
+                    cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT SUM(MontoTotal) AS MontoTotal FROM COMPRA " +
-                                                          "WHERE FechaRegistro >= @FechaDesde AND FechaRegistro <= @FechaHasta", con))
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
                     {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("@FechaDesde", fechaDesde);
-                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
-
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            montoTotal = Convert.ToDecimal(result);
-                        }
+                        montoTotal = Convert.ToDecimal(result);
                     }
                 }
                 catch (Exception ex)
                 {
-                    
+                    // Manejar la excepción según sea necesario
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
 
             return montoTotal;
         }
+
     }
 }
