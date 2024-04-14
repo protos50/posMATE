@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-using CapaEntidad;  
+using CapaEntidad;
 
 namespace CapaDatos
 {
@@ -23,16 +23,13 @@ namespace CapaDatos
                 {
                     con.Open(); // Abre la conexión 
 
-                    // Consulta SQL para seleccionar datos de usuarios y roles
-                    string query = @"
-                        SELECT u.IdUsuario, u.DNI, u.Nombre, u.Apellido, u.Email, u.Clave, u.Direccion, 
-                               ISNULL(u.FechaNacimiento, '') AS FechaNacimiento, u.Telefono, u.Estado, 
-                               r.IdRol, r.Descripcion 
-                        FROM usuario u
-                        INNER JOIN rol r ON r.IdRol = u.IdRol";
+                    // Nombre del procedimiento almacenado
+                    string storedProcedure = "SP_LISTARUSUARIOS";
 
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    using (SqlCommand cmd = new SqlCommand(storedProcedure, con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -62,13 +59,14 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                   
+                    // Manejo de excepciones
                     throw ex;
                 }
             }
 
             return lista;
         }
+
 
         // Método para registrar un usuario en la base de datos
         public int Registrar(Usuario obj, out string Mensaje)
@@ -168,8 +166,9 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT * FROM USUARIO WHERE Nombre = @Nombre", con))
+                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERUSUARIOPORNOMBRE", con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Nombre", nombre);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -178,8 +177,7 @@ namespace CapaDatos
                             {
                                 usuario = new Usuario()
                                 {
-                                    IdUsuario = Convert.ToInt32(reader["IdUsuario"]),
-                                   
+                                    IdUsuario = Convert.ToInt32(reader["IdUsuario"])
                                 };
                             }
                         }
