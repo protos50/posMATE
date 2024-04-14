@@ -9,7 +9,6 @@
     "start": "nodemon ./src/index.ts"
   },
   "dependencies": {
-    "@rmp135/sql-ts": "^2.1.0",
     "@types/express": "^4.17.18",
     "@types/mssql": "^9.1.0",
     "dotenv": "^16.3.1",

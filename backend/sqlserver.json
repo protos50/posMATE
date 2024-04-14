@@ -1,9 +1,0 @@
-{
-    "client": "tedious",
-    "connection": {
-      "host": "localhost",
-      "user": "db",
-      "password": "Password12345",
-      "database" : "DB_posmate"
-    }
-  }

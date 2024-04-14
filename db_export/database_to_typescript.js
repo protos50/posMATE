@@ -1,18 +1,21 @@
  
 //const Client = require('@rmp135/sql-ts').Client
 import { Client } from '@rmp135/sql-ts' 
- 
+//include env ../backend/.env
+import dotenv from 'dotenv'
+dotenv.config({path: '../backend/.env'})
+
  import fs from 'fs'
 const config = {
   "client": "mssql",
   "connection": {
-    "host": "localhost",
-    "user": "sa",
-    "password": "Password12345",
-    "database": "DB_posmate"
+    "host":  process.env.DB_HOST,
+    "user":  process.env.DB_USER,
+    "password":  process.env.DB_PASS,
+    "database":  process.env.DB_NAME,
   }
 }
-
+ 
 const main=async()=>{
   console.log('Generando interfaces de la base de datos')
 const definition = await Client
