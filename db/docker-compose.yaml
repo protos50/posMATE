@@ -1,0 +1,25 @@
+version: '3.9'
+
+networks:
+  posmate-backend-network:
+    driver: bridge
+
+services:
+  posmate-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-CU10-ubuntu-20.04
+    user: root
+    container_name: posmate-sqlserver
+    networks:
+      - posmate-backend-network
+    restart: always
+    env_file:
+      - sqlserver.env
+      - sapassword.env
+    ports:
+      - '1433:1433'
+    volumes: 
+      - ./data/mssql/data:/var/opt/mssql/data
+      - ./data/sqlserver/data:/var/opt/sqlserver/data
+      - ./data/sqlserver/log:/var/opt/sqlserver/log
+      - ./data/sqlserver/backup:/var/opt/sqlserver/backup
+      - ./data/usr/shared:/usr/shared
