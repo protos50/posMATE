@@ -1,0 +1,22 @@
+{
+  "name": "db_export",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "bin": {
+    "sql-ts": "./bin/sql-ts.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "generator-mssql-types": "^0.1.1",
+    "knex": "^3.1.0",
+    "tedious": "^18.1.0",
+    "typescript": "^5.4.5",
+    "yo": "^5.0.0"
+  }
+}
