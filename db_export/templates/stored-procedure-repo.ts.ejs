@@ -4,29 +4,40 @@
  * WARNING: If you change anything in this file it may be automatically overwriten!
  */
 
-import { Datasource, IProcedureResult, Procedure, SqlTypes } from '@internal/mssql-connector';
+//import { Datasource, IProcedureResult, Procedure, SqlTypes } from '@internal/mssql-connector';
+import { database } from '../../config/database';
+import sql from 'mssql';
 
-export class StoredProcedure {
-    readonly _repository: Datasource;
+//export class <%= data.procedure.name %> {
+   // readonly _repository: Datasource;
 
-    constructor(repository: Datasource) {
-        this._repository = repository;
-    }
+    //constructor(repository: Datasource) {
+    //    this._repository = repository;
+    //}
 
-    public async execute(<% if (!data.procedure.parameters.isEmptyType) { %>params: Params<% } %>): Promise<IProcedureResult<Result>> {
-        const procedure = new Procedure<Result>('<%= data.procedure.name %>');
+ export const execute = async(<% if (!data.procedure.parameters.isEmptyType) { %>params: Params<% } %>): Promise<sql.IProcedureResult<Result>> => {
+       
+    // const procedure = new Procedure<Result>('<%= data.procedure.name %>');
+    var request = new sql.Request(database);
 <%_ for (attr of data.procedure.parameters.attributes) { -%>
     <%_ if (attr.optional) { -%>
         if (params.<%= attr.name %> != null) {
-            procedure.addParameter('<%= attr.name %>', params.<%= attr.name %>, SqlTypes.<%= attr.type.sqlType %>);
+            request.input('<%= attr.name %>', sql.<%= attr.type.sqlType %>, params.<%= attr.name %>);
+            // procedure.addParameter('<%= attr.name %>', params.<%= attr.name %>, SqlTypes.<%= attr.type.sqlType %>);
         }
     <%_ } else { -%>
-        procedure.addParameter('<%= attr.name %>', params.<%= attr.name %>, SqlTypes.<%= attr.type.sqlType %>);
+        request.input('<%= attr.name %>', sql.<%= attr.type.sqlType %>, params.<%= attr.name %>);
+        //procedure.addParameter('<%= attr.name %>', params.<%= attr.name %>, SqlTypes.<%= attr.type.sqlType %>);
     <%_ } -%>
 <%_ } -%>
-        return await this._repository.execProcedure(procedure);
+    //request.output('output_parameter', sql.VarChar(50));
+    const recordsets = await request.execute<Result>('<%= data.procedure.name %>');
+    console.log("RecordSet <%= data.procedure.name %>",recordsets)
+    return recordsets
+    //return await this._repository.execProcedure(procedure);
+
     }
-}
+//}
 
 <%_ if (data.procedure.parameters.isEmptyType) { -%>
 <%_ } else if (data.procedure.parameters.isPlainType) { -%>
@@ -57,5 +68,5 @@ export type Result = {
 <%_ for (attr of data.procedure.result.attributes) { -%>
     <%= attr.name %><%= attr.optional ? '?' : '' %>: <%= attr.type.nativeType %>; /* <%= attr.type.commentSqlType %> */
 <%_ } -%>
-};
-<%_ } -%>
+} | null;
+<%_ }  -%>

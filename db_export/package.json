@@ -17,6 +17,7 @@
     "dotenv": "^16.4.5",
     "generator-mssql-types": "^0.1.1",
     "knex": "^3.1.0",
+    "sequelize-auto-v2": "^0.5.3",
     "tedious": "^18.1.0",
     "typescript": "^5.4.5",
     "yo": "^5.0.0"
