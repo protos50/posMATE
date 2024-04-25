@@ -1,35 +1,37 @@
-// import dotenv from "dotenv";
-// import fs from "fs";
-// import path from "path";
+/*import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 
-// dotenv.config();
+dotenv.config();
 
-// //use sequelize 
-// import { Sequelize } from 'sequelize-typescript';
+//use sequelize 
+import { Sequelize } from 'sequelize-typescript';
 
-// export const db = new Sequelize({
-//   database: process.env.DB_NAME ?? "mysb",
-//   dialect: 'mssql',
-//   username: process.env.DB_USER ?? "sa",
-//   password: process.env.DB_PASS ?? "sa",
-//   port: parseInt(process.env.DB_PORT ?? "1433"),
-//   models: ['../models'], // or [Player, Team],
-// });
+export const db = new Sequelize({
+  database: process.env.DB_NAME ?? "mysb",
+  dialect: 'mssql',
+  username: process.env.DB_USER ?? "sa",
+  password: process.env.DB_PASS ?? "sa",
+  port: parseInt(process.env.DB_PORT ?? "1433"),
+  models: ['../models'], // or [Player, Team],
+});
  
-// async function testConnection() {
-//   try {
-//     await db.authenticate();
-//     console.log("Connection has been established successfully.");
-//   } catch (error) {
-//     console.error("Unable to connect to the database:", error);
-//   }
-// }
-// testConnection();
+async function testConnection() {
+  try {
+    await db.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+}
+testConnection();
  
-// //export database
-// export default db;
-
-/*
+// export database
+export default db;
+*/
+import dotenv from "dotenv";
+ 
+dotenv.config();
 import * as db from "mssql";
 
 const config = {
@@ -40,11 +42,12 @@ const config = {
   port: process.env.DB_PORT,
   options: {
     encrypt: false,
-    trustServerCertificate: false,
+    trustServerCertificate: true,
   },
 };
 
 const connectionString = `Server=${config.server},${config.port};Database=${config.database};User Id=${config.user};Password=${config.password};Encrypt=false`;
+console.log(connectionString)
 
 export const database = new db.ConnectionPool(connectionString)
   .addListener("error", (err) => {
@@ -62,4 +65,4 @@ export const database = new db.ConnectionPool(connectionString)
   .addListener("disconnect", () => {
     console.log("Database connection disconnected");
   }) 
-*/
+

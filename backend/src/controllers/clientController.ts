@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 // import { db } from "../config/database";
 
-let models = require("../models");
+// let models = require("../models");
 //import { SP_LISTARUSUARIOS, SP_AGREGARCLIENTE } from "../procedures";
 
 export const listarClientes = async (req: Request, res: Response) => {
   //get dni, nombre, apellido from request GET parameters
-  try{
-  const users = await  models.USUARIO.findAll()
-  console.log(users)
+  /*try{
+  //const users = await  models.USUARIO.findAll()
+  //console.log(users)
  
  
   res.json({
@@ -23,7 +23,7 @@ export const listarClientes = async (req: Request, res: Response) => {
     });
   }
 
-
+*/
 
   // const result = await SP_LISTARUSUARIOS();
   //const result = await database.query('SELECT TOP 5 * FROM Cliente');

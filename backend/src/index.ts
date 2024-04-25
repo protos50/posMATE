@@ -2,23 +2,23 @@ import dotenv from "dotenv";
 import express from "express";
 import authRouter from "./routes/authRouter";
 import clientesRouter from "./routes/clientesRouter";
- 
+import {database} from "./config/database";
  
 
 dotenv.config();
 
  
-// if (!db.connected) {
-//   database
-//     .connect()
-//     .then((asd:any) => {
-//       console.log(asd)
-//       console.log("Connected to database");
-//     })
-//     .catch((err:any) => {
-//       console.log("Error connecting to database", err);
-//     });
-// }
+if (!database.connected) {
+  database
+    .connect()
+    .then((asd:any) => {
+      console.log(asd)
+      console.log("Connected to database");
+    })
+    .catch((err:any) => {
+      console.log("Error connecting to database", err);
+    });
+}
 
 
 const app: express.Application = express();
