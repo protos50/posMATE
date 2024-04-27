@@ -5,5 +5,5 @@
  */
 
 <%_ for (name of data.procedureNames) { -%>
-export * as <%= name %> from './impl/<%= name %>';
+export { execute as <%= name %> } from './impl/<%= name %>';
 <%_ } -%>

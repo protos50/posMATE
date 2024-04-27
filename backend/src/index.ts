@@ -1,18 +1,37 @@
-import dotenv from 'dotenv';
-import express from 'express';
-import authRouter from './routes/authRouter';
+import dotenv from "dotenv";
+import express from "express";
+import authRouter from "./routes/authRouter";
+import clientesRouter from "./routes/clientesRouter";
+import {database} from "./config/database";
+ 
+
 dotenv.config();
+
+ 
+if (!database.connected) {
+  database
+    .connect()
+    .then((asd:any) => {
+      console.log(asd)
+      console.log("Connected to database");
+    })
+    .catch((err:any) => {
+      console.log("Error connecting to database", err);
+    });
+}
+
 
 const app: express.Application = express();
 //use json
 app.use(express.json());
- 
+
 const port = process.env.PORT;
 
-app.use('/auth', authRouter);
+app.use("/auth", authRouter);
+app.use("/clientes", clientesRouter);
 
-app.get('/', (_req: express.Request, _res: express.Response) => {
-  _res.send('Hola');
+app.get("/", (_req: express.Request, _res: express.Response) => {
+  _res.send("Hola");
 });
 
 // Server setup
