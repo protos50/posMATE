@@ -2,24 +2,30 @@ import dotenv from "dotenv";
 import express from "express";
 import authRouter from "./routes/authRouter";
 import clientesRouter from "./routes/clientesRouter";
-import {database} from "./config/database";
- 
+import { database } from "./config/database";
 
 dotenv.config();
 
- 
-if (!database.connected) {
-  database
-    .connect()
-    .then((asd:any) => {
-      console.log(asd)
-      console.log("Connected to database");
-    })
-    .catch((err:any) => {
-      console.log("Error connecting to database", err);
-    });
+function checkDBConnection() {
+  if (!database.connected) {
+    console.log("Connecting to database...");
+    database
+      .connect()
+      .then((conn: any) => {
+
+        console.log(`Connected to database ${conn.config.database} on server ${conn.config.server}:${conn.config.port}`);
+      })
+      .catch((err: any) => {
+        console.log("Error connecting to database", err.message);
+      });
+  }
 }
 
+checkDBConnection();
+
+setInterval(() => {
+  checkDBConnection();
+}, 10000);
 
 const app: express.Application = express();
 //use json
