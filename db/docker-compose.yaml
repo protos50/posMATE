@@ -22,12 +22,12 @@ services:
       retries: 10
       start_period: 10s
     ports:
+      #- '1433:1433'
+      # Si el puerto 1433 esta ocupado en el host, usar el puerto 1533
       - '1433:1433'
     volumes: 
-      - ./data/mssql/data:/var/opt/mssql/data
-      - ./data/sqlserver/data:/var/opt/sqlserver/data
-      - ./data/sqlserver/log:/var/opt/sqlserver/log
-      - ./data/sqlserver/backup:/var/opt/sqlserver/backup
+      - ./data/mssql:/var/opt/mssql
+      - ./data/sqlserver:/var/opt/sqlserver
       - ./data/usr/shared:/usr/shared
   posmate-api: 
     build: ../backend
