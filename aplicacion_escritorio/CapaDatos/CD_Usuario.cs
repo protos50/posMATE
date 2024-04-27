@@ -6,11 +6,78 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using CapaEntidad;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace CapaDatos
 {
     public class CD_Usuario
     {
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
+
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener una lista de usuarios.
+        /// </summary>
+        /// <returns>Una lista de objetos Usuario si la solicitud es exitosa; de lo contrario, una lista vacía.</returns>
+        public async Task<List<Usuario>> ListarAsync()
+        {
+            // Inicializa una nueva lista de usuarios
+            List<Usuario> lista = new List<Usuario>();
+            try
+            {
+                // Realiza una solicitud GET a la API de usuarios
+                HttpResponseMessage response = await client.GetAsync("http://localhost:8000/usuarios");
+                // Asegura que la respuesta sea exitosa (código de estado 200-299)
+                response.EnsureSuccessStatusCode();
+                // Lee el cuerpo de la respuesta como un string
+                string responseBody = await response.Content.ReadAsStringAsync();
+                // Deserializa el JSON a una lista de objetos Usuario
+                lista = JsonConvert.DeserializeObject<List<Usuario>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", e.Message);
+            }
+            // Devuelve la lista de usuarios
+            return lista;
+        }
+
+
+        /// <summary>
+        /// Envía una solicitud asincrónica POST a la API para autenticar un usuario.
+        /// </summary>
+        /// <param name="DNI">El DNI del usuario que intenta iniciar sesión.</param>
+        /// <param name="Clave">La clave del usuario que intenta iniciar sesión.</param>
+        /// <returns>Un objeto Usuario si la autenticación es exitosa; de lo contrario, null.</returns>
+        public async Task<Usuario> LoginAsync(string DNI, string Clave)
+        {
+            // Empaqueta los datos de DNI y Clave en un objeto anónimo
+            var loginData = new { DNI, Clave };
+            // Convierte los datos de login a JSON y los envía como contenido de la solicitud
+            var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
+
+            // Realiza la solicitud POST a la API de login
+            var response = await client.PostAsync("http://localhost:3000/login", content);
+            if (response.IsSuccessStatusCode)
+            {
+                // Lee el cuerpo de la respuesta como un string
+                var responseBody = await response.Content.ReadAsStringAsync();
+                // Deserializa el JSON a un objeto Usuario
+                var usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                // Devuelve el objeto Usuario
+                return usuario;
+            }
+            else
+            {
+                // Devuelve null si las credenciales no son correctas o si ocurre un error
+                return null;
+            }
+        }
+
+
         // Método para listar usuarios desde la base de datos
         public List<Usuario> Listar()
         {
@@ -67,6 +134,61 @@ namespace CapaDatos
             return lista;
         }
 
+        /// <summary>
+        /// Envía una solicitud asincrónica POST a la API para registrar un nuevo usuario.
+        /// </summary>
+        /// <param name="obj">El objeto Usuario con los datos a registrar.</param>
+        /// <returns>Una tupla que contiene el ID del usuario generado y el mensaje de resultado.</returns>
+        public async Task<(int IdUsuario, string Mensaje)> RegistrarAsync(Usuario obj)
+        {
+            int idUsuarioGenerado = 0;
+            string mensaje = string.Empty;
+
+            try
+            {
+                // Empaqueta los datos del usuario en un objeto anónimo
+                var userData = new
+                {
+                    obj.Nombre,
+                    obj.Apellido,
+                    obj.Clave,
+                    obj.Email,
+                    obj.DNI,
+                    obj.Direccion,
+                    FechaNacimiento = obj.FechaNacimiento.ToString("yyyy-MM-dd"),
+                    obj.Telefono,
+                    obj.oRol.IdRol,
+                    obj.Estado
+                };
+                var content = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
+
+                // Realiza la solicitud POST a la API de registro de usuarios
+                var response = await client.PostAsync("http://localhost:3000/usuarios/registrar", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Lee el cuerpo de la respuesta como un string
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    // Deserializa el JSON para obtener el ID del usuario y el mensaje
+                    dynamic result = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                    idUsuarioGenerado = result.IdUsuarioResultado;
+                    mensaje = result.Mensaje;
+                }
+                else
+                {
+                    // Lee el cuerpo de la respuesta como un string para obtener el mensaje de error
+                    mensaje = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                mensaje = e.Message;
+            }
+
+            return (idUsuarioGenerado, mensaje);
+        }
+
+
 
         // Método para registrar un usuario en la base de datos
         public int Registrar(Usuario obj, out string Mensaje)
@@ -111,6 +233,58 @@ namespace CapaDatos
 
             return idUsuarioGenerado;
         }
+
+        public async Task<(bool Respuesta, string Mensaje)> EditarUsuarioAsync(Usuario obj)
+        {
+            int respuesta = 0;
+            string mensaje = string.Empty;
+
+            try
+            {
+                // Empaqueta los datos del usuario en un objeto anónimo
+                var userData = new
+                {
+                    obj.IdUsuario,
+                    obj.Nombre,
+                    obj.Apellido,
+                    obj.Clave,
+                    obj.Email,
+                    obj.DNI,
+                    obj.Direccion,
+                    FechaNacimiento = obj.FechaNacimiento.ToString("yyyy-MM-dd"),
+                    obj.Telefono,
+                    obj.oRol.IdRol,
+                    obj.Estado
+                };
+                var content = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
+
+                // Realiza la solicitud PUT a la API para editar el usuario
+                var response = await client.PutAsync("http://localhost:3000/usuarios/editar", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Lee el cuerpo de la respuesta como un string
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    // Deserializa el JSON para obtener la respuesta y el mensaje
+                    dynamic result = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                    respuesta = result.Respuesta;
+                    mensaje = result.Mensaje;
+                }
+                else
+                {
+                    // Lee el cuerpo de la respuesta como un string para obtener el mensaje de error
+                    mensaje = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                mensaje = e.Message;
+            }
+
+           
+            return (Convert.ToBoolean(respuesta), mensaje);
+        }
+
 
         // Método para editar un usuario en la base de datos
         public bool Editar(Usuario obj, out string Mensaje)

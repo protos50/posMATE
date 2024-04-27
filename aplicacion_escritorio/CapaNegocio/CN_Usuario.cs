@@ -11,11 +11,33 @@ namespace CapaNegocio
     public class CN_Usuario
     {
         private CD_Usuario ocd_usuario = new CD_Usuario();
+        
         public List<Usuario> Listar()
         {
             return ocd_usuario.Listar();
         }
 
+        public async Task<List<Usuario>> ListarAsync()
+        {
+            return await ocd_usuario.ListarAsync();
+        }
+
+        public async Task<Usuario> LoginAsync(string DNI, string Clave)
+        {
+            return await ocd_usuario.LoginAsync(DNI, Clave);
+        }
+
+        public async Task<(int IdUsuario, string Mensaje)> RegistrarAsync(Usuario obj)
+        {
+            // Aquí llamas al método RegistrarAsync de la capa de datos
+            return await ocd_usuario.RegistrarAsync(obj);
+        }
+
+        public async Task<(bool Respuesta, string Mensaje)> EditarUsuarioAsync(Usuario obj)
+        {
+            // Aquí llamas al método RegistrarAsync de la capa de datos
+            return await ocd_usuario.EditarUsuarioAsync(obj);
+        }
 
         public int Registrar(Usuario obj, out string Mensaje)
         {

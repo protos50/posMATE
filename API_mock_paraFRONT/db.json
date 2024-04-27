@@ -1,0 +1,133 @@
+{
+  "usuarios": [
+    {
+      "IdUsuario": 1,
+      "Nombre": "AdminGonzalo",
+      "Apellido": "Ramirez",
+      "Clave": "123",
+      "Email": "admin@gmail.com",
+      "DNI": "123",
+      "Direccion": "Brasil 120",
+      "FechaNacimiento": "2002-10-10",
+      "Telefono": "3794205084",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 1,
+        "Descripcion": "Administrador"
+      }
+    },
+    {
+      "IdUsuario": 2,
+      "Nombre": "AdminFranco",
+      "Apellido": "zini",
+      "Clave": "admin2",
+      "Email": "admin2@gmail.com",
+      "DNI": "40049028",
+      "Direccion": "Uruguay 201",
+      "FechaNacimiento": "1998-11-06",
+      "Telefono": "3794203121",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 1,
+        "Descripcion": "Administrador"
+      }
+    },
+    {
+      "IdUsuario": 3,
+      "Nombre": "EncargadoLuis",
+      "Apellido": "Lopez",
+      "Clave": "1234",
+      "Email": "encargado@gmail.com",
+      "DNI": "1234",
+      "Direccion": "Lavalle 101",
+      "FechaNacimiento": "1995-07-13",
+      "Telefono": "3775405121",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 3,
+        "Descripcion": "Encargado"
+      }
+    },
+    {
+      "IdUsuario": 4,
+      "Nombre": "EncargadoPedro",
+      "Apellido": "Silva",
+      "Clave": "encargado2",
+      "Email": "encargado2@gmail.com",
+      "DNI": "38124851",
+      "Direccion": "Peru 431",
+      "FechaNacimiento": "2000-05-31",
+      "Telefono": "1122524512",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 3,
+        "Descripcion": "Encargado"
+      }
+    },
+    {
+      "IdUsuario": 5,
+      "Nombre": "EmpleadoCamila",
+      "Apellido": "Paredes",
+      "Clave": "12345",
+      "Email": "vendedor@gmail.com",
+      "DNI": "12345",
+      "Direccion": "junin 12",
+      "FechaNacimiento": "2002-12-14",
+      "Telefono": "3795812351",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 2,
+        "Descripcion": "Empleado"
+      }
+    },
+    {
+      "IdUsuario": 6,
+      "Nombre": "EmpleadoMartin",
+      "Apellido": "Palermo",
+      "Clave": "empleado2",
+      "Email": "empleado2@gmail.com",
+      "DNI": "42528412",
+      "Direccion": "San lorenzo 991",
+      "FechaNacimiento": "2000-07-14",
+      "Telefono": "1120458121",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 2,
+        "Descripcion": "Empleado"
+      }
+    }
+  ],
+  "login": [
+    {
+      "IdUsuario": 1,
+      "Nombre": "AdminGonzalo",
+      "Apellido": "Ramirez",
+      "Clave": "123",
+      "Email": "admin@gmail.com",
+      "DNI": "123",
+      "Direccion": "Brasil 120",
+      "FechaNacimiento": "2002-10-10",
+      "Telefono": "3794205084",
+      "Estado": true,
+      "oRol": {
+        "IdRol": 1,
+        "Descripcion": "Administrador"
+      }
+    },
+    {
+      "id": "236c",
+      "DNI": "123",
+      "Clave": "123"
+    },
+    {
+      "id": "87da",
+      "DNI": "123123123",
+      "Clave": "123123"
+    },
+    {
+      "id": "e154",
+      "DNI": "123",
+      "Clave": "123"
+    }
+  ]
+}

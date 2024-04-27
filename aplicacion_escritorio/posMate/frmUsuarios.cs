@@ -231,7 +231,7 @@ namespace CapaPresentacion
         {
 
         }
-
+        /*
         // ********GUARDAR *************
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -345,6 +345,125 @@ namespace CapaPresentacion
                 else
                 {
                     MessageBox.Show(mensaje);
+                }
+            }
+        }
+        */
+        // ********GUARDAR *************
+        private async void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //** VALIDACIONES **
+
+            // Validación de campos obligatorios
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                string.IsNullOrWhiteSpace(txtClave.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtDNI.Text) ||
+                string.IsNullOrWhiteSpace(txtDireccion.Text) ||
+                string.IsNullOrWhiteSpace(txtTelefono.Text) ||
+                cboRol.SelectedItem == null ||
+                cboEstado.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor, completa todos los campos obligatorios.");
+                return;
+            }
+
+            // Validación de DNI como número entero positivo
+            if (!int.TryParse(txtDNI.Text, out int dni) || dni <= 0)
+            {
+                MessageBox.Show("El DNI debe ser un número válido y mayor que cero.");
+                return;
+            }
+
+            // Validación de dirección de correo electrónico
+            string emailPattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+            if (!Regex.IsMatch(txtEmail.Text, emailPattern))
+            {
+                MessageBox.Show("El correo electrónico ingresado no es válido.");
+                return;
+            }
+
+            string mensaje = string.Empty;
+            int idUsuario = 0;
+
+            if (!string.IsNullOrEmpty(txtId.Text))
+            {
+                // Si el campo txtId no está vacío, intenta convertirlo a un entero
+                if (!int.TryParse(txtId.Text, out idUsuario))
+                {
+                    MessageBox.Show("El campo ID no contiene un valor numérico válido.");
+                    return;
+                }
+            }
+
+            if (!Regex.IsMatch(txtNombre.Text, "^[A-Za-z ]+$") || !Regex.IsMatch(txtApellido.Text, "^[A-Za-z ]+$"))
+            {
+                MessageBox.Show("Los nombres y apellidos solo deben contener letras y espacios.");
+                return;
+            }
+
+            Usuario usuario = new Usuario()
+            {
+                IdUsuario = idUsuario,
+                Nombre = txtNombre.Text,
+                Apellido = txtApellido.Text,
+                Clave = txtClave.Text,
+                Email = txtEmail.Text,
+                DNI = txtDNI.Text,
+                Direccion = txtDireccion.Text,
+                FechaNacimiento = dtpFecha.Value,
+                Telefono = txtTelefono.Text,
+                oRol = new Rol() { IdRol = Convert.ToInt32(((OpcionCombo)cboRol.SelectedItem).Valor) },
+                Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false,
+            };
+
+            if (usuario.IdUsuario == 0)
+            {
+                // Llamada al método RegistrarAsync y espera por el resultado
+                var resultado = await new CN_Usuario().RegistrarAsync(usuario);
+
+                // Manejo del resultado
+                if (resultado.IdUsuario != 0)
+                {
+                    dgvData.Rows.Add(new object[] { "", resultado.IdUsuario, usuario.DNI, usuario.Nombre, usuario.Apellido, usuario.Clave, usuario.Email, usuario.Direccion, usuario.FechaNacimiento, usuario.Telefono, ((OpcionCombo)cboRol.SelectedItem).Texto.ToString(), ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString() });
+                    limpiar();
+
+                    // Mostrar un mensaje de éxito al guardar
+                    MessageBox.Show("Usuario guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Mostrar el mensaje de error o información devuelto por el método RegistrarAsync
+                    MessageBox.Show(resultado.Mensaje);
+                }
+            }
+            //si es usuario ya existente actualiza
+            else
+            {
+                var resultado = await new CN_Usuario().EditarUsuarioAsync(usuario);
+                if (resultado.Respuesta)
+                {
+                    DataGridViewRow row = dgvData.Rows[int.Parse(txtIndice.Text)];
+                    row.Cells["Id"].Value = txtId.Text;
+                    row.Cells["Nombre"].Value = txtNombre.Text;
+                    row.Cells["Apellido"].Value = txtApellido.Text;
+                    row.Cells["Clave"].Value = txtClave.Text;
+                    row.Cells["Email"].Value = txtEmail.Text;
+                    row.Cells["Documento"].Value = txtDNI.Text;
+                    row.Cells["Direccion"].Value = txtDireccion.Text;
+                    row.Cells["FechaNacimiento"].Value = dtpFecha.Value;
+                    row.Cells["Telefono"].Value = txtTelefono.Text;
+                    row.Cells["Estado"].Value = ((OpcionCombo)cboEstado.SelectedItem).Texto.ToString();
+                    row.Cells["Rol"].Value = ((OpcionCombo)cboRol.SelectedItem).Texto.ToString();
+                    limpiar();
+
+                    // Mostrar un mensaje de éxito al editar
+                    MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(resultado.Mensaje);
                 }
             }
         }

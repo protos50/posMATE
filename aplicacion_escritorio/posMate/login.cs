@@ -51,6 +51,35 @@ namespace CapaPresentacion
             }
         }
 
+        private async void iconButton1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtDNI.Text) || string.IsNullOrWhiteSpace(txtClave.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            // Llamada asincrónica al método Listar
+            /*
+            List<Usuario> usuarios = await new CN_Usuario().ListarAsync();
+            Usuario oUsuario = usuarios.FirstOrDefault(u => u.DNI == txtDNI.Text && u.Clave == txtClave.Text && u.Estado != false);
+            */
+            Usuario oUsuario = await new CN_Usuario().LoginAsync(txtDNI.Text, txtClave.Text);
+
+            if (oUsuario != null)
+            {
+                Form1 form1 = new Form1(oUsuario);
+                form1.Show();
+                this.Hide();
+                form1.FormClosing += frm_closing;
+            }
+            else
+            {
+                MessageBox.Show("Credenciales incorrectas. Por favor, verifique su DNI y Clave.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /*
         private void iconButton1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtDNI.Text) || string.IsNullOrWhiteSpace(txtClave.Text))
@@ -74,7 +103,7 @@ namespace CapaPresentacion
             {
                 MessageBox.Show("Credenciales incorrectas. Por favor, verifique su DNI y Clave.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         private void iconButton2_Click(object sender, EventArgs e)
         {
