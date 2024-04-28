@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import authRouter from "./routes/authRouter";
 import clientesRouter from "./routes/clientesRouter";
+import usuariosRouter from "./routes/usuariosRouter";
 import { database } from "./config/database";
 
 dotenv.config();
@@ -35,6 +36,7 @@ const port = process.env.PORT;
 
 app.use("/auth", authRouter);
 app.use("/clientes", clientesRouter);
+app.use("/usuarios", usuariosRouter);
 
 app.get("/", (_req: express.Request, _res: express.Response) => {
   _res.send("Hola");

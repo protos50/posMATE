@@ -23,14 +23,8 @@ import sql from 'mssql';
             request.input('IdCategoria', sql.Int(), params.IdCategoria);
             // procedure.addParameter('IdCategoria', params.IdCategoria, SqlTypes.Int());
         }
-        if (params.Descripcion != null) {
-            request.input('Descripcion', sql.NVarChar(100), params.Descripcion);
-            // procedure.addParameter('Descripcion', params.Descripcion, SqlTypes.NVarChar(100));
-        }
-        if (params.Estado != null) {
-            request.input('Estado', sql.Bit(), params.Estado);
-            // procedure.addParameter('Estado', params.Estado, SqlTypes.Bit());
-        }
+    request.output('Descripcion', sql.NVarChar(100));
+    request.output('Estado', sql.Bit());
     //request.output('output_parameter', sql.VarChar(50));
     const recordsets = await request.execute<Result>('SP_OBTENERCATEGORIAPORID');
     console.log("RecordSet SP_OBTENERCATEGORIAPORID",recordsets)

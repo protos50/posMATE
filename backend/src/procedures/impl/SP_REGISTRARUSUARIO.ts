@@ -59,14 +59,8 @@ import sql from 'mssql';
             request.input('Estado', sql.Bit(), params.Estado);
             // procedure.addParameter('Estado', params.Estado, SqlTypes.Bit());
         }
-        if (params.IdUsuarioResultado != null) {
-            request.input('IdUsuarioResultado', sql.Int(), params.IdUsuarioResultado);
-            // procedure.addParameter('IdUsuarioResultado', params.IdUsuarioResultado, SqlTypes.Int());
-        }
-        if (params.Mensaje != null) {
-            request.input('Mensaje', sql.VarChar(500), params.Mensaje);
-            // procedure.addParameter('Mensaje', params.Mensaje, SqlTypes.VarChar(500));
-        }
+    request.output('IdUsuarioResultado', sql.Int());
+    request.output('Mensaje', sql.VarChar(500));
     //request.output('output_parameter', sql.VarChar(50));
     const recordsets = await request.execute<Result>('SP_REGISTRARUSUARIO');
     console.log("RecordSet SP_REGISTRARUSUARIO",recordsets)

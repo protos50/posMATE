@@ -20,6 +20,7 @@ import sql from 'mssql';
     // const procedure = new Procedure<Result>('<%= data.procedure.name %>');
     var request = new sql.Request(database);
 <%_ for (attr of data.procedure.parameters.attributes) { -%>
+<%_ if (attr.inputOrOutput == "input") { -%>
     <%_ if (attr.optional) { -%>
         if (params.<%= attr.name %> != null) {
             request.input('<%= attr.name %>', sql.<%= attr.type.sqlType %>, params.<%= attr.name %>);
@@ -29,6 +30,9 @@ import sql from 'mssql';
         request.input('<%= attr.name %>', sql.<%= attr.type.sqlType %>, params.<%= attr.name %>);
         //procedure.addParameter('<%= attr.name %>', params.<%= attr.name %>, SqlTypes.<%= attr.type.sqlType %>);
     <%_ } -%>
+<%_ }else{ -%>
+    request.output('<%= attr.name %>', sql.<%= attr.type.sqlType %>);
+<%_ } -%>
 <%_ } -%>
     //request.output('output_parameter', sql.VarChar(50));
     const recordsets = await request.execute<Result>('<%= data.procedure.name %>');
