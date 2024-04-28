@@ -280,8 +280,6 @@ namespace CapaDatos
                 // Manejo de excepciones en caso de error en la solicitud HTTP
                 mensaje = e.Message;
             }
-
-           
             return (Convert.ToBoolean(respuesta), mensaje);
         }
 
@@ -365,6 +363,37 @@ namespace CapaDatos
 
             return usuario;
         }
+
+        public async Task<Usuario> ObtenerUsuarioPorNombreAsync(string nombre)
+        {
+            try
+            {
+                var response = await client.GetAsync($"http://localhost:3000/usuarios/obtener-por-nombre?nombre={nombre}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    // Verifica si la API devolvió un objeto vacío
+                    if (string.IsNullOrWhiteSpace(responseBody))
+                    {
+                        return null; // El usuario será null si la API devolvió un objeto vacío
+                    }
+                    else
+                    {
+                        var usuario = JsonConvert.DeserializeObject<Usuario>(responseBody);
+                        return usuario; // Devuelve el usuario si se encontró
+                    }
+                }
+                else
+                {
+                    return null; // El usuario será null si la respuesta no fue exitosa
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

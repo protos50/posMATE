@@ -47,11 +47,6 @@ async function enviarPeticionPut(url, datos) {
   }
 }
 
-// Url
-const urlRegistrar = 'http://localhost:3000/usuarios/registrar';
-const urlUsuarios = 'http://localhost:3000/usuarios';
-const urlEditarUsuario = 'http://localhost:3000/usuarios/editar';
-
 // Datos a mandar
 const dato_usuario_editar = {
   IdUsuario: '1',
@@ -80,6 +75,13 @@ const dato_usuario_registrar = {
   Estado: false
 };
 
+// Url
+const urlRegistrar = 'http://localhost:3000/usuarios/registrar';
+const urlUsuarios = 'http://localhost:3000/usuarios';
+const urlEditarUsuario = 'http://localhost:3000/usuarios/editar';
+const urlUsuarioPorNombre = 'http://localhost:3000/usuarios/obtener-por-nombre?nombre={Franquitoz}';
+
 //enviarPeticionPost(urlRegistrar, dato_usuario_registrar); // POST registrar usuario
 //enviarPeticionGet(urlUsuarios); // GET peticion lista usuarios
-enviarPeticionPut(urlEditarUsuario, dato_usuario_editar) // PUT editar un usuario
+//enviarPeticionPut(urlEditarUsuario, dato_usuario_editar) // PUT editar un usuario
+enviarPeticionGet(urlUsuarioPorNombre) // GET usuario por nombre
