@@ -31,10 +31,7 @@ import sql from 'mssql';
             request.input('Estado', sql.Bit(), params.Estado);
             // procedure.addParameter('Estado', params.Estado, SqlTypes.Bit());
         }
-        if (params.Success != null) {
-            request.input('Success', sql.Bit(), params.Success);
-            // procedure.addParameter('Success', params.Success, SqlTypes.Bit());
-        }
+    request.output('Success', sql.Bit());
     //request.output('output_parameter', sql.VarChar(50));
     const recordsets = await request.execute<Result>('SP_EDITARCATEGORIA');
     console.log("RecordSet SP_EDITARCATEGORIA",recordsets)

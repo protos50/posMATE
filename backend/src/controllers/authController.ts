@@ -11,7 +11,7 @@ export const login = async (req: Request, res: Response) => {
       const usuario = result.recordset.filter(
         (r) => r?.DNI === req.body.DNI && r?.Clave === req.body.Clave
       );
-      console.log(usuario);
+
       if (usuario.length > 0 && usuario[0]) {
         const usr = usuario[0];
 
@@ -32,14 +32,14 @@ export const login = async (req: Request, res: Response) => {
           },
         });
       } else {
-        throw "No se encontraron usuarios con ese usuario y contraseña";
+        res.status(401).json({ message: "Credenciales incorrectas" });
       }
     } else {
-      throw "No se encontraron usuarios";
+      res.status(401).json({ message: "No existen usuarios" });
     }
-  } catch (error:any) {
-    console.error(error)
-    res.status(400).json({error: error.message || "Error desconocido"});
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).json({ message: error.message || "Error desconocido" });
   }
 };
 
