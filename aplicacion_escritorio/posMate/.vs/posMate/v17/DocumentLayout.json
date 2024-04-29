@@ -3,32 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\posmate\\frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capanegocio\\cn_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmvercompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmvercompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capanegocio\\cn_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmusuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capadatos\\cd_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|c:\\users\\franck50\\documents\\point-of-sales\\aplicacion_escritorio\\capaentidad\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -41,7 +45,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,32 +57,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "CD_Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
+              "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Usuario.cs",
+              "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
+              "RelativeToolTip": "..\\CapaDatos\\CD_Usuario.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAiwEcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-25T19:47:21.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "frmVerCompras.cs",
+              "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmVerCompras.cs",
+              "RelativeDocumentMoniker": "frmVerCompras.cs",
+              "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmVerCompras.cs",
+              "RelativeToolTip": "frmVerCompras.cs",
+              "ViewState": "AQIAAJwAAAAAAAAAAAAqwKYAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-28T01:34:15.629Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "frmUsuarios.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmUsuarios.cs",
               "RelativeDocumentMoniker": "frmUsuarios.cs",
               "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmUsuarios.cs",
               "RelativeToolTip": "frmUsuarios.cs",
-              "ViewState": "AQIAALMBAAAAAAAAAAAwwMABAAA/AAAA",
+              "ViewState": "AQIAACMAAAAAAAAAAADgvzIAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T23:36:28.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-25T23:36:28.944Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "frmUsuarios.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmUsuarios.cs",
               "RelativeDocumentMoniker": "frmUsuarios.cs",
               "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\frmUsuarios.cs [Design]",
               "RelativeToolTip": "frmUsuarios.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T23:36:26.909Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-04-25T23:36:26.909Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "CD_Producto.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaDatos\\CD_Producto.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Producto.cs",
@@ -90,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaEntidad\\Usuario.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\Usuario.cs",
@@ -98,11 +125,12 @@
               "RelativeToolTip": "..\\CapaEntidad\\Usuario.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T20:22:42.602Z"
+              "WhenOpened": "2024-04-25T20:22:42.602Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Rol.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaEntidad\\Rol.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\Rol.cs",
@@ -114,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "login.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\login.cs",
               "RelativeDocumentMoniker": "login.cs",
@@ -126,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "login.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\posMate\\login.cs",
               "RelativeDocumentMoniker": "login.cs",
@@ -137,28 +165,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "CN_Usuario.cs",
               "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaNegocio\\CN_Usuario.cs",
               "RelativeDocumentMoniker": "..\\CapaNegocio\\CN_Usuario.cs",
               "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaNegocio\\CN_Usuario.cs",
               "RelativeToolTip": "..\\CapaNegocio\\CN_Usuario.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwCcAAAAJAAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAwwCkAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-25T19:47:41.853Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CD_Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
-              "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Usuario.cs",
-              "ToolTip": "C:\\Users\\Franck50\\Documents\\Point-Of-Sales\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
-              "RelativeToolTip": "..\\CapaDatos\\CD_Usuario.cs",
-              "ViewState": "AQIAAOYAAAAAAAAAAAAAAOwAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:47:21.963Z",
-              "EditorCaption": ""
             }
           ]
         }

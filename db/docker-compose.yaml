@@ -15,16 +15,16 @@ services:
     env_file:
       - sqlserver.env
       - sapassword.env
-    healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $$MSSQL_SA_PASSWORD -Q "SELECT 1" -b -o /dev/null
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 10s
+    #healthcheck:
+    #  test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $$MSSQL_SA_PASSWORD -Q "SELECT 1" -b -o /dev/null
+    #  interval: 10s
+    #  timeout: 3s
+    #  retries: 10
+    #  start_period: 10s
     ports:
       #- '1433:1433'
       # Si el puerto 1433 esta ocupado en el host, usar el puerto 1533
-      - '1433:1433'
+      - '1633:1433'
     volumes: 
       - ./data/mssql:/var/opt/mssql
       - ./data/mssql/data:/var/opt/mssql/data
@@ -40,8 +40,8 @@ services:
       - '3000:3000'
     deploy:
       replicas: 1
-    depends_on: 
-      posmate-sqlserver:
-        condition: service_healthy
+    #depends_on: 
+    #  posmate-sqlserver:
+    #    condition: service_healthy
     networks:
       - posmate-backend-network

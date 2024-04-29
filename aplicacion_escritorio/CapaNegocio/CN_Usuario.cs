@@ -39,12 +39,14 @@ namespace CapaNegocio
             return await ocd_usuario.EditarUsuarioAsync(obj);
         }
 
+        public async Task<Usuario> ObtenerUsuarioPorNombreAsync(string nombre)
+        {
+            return await ocd_usuario.ObtenerUsuarioPorNombreAsync(nombre);
+        }
         public int Registrar(Usuario obj, out string Mensaje)
         {
             return ocd_usuario.Registrar(obj, out Mensaje);
         }
-
-     
 
 
         public bool Editar(Usuario obj, out string Mensaje)

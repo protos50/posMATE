@@ -188,6 +188,36 @@ app.put('/usuarios/editar', (req, res) => {
   console.log("Codigo de estado: " + res.statusCode);
 });
 
+// Ruta para obtener un usuario por nombre
+app.get('/usuarios/obtener-por-nombre', (req, res) => {
+  let nombre = req.query.nombre; // Obtén el nombre desde la consulta
+  nombre = nombre.replace('{', '').replace('}', '')
+  console.log("Nombre recibido: " + nombre)
+
+  // Realiza la lógica para obtener el usuario por nombre desde tu base de datos
+  // (puedes usar tus procedimientos almacenados aquí)
+
+  // Ejemplo: consulta a la lista de usuarios y encuentra el usuario por nombre
+  let usuarioEncontrado;
+
+  if (nombre == "ChasChas") {
+    usuarioEncontrado = true;
+  } else {
+    usuarioEncontrado = false;
+  }
+
+  if (usuarioEncontrado) {
+    const idUsuario_encontrado = 1;
+    res.json({ IdUsuario: idUsuario_encontrado }); // Devuelve solo el IdUsuario como respuesta
+  } else {
+    res.json({}); // No se encontró ningún usuario, devuelve un objeto vacío
+  }
+
+  console.log("Mensaje de estado: " + res.statusMessage);
+  console.log("Codigo de estado: " + res.statusCode);
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
