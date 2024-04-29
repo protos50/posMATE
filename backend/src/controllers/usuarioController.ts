@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   SP_LISTARUSUARIOS,
   SP_REGISTRARUSUARIO,
+  SP_EDITARUSUARIO,
 } from "../procedures";
 
 export const listarUsuarios = async (req: Request, res: Response) => {
@@ -55,17 +56,45 @@ export const agregarUsuario = async (req: Request, res: Response) => {
 }
 
 Si el registro fue exitoso, IdUsuarioResultado es el ID del nuevo usuario*/
-  try { 
+  try {
     const result = await SP_REGISTRARUSUARIO(req.body);
-    console.log("RESULTADO USUARIO",   result);
+    console.log("RESULTADO USUARIO", result);
     res.json(result.output);
   } catch (error: any) {
     console.error(error);
-    res
-      .status(400)
-      .json({
-        IdUsuarioResultado: 0,
-        Mensaje: error.message || "Error desconocido",
-      });
+    res.status(400).json({
+      IdUsuarioResultado: 0,
+      Mensaje: error.message || "Error desconocido",
+    });
+  }
+};
+
+export const editarUsuario = async (req: Request, res: Response) => {
+  /* req.body
+  {
+  IdUsuario: '1',
+  Nombre: 'api name',
+  Apellido: 'api surname',
+  Clave: 'api pass',
+  Email: 'api@test.com',
+  DNI: '666',
+  Direccion: 'api 666',
+  FechaNacimiento: '2023-09-14',
+  Telefono: '5645',
+  IdRol: 2,
+  Estado: false
+}
+
+Si el registro fue exitoso, IdUsuarioResultado es el ID del nuevo usuario*/
+  try {
+    const result = await SP_EDITARUSUARIO(req.body);
+    console.log("RESULTADO EDITAR USUARIO", result);
+    res.json(result.output);
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).json({
+      Respuesta: 0,
+      Mensaje: error.message || "Error desconocido",
+    });
   }
 };
