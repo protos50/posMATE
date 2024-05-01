@@ -1,3 +1,4 @@
+.env.default
 # Logs
 logs
 *.log

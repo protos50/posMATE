@@ -30,10 +30,80 @@ namespace CapaPresentacion
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
+        private async void frmUsuarios_Load(object sender, EventArgs e)
+        {
+            // Agregar opciones "Activo" y "No Activo" al ComboBox cboEstado
+            cboEstado.Items.Add(new OpcionCombo() { Valor = 1, Texto = "Activo" });
+            cboEstado.Items.Add(new OpcionCombo() { Valor = 0, Texto = "No Activo" });
 
+            // Configurar el ComboBox cboEstado para mostrar el texto y usar el valor al seleccionar
+            cboEstado.DisplayMember = "Texto";
+            cboEstado.ValueMember = "Valor";
+
+            // Establecer la opción seleccionada inicialmente como "Activo"
+            cboEstado.SelectedIndex = 0;
+
+            // Obtener una lista de roles y agregarlos al ComboBox cboRol
+            List<Rol> listaRol = new CN_Rol().Listar();
+            foreach (var item in listaRol)
+            {
+                cboRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.Descripcion });
+            }
+
+            // Configurar el ComboBox cboRol para mostrar el texto y usar el valor al seleccionar
+            cboRol.DisplayMember = "Texto";
+            cboRol.ValueMember = "Valor";
+
+            // Establecer la opción seleccionada inicialmente como administrador
+            cboRol.SelectedIndex = 0;
+
+            // Iterar a través de las columnas del DataGridView dgvData
+            foreach (DataGridViewColumn columna in dgvData.Columns)
+            {
+                //  agrega a cboBusqueda
+                if (columna.Visible == true && columna.Name != "btnseleccionar")
+                {
+                    cboBusqueda.Items.Add(new OpcionCombo() { Valor = columna.Name, Texto = columna.HeaderText });
+                }
+            }
+
+            // Configurar el ComboBox cboBusqueda para mostrar el texto y usar el valor al seleccionar
+            cboBusqueda.DisplayMember = "Texto";
+            cboBusqueda.ValueMember = "Valor";
+
+            // Establecer la opción seleccionada inicialmente como la primera columna visible
+            cboBusqueda.SelectedIndex = 0;
+
+            // Obtener una lista de usuarios y mostrarlos en el dgv
+            //List<Usuario> listaUsuario = new CN_Usuario().Listar();
+            List<Usuario> listaUsuario = await new CN_Usuario().ListarAsync();
+
+            foreach (Usuario usuario in listaUsuario)
+            {
+                // Agregar una fila al DataGridView con los datos del usuario
+                dgvData.Rows.Add(
+                    "",
+                    usuario.IdUsuario,
+                    usuario.DNI,
+                    usuario.Nombre,
+                    usuario.Apellido,
+                    usuario.Clave,
+                    usuario.Email,
+                    usuario.Direccion,
+                    usuario.FechaNacimiento,
+                    usuario.Telefono,
+                    usuario.Estado ? "Activo" : "Inactivo",
+                    usuario.oRol.Descripcion
+                );
+            }
+
+
+            FiltrarUsuarios(true);
+        }
+        /*
         // Carga el formulario y se ejecuta este metodo
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
@@ -104,7 +174,7 @@ namespace CapaPresentacion
            
             FiltrarUsuarios(true);
         }
-
+        */
 
 
         //limpia los campos
