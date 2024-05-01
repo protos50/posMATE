@@ -7,28 +7,27 @@ networks:
 services:
   posmate-sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     container_name: posmate-sqlserver
     networks:
       - posmate-backend-network
     restart: always
-    environment:
-      ACCEPT_EULA: "Y"
     env_file:
-      - sqlserver.env  # Assuming this file contains environment variables for SQL Server
-      - sapassword.env # Assuming this file contains the password for the 'sa' user
+      - sqlserver.env
+      - sapassword.env
     healthcheck:
       test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $$MSSQL_SA_PASSWORD -Q "SELECT 1" -b -o /dev/null
       interval: 10s
       timeout: 3s
       retries: 10
       start_period: 10s
-    ports:
-      - "1533:1433"  # Maps container port 1433 to host port 1533
-    volumes:
-      - E:\testDB\data:/var/opt/mssql/data  # Mounts host directory for data
-      - E:\testDB\log:/var/opt/mssql/log    # Mounts host directory for logs
-      - E:\testDB\secrets:/var/opt/mssql/secrets  # Mounts host directory for secrets (optional)
-
+    ports: 
+      - '127.0.0.1:1433:1433'
+    volumes: 
+      - ./data/mssql:/var/opt/mssql
+      - ./data/mssql/data:/var/opt/mssql/data
+      - ./data/sqlserver:/var/opt/sqlserver
+      - ./data/usr/shared:/usr/shared
   posmate-api: 
     build: ../backend
     container_name: posmate-api
@@ -36,7 +35,7 @@ services:
     env_file:
       - backend.env 
     ports:
-      - '3000:3000'
+      - '127.0.0.1:3000:3000'
     deploy:
       replicas: 1
     depends_on: 
@@ -44,5 +43,3 @@ services:
         condition: service_healthy
     networks:
       - posmate-backend-network
-
-#docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Contraseña12345" -p 1533:1433 -v E:\testDB\data:/var/opt/mssql/data -v E:\testDB\log:/var/opt/mssql/log -v E:\testDB\secrets:/var/opt/mssql/secrets -d --privileged mcr.microsoft.com/mssql/server:2022-latest
