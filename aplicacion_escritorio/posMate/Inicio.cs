@@ -27,5 +27,6 @@ namespace CapaPresentacion
         {
             lblStatus.Text = DateTime.Now.ToString("T");
         }
+
     }
 }

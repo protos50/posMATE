@@ -101,14 +101,6 @@ namespace posMate
             MostrarFormularioEnContenedor(frmUsuario);
         }
 
-        private void iconButton2_Click(object sender, EventArgs e)
-        {
-            frmBackUp formularioBU = new frmBackUp();
-            MostrarFormularioEnContenedor(formularioBU);
-            SidePanel.Top = btnBackup.Top;
-
-        }
-
         private void btnReportes_Click_2(object sender, EventArgs e)
         {
             SidePanel.Top = btnReportes.Top;

@@ -175,7 +175,7 @@ namespace CapaDatos
                 var content = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
 
                 // URL del endpoint
-                string url = apiUrl + "/usuarios/registra";
+                string url = apiUrl + "/usuarios/registrar";
                 // Realiza la solicitud POST a la API de registro de usuarios
                 var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
