@@ -24,6 +24,7 @@ services:
       retries: 10
       start_period: 10s
     ports:
+
       - "1533:1433"  # Maps container port 1433 to host port 1533
     volumes:
       - E:\testDB\data:/var/opt/mssql/data  # Mounts host directory for data
