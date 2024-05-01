@@ -17,7 +17,7 @@ export const listarUsuarios = async (req: Request, res: Response) => {
             IdUsuario: usr.IdUsuario,
             Nombre: usr.Nombre,
             Apellido: usr.Apellido,
-            Clave: usr.Clave,
+           // Clave: usr.Clave,
             Email: usr.Email,
             DNI: usr.DNI,
             Direccion: usr.Direccion,
