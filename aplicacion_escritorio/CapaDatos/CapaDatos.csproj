@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfigManager.cs" />
     <Compile Include="BaseDatosDAL.cs" />
     <Compile Include="CD_Categoria.cs" />
     <Compile Include="CD_Cliente.cs" />

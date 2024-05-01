@@ -8,11 +8,15 @@ using System.Data.SqlClient;
 using CapaEntidad;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Windows.Forms;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 
 namespace CapaDatos
 {
     public class CD_Usuario
     {
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
         // HttpClient es recomendable que sea estático y reutilizable
         private static readonly HttpClient client = new HttpClient();
 
@@ -26,8 +30,10 @@ namespace CapaDatos
             List<Usuario> lista = new List<Usuario>();
             try
             {
+                // URL del endpoint
+                string url = apiUrl + "/usuarios";
                 // Realiza una solicitud GET a la API de usuarios
-                HttpResponseMessage response = await client.GetAsync("http://localhost:8000/usuarios");
+                HttpResponseMessage response = await client.GetAsync(url);
                 // Asegura que la respuesta sea exitosa (código de estado 200-299)
                 response.EnsureSuccessStatusCode();
                 // Lee el cuerpo de la respuesta como un string
@@ -38,8 +44,7 @@ namespace CapaDatos
             catch (HttpRequestException e)
             {
                 // Manejo de excepciones en caso de error en la solicitud HTTP
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                throw e;
             }
             // Devuelve la lista de usuarios
             return lista;
@@ -59,8 +64,11 @@ namespace CapaDatos
             // Convierte los datos de login a JSON y los envía como contenido de la solicitud
             var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
 
+            // URL del endpoint
+            string url= apiUrl + "/auth/login";
             // Realiza la solicitud POST a la API de login
-            var response = await client.PostAsync("http://localhost:3000/login", content);
+            var response = await client.PostAsync(url, content);
+
             if (response.IsSuccessStatusCode)
             {
                 // Lee el cuerpo de la respuesta como un string
@@ -72,6 +80,10 @@ namespace CapaDatos
             }
             else
             {
+                // Si el estado no es exitoso, muestra el mensaje de error del servidor
+                var errorBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error en la autenticación: {errorBody}");
+                MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // Devuelve null si las credenciales no son correctas o si ocurre un error
                 return null;
             }
@@ -162,8 +174,10 @@ namespace CapaDatos
                 };
                 var content = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
 
+                // URL del endpoint
+                string url = apiUrl + "/usuarios/registra";
                 // Realiza la solicitud POST a la API de registro de usuarios
-                var response = await client.PostAsync("http://localhost:3000/usuarios/registrar", content);
+                var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
                     // Lee el cuerpo de la respuesta como un string
@@ -176,7 +190,9 @@ namespace CapaDatos
                 else
                 {
                     // Lee el cuerpo de la respuesta como un string para obtener el mensaje de error
-                    mensaje = await response.Content.ReadAsStringAsync();
+                    var errorBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error en la autenticación: {errorBody}");
+                    MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (HttpRequestException e)
@@ -258,8 +274,10 @@ namespace CapaDatos
                 };
                 var content = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
 
+                // URL del endpoint
+                string url = apiUrl + "/usuarios/editar";
                 // Realiza la solicitud PUT a la API para editar el usuario
-                var response = await client.PutAsync("http://localhost:3000/usuarios/editar", content);
+                var response = await client.PutAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
                     // Lee el cuerpo de la respuesta como un string
@@ -271,8 +289,9 @@ namespace CapaDatos
                 }
                 else
                 {
-                    // Lee el cuerpo de la respuesta como un string para obtener el mensaje de error
-                    mensaje = await response.Content.ReadAsStringAsync();
+                    var errorBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error en la autenticación: {errorBody}");
+                    MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (HttpRequestException e)
@@ -368,7 +387,10 @@ namespace CapaDatos
         {
             try
             {
-                var response = await client.GetAsync($"http://localhost:3000/usuarios/obtener-por-nombre?nombre={nombre}");
+                // URL del endpoint
+                string url = apiUrl + $"/usuarios/obtener-por-nombre?nombre={nombre}";
+                //var response = await client.GetAsync($"http://localhost:3000/usuarios/obtener-por-nombre?nombre={nombre}");
+                var response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
                     var responseBody = await response.Content.ReadAsStringAsync();
@@ -385,6 +407,9 @@ namespace CapaDatos
                 }
                 else
                 {
+                    var errorBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error en la autenticación: {errorBody}");
+                    MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null; // El usuario será null si la respuesta no fue exitosa
                 }
             }

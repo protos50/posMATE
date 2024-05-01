@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
   console.log("Codigo de estado: " + res.statusCode);
 });
 
+
 // Ruta para obtener la lista de usuarios
 app.get('/usuarios', (req, res) => {
   const usuarios = [
@@ -148,7 +149,7 @@ app.post('/login', (req, res) => {
     console.log("Codigo de estado: " + res.statusCode);
   } else {
     // Respuesta si las credenciales son incorrectas
-    res.status(401).json({ message: 'Credenciales incorrectas' });
+    res.status(401).json({ message: 'Credenciales incorrectas!!!' });
   }
 }
 );
@@ -161,10 +162,20 @@ app.post('/usuarios/registrar', (req, res) => {
 
   // Simula la creación de un usuario y devuelve un ID ficticio con un mensaje vacío
   const idUsuarioFicticio = Math.floor(Math.random() * 10000); // Genera un ID aleatorio
+
+  // caso creado el usuario
+  res.json({
+    "IdUsuarioResultado": idUsuarioFicticio,
+    "Mensaje": "Usuario Registrado"
+  });
+
+  // caso se quiera registar un mismo DNI
+  /*
   res.json({
     "IdUsuarioResultado": 0,
     "Mensaje": "No se puede repetir el DNI para mas de un usuario"
   });
+  */
 
   console.log("Mensaje de estado: " + res.statusMessage);
   console.log("Codigo de estado: " + res.statusCode);
@@ -218,7 +229,7 @@ app.get('/usuarios/obtener-por-nombre', (req, res) => {
 });
 
 
-const PORT = 3000;
+const PORT = 3033;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

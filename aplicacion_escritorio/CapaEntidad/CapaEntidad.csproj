@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfig.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="FranjaHoraria.cs" />
     <Compile Include="Cliente.cs" />

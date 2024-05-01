@@ -10,10 +10,18 @@ async function enviarPeticionPost(url, datos) {
       console.log('Éxito:', respuesta.data);
     } else {
       console.log('Respuesta con estado:', respuesta.status);
+      console.log('Mensaje del servidor:', respuesta.data); // Aquí está el mensaje del servidor
     }
+
+    console.log("Mensaje de estado: " + respuesta.statusText);
+    console.log("Codigo de estado: " + respuesta.status);
+
   } catch (error) {
     console.error('Error en la petición:', error.message);
+    console.log('Error recibido:', error.response.data); // Aquí está el mensaje del servidor en caso de error
   }
+
+  
 }
 
 async function enviarPeticionGet(url) {
@@ -26,9 +34,15 @@ async function enviarPeticionGet(url) {
       console.log('Éxito:', respuesta.data);
     } else {
       console.log('Respuesta con estado:', respuesta.status);
+      console.log('Mensaje del servidor:', respuesta.data); // Aquí está el mensaje del servidor
     }
+
+    console.log("Mensaje de estado: " + respuesta.statusText);
+    console.log("Codigo de estado: " + respuesta.status);
+
   } catch (error) {
     console.error('Error en la petición:', error.message);
+    console.log('Error recibido:', error.response.data); // Aquí está el mensaje del servidor en caso de error
   }
 }
 
@@ -41,9 +55,15 @@ async function enviarPeticionPut(url, datos) {
       console.log('Respuesta:', respuesta.data);
     } else {
       console.log('Respuesta con estado:', respuesta.status);
+      console.log('Mensaje del servidor:', respuesta.data); // Aquí está el mensaje del servidor
     }
+
+    console.log("Mensaje de estado: " + respuesta.statusText);
+    console.log("Codigo de estado: " + respuesta.status);
+    
   } catch (error) {
     console.error('Error en la petición:', error.message);
+    console.log('Error recibido:', error.response.data); // Aquí está el mensaje del servidor en caso de error
   }
 }
 
@@ -75,13 +95,30 @@ const dato_usuario_registrar = {
   Estado: false
 };
 
+// Supongamos que tienes los valores de DNI y Clave
+const DNI = "123"; // Ejemplo: DNI del usuario
+const Clave = "123"; // Ejemplo: Clave del usuario
+
+// Crea un objeto con las mismas propiedades
+const dato_login = {
+  DNI: DNI,
+  Clave: Clave
+};
+
+// Ahora puedes usar el objeto dato_login en tu código JavaScript
+// para simular los datos que se enviarán a la API.
+
+
 // Url
+const urlLogin = 'http://localhost:3000/login';
 const urlRegistrar = 'http://localhost:3000/usuarios/registrar';
 const urlUsuarios = 'http://localhost:3000/usuarios';
 const urlEditarUsuario = 'http://localhost:3000/usuarios/editar';
 const urlUsuarioPorNombre = 'http://localhost:3000/usuarios/obtener-por-nombre?nombre={Franquitoz}';
 
+
 //enviarPeticionPost(urlRegistrar, dato_usuario_registrar); // POST registrar usuario
 //enviarPeticionGet(urlUsuarios); // GET peticion lista usuarios
 //enviarPeticionPut(urlEditarUsuario, dato_usuario_editar) // PUT editar un usuario
-enviarPeticionGet(urlUsuarioPorNombre) // GET usuario por nombre
+//enviarPeticionGet(urlUsuarioPorNombre) // GET usuario por nombre
+enviarPeticionPost(urlLogin, dato_login);
