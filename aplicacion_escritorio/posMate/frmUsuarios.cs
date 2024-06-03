@@ -602,5 +602,10 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

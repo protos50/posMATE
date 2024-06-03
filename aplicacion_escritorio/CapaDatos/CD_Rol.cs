@@ -6,11 +6,36 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace CapaDatos
 {
     public class CD_Rol
     {
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
+
+        public async Task<List<Rol>> ListarRolAsync()
+        {
+            List<Rol> lista = new List<Rol>();
+            try
+            {
+                string url = apiUrl + "/roles";
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<Rol>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                throw e;
+            }
+            return lista;
+        }
+
         // Método para listar roles desde la base de datos
         public List<Rol> Listar()
         {
@@ -52,5 +77,7 @@ namespace CapaDatos
             }
             return lista;
         }
+
+        
     }
 }

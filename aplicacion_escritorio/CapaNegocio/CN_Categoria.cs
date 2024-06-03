@@ -2,6 +2,7 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
@@ -14,10 +15,18 @@ namespace CapaNegocio
             return ocd_categoria.ObtenerCategorias();
         }
 
+        public async Task<List<Categoria>> ObtenerCategoriasAsync()
+        {
+            return await ocd_categoria.ObtenerCategoriasAsync();
+        }
         public bool AgregarCategoria(Categoria categoria)
         {
-            
             return ocd_categoria.AgregarCategoria(categoria);
+        }
+
+        public async Task<(bool Success, string mensaje)> AgregarCategoriaAsync(Categoria categoria)
+        {
+            return await ocd_categoria.AgregarCategoriaAsync(categoria);
         }
 
         public bool EditarCategoria(Categoria categoria)

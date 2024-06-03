@@ -110,11 +110,14 @@ const dato_login = {
 
 
 // Url
-const urlLogin = 'http://localhost:3000/login';
-const urlRegistrar = 'http://localhost:3000/usuarios/registrar';
-const urlUsuarios = 'http://localhost:3000/usuarios';
-const urlEditarUsuario = 'http://localhost:3000/usuarios/editar';
-const urlUsuarioPorNombre = 'http://localhost:3000/usuarios/obtener-por-nombre?nombre={Franquitoz}';
+const port = 3033;
+
+const urlLogin = `http://localhost:${port}/auth/login`;
+const urlRegistrar = `http://localhost:${port}/usuarios/registrar`;
+const urlUsuarios = `http://localhost:${port}/usuarios`;
+const urlEditarUsuario = `http://localhost:${port}/usuarios/editar`;
+const urlUsuarioPorNombre = `http://localhost:${port}/usuarios/obtener-por-nombre?nombre={Franquitoz}`;
+const urlCategorias = `http://localhost:${port}/categorias`;
 
 
 //enviarPeticionPost(urlRegistrar, dato_usuario_registrar); // POST registrar usuario
@@ -122,3 +125,4 @@ const urlUsuarioPorNombre = 'http://localhost:3000/usuarios/obtener-por-nombre?n
 //enviarPeticionPut(urlEditarUsuario, dato_usuario_editar) // PUT editar un usuario
 //enviarPeticionGet(urlUsuarioPorNombre) // GET usuario por nombre
 enviarPeticionPost(urlLogin, dato_login);
+//enviarPeticionGet(urlCategorias); // GET peticion lista categorias

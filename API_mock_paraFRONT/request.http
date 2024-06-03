@@ -1,0 +1,10 @@
+POST http://localhost:3033/auth/login
+Content-Type: application/json
+
+{
+    "DNI": "12345",
+    "Clave": "12345"
+}
+
+###
+GET http://localhost:3033/

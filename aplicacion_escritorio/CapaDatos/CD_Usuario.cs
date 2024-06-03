@@ -32,7 +32,7 @@ namespace CapaDatos
             {
                 // URL del endpoint
                 string url = apiUrl + "/usuarios";
-                // Realiza una solicitud GET a la API de usuarios
+                // Realiza una solicitud GET a la API
                 HttpResponseMessage response = await client.GetAsync(url);
                 // Asegura que la respuesta sea exitosa (código de estado 200-299)
                 response.EnsureSuccessStatusCode();
@@ -178,10 +178,11 @@ namespace CapaDatos
                 string url = apiUrl + "/usuarios/registrar";
                 // Realiza la solicitud POST a la API de registro de usuarios
                 var response = await client.PostAsync(url, content);
+                // Lee el cuerpo de la respuesta como un string
+                var responseBody = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
-                    // Lee el cuerpo de la respuesta como un string
-                    var responseBody = await response.Content.ReadAsStringAsync();
                     // Deserializa el JSON para obtener el ID del usuario y el mensaje
                     dynamic result = JsonConvert.DeserializeObject<dynamic>(responseBody);
                     idUsuarioGenerado = result.IdUsuarioResultado;
@@ -191,8 +192,8 @@ namespace CapaDatos
                 {
                     // Lee el cuerpo de la respuesta como un string para obtener el mensaje de error
                     var errorBody = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"Error en la autenticación: {errorBody}");
-                    MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine($"Error en la autenticación: {responseBody}");
+                    MessageBox.Show($"Error en la autenticación: {responseBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (HttpRequestException e)

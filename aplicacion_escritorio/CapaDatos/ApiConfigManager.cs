@@ -12,7 +12,7 @@ namespace CapaDatos
 {
     public class ApiConfigManager
     {
-        private static readonly string apiConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "api-config.json");
+        private static readonly string apiConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
         private static readonly ApiConfig apiConfig;
 
         static ApiConfigManager()

@@ -15,5 +15,9 @@ namespace CapaNegocio
         {
             return ocd_rol.Listar();
         }
+        public async Task<List<Rol>> ListarRolAsync()
+        {
+            return await ocd_rol.ListarRolAsync();
+        }
     }
 }

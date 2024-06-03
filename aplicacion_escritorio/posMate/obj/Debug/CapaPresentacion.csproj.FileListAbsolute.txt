@@ -592,3 +592,7 @@ E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPr
 E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPres.61CA7C38.Up2Date
 E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPresentacion.exe
 E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPresentacion.pdb
+E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\bin\Debug\CapaPresentacion.exe.manifest
+E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\bin\Debug\CapaPresentacion.application
+E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPresentacion.exe.manifest
+E:\proyecto_ing2_postMATE\posMATE\aplicacion_escritorio\posMate\obj\Debug\CapaPresentacion.application

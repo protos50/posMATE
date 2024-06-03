@@ -7,12 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace CapaDatos
 {
     public class CD_Categoria
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
 
         public List<Categoria> ObtenerCategorias()
         {
@@ -48,6 +56,34 @@ namespace CapaDatos
             return lista;
         }
 
+        public async Task<List<Categoria>> ObtenerCategoriasAsync()
+        {
+            List<Categoria> listaCategoria = new List<Categoria>();
+
+            try
+            {
+                // URL del endpoint
+                string url = apiUrl + "/categorias";
+
+                //Peticion GET a la API
+                HttpResponseMessage responseMessage = await client.GetAsync(url);
+
+                //Asegura que la respuesta de la peticion sea exitosa o retorna excepcion
+                responseMessage.EnsureSuccessStatusCode();
+                //
+                string responseBody = await responseMessage.Content.ReadAsStringAsync();
+                //
+                listaCategoria = JsonConvert.DeserializeObject<List<Categoria>>(responseBody);
+
+            }
+            catch (HttpRequestException e)
+            {
+
+                throw e;
+            }
+
+            return listaCategoria;
+        }
 
         public bool AgregarCategoria(Categoria categoria)
         {
@@ -82,6 +118,48 @@ namespace CapaDatos
             }
         }
 
+        public async Task<(bool Success, string Mensaje)> AgregarCategoriaAsync(Categoria categoria)
+        {
+            bool success = false;
+            string mensaje = string.Empty;
+
+            try
+            {
+                //Empaqueta los datos de la categoría en un objeto anónimo
+                var categoriaData = new
+                {
+                    Descripcion = categoria.Descripcion,
+                    Estado = categoria.estado
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(categoriaData), Encoding.UTF8, "application/json");
+
+               
+                string url = apiUrl + "/categorias/agregar";  // URL del endpoint
+                var response = await client.PostAsync(url, content);  // Realiza la solicitud POST a la API de registro de categorias
+
+                var responseBody = await response.Content.ReadAsStringAsync();  // Lee el cuerpo de la respuesta como un string
+                dynamic result = JsonConvert.DeserializeObject<dynamic>(responseBody); // Deserializa el mensaje de respuesta a un objeto JSON
+
+                if (response.IsSuccessStatusCode)
+                {
+                    success = result.Success;  // Obtiene el valor de la propiedad Success de result
+                    mensaje = result.Mensaje;  // Si la solicitud fue exitosa, obtiene el mensaje de respuesta
+                }
+                else
+                {
+                    // Muestra un messagebox con el mensaje de error
+                    MessageBox.Show($"Error al agregar categoría: {result.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Exepcion en caso de error en la solicitud POST
+                mensaje = e.Message;
+            }
+
+            return (success, mensaje);
+        }
 
         public bool EditarCategoria(Categoria categoria)
         {
