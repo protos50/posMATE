@@ -17,6 +17,11 @@ namespace CapaNegocio
             return ocd_producto.ObtenerProductos();
         }
 
+        public async Task<List<Producto>> ObtenerProductosAsync()
+        {
+            return await ocd_producto.ObtenerProductosAsync();
+        }
+
         public bool AgregarProducto(Producto producto)
         {           
             return ocd_producto.AgregarProducto(producto);
