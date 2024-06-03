@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio
 {
-  public class CN_Permiso
+    public class CN_Permiso
     {
         private CD_Permiso ocd_permiso = new CD_Permiso();
         public List<Permiso> Listar(int IdUsuario)
@@ -16,6 +16,10 @@ namespace CapaNegocio
             return ocd_permiso.Listar(IdUsuario);
         }
 
+        public async Task<List<Permiso>> ListarAsync(int idusuario)
+        {
+            return await ocd_permiso.ListarAsync(idusuario);
+        }
 
     }
 }
