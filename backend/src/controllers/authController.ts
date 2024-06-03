@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 // import { db } from "../config/database";
 import { SP_LISTARUSUARIOS, SP_AGREGARCLIENTE } from "../procedures";
+
 export const login = async (req: Request, res: Response) => {
   try {
     console.log(req.body);
