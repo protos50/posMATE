@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 
-const categoriasRoutes = require('./categoriasRoutes');
-const usuariosRoutes = require('./usuariosRoutes');
-const rolesRoutes = require('./rolesRoutes');
-const productosRoutes = require('./productosRoutes');
-const clientesRoutes = require('./clientesRoutes');
-const proveedoresRoutes = require('./proveedoresRoutes');
+const categoriasRoutes = require('./routes/categoriasRoutes');
+const usuariosRoutes = require('./routes/usuariosRoutes');
+const rolesRoutes = require('./routes/rolesRoutes');
+const productosRoutes = require('./routes/productosRoutes');
+const clientesRoutes = require('./routes/clientesRoutes');
+const proveedoresRoutes = require('./routes/proveedoresRoutes');
 
 
 app.use(express.json());

@@ -25,7 +25,7 @@ const modelo_json_usuario = [
 router.get('/', (req, res) => {
   console.log("GET : /");
   // Envía el archivo HTML como respuesta
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 
   console.log("Mensaje de estado: " + res.statusMessage);
   console.log("Codigo de estado: " + res.statusCode);
