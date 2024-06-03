@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+const modelo_json_categoria = [
+  {
+    "IdCategoria":1,
+    "Descripcion":"Electrónicos",
+    "Estado":true
+  }
+]
+
 router.get('/categorias', (req, res) => {
     console.log("GET : /categorias");
   

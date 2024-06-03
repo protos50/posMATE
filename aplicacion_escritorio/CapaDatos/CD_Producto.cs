@@ -7,12 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace CapaDatos
 {
     public class CD_Producto
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
+
         public List<Producto> ObtenerProductos()
         {
             List<Producto> lista = new List<Producto>();
@@ -61,6 +69,35 @@ namespace CapaDatos
                     lista = new List<Producto>();
                 }
             }
+            return lista;
+        }
+
+        /// Realiza una solicitud asincrónica a la API para obtener la lista de productos.
+        /// </summary>
+        /// <returns>Una lista de objetos Producto si la solicitud es exitosa; de lo contrario, una excepcion.</returns>
+        public async Task<List<Producto>> ObtenerProductosAsync()
+        {
+            // Inicializa una nueva lista de productos
+            List<Producto> lista = new List<Producto>();
+            try
+            {
+                // URL del endpoint
+                string url = apiUrl + "/productos";
+                // Realiza una solicitud GET a la API
+                HttpResponseMessage response = await client.GetAsync(url);
+                // Asegura que la respuesta sea exitosa (código de estado 200-299)
+                response.EnsureSuccessStatusCode();
+                // Lee el cuerpo de la respuesta como un string
+                string responseBody = await response.Content.ReadAsStringAsync();
+                // Deserializa el JSON a una lista de objetos Producto
+                lista = JsonConvert.DeserializeObject<List<Producto>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                throw e;
+            }
+            // Devuelve la lista de productos
             return lista;
         }
 

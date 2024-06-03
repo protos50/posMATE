@@ -2,6 +2,25 @@ const express = require('express');
 const router = express.Router();
 const path = require('path'); // Importa el módulo 'path'
 
+const modelo_json_usuario = [
+  {
+    "IdUsuario": 1,
+    "Nombre": "AdminGonzalo",
+    "Apellido": "Ramirez",
+    "Clave": "123",
+    "Email": "admin@gmail.com",
+    "DNI": "123",
+    "Direccion": "Brasil 120",
+    "FechaNacimiento": "2002-10-10",
+    "Telefono": "3794205084",
+    "Estado": true,
+    "oRol": {
+      "IdRol": 1,
+      "Descripcion": "Administrador"
+    }
+  }
+]
+
 // Ruta para manejar solicitudes GET
 router.get('/', (req, res) => {
   console.log("GET : /");
@@ -189,6 +208,7 @@ router.post('/auth/login', (req, res) => {
         "IdRol": 3,
         "Descripcion": "Encargado"
       }
+      
     };
     res.json(usuario);
 
