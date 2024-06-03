@@ -7,6 +7,7 @@ const rolesRoutes = require('./routes/rolesRoutes');
 const productosRoutes = require('./routes/productosRoutes');
 const clientesRoutes = require('./routes/clientesRoutes');
 const proveedoresRoutes = require('./routes/proveedoresRoutes');
+const permisosRoutes = require('./routes/permisosRoutes');
 
 
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(rolesRoutes);
 app.use(productosRoutes);
 app.use(clientesRoutes);
 app.use(proveedoresRoutes);
+app.use(permisosRoutes);
 
 
 const PORT = 3033;
