@@ -18,6 +18,11 @@ namespace CapaNegocio
             return ocd_cliente.ObtenerClientes();
         }
 
+        public async Task<List<Cliente>> ListarClienteAsync()
+        {
+            return await ocd_cliente.ListarClienteAsync();
+        }
+        
         public bool AgregarCliente(Cliente cliente)
         {
             return ocd_cliente.AgregarCliente(cliente);

@@ -72,6 +72,7 @@ namespace CapaDatos
             return lista;
         }
 
+        /// <summary>
         /// Realiza una solicitud asincrónica a la API para obtener la lista de productos.
         /// </summary>
         /// <returns>Una lista de objetos Producto si la solicitud es exitosa; de lo contrario, una excepcion.</returns>

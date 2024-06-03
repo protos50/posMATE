@@ -7,12 +7,19 @@ using CapaEntidad;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace CapaDatos
 {
     public class CD_Proveedor
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
 
         public List<Proveedor> ObtenerProveedores()
         {
@@ -49,6 +56,28 @@ namespace CapaDatos
                     
                     lista = new List<Proveedor>();
                 }
+            }
+            return lista;
+        }
+
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener la lista de proveedores.
+        /// </summary>
+        /// <returns>Una lista de objetos Proveedor si la solicitud es exitosa; de lo contrario, una excepcion.</returns>
+        public async Task<List<Proveedor>> ListarProveedorAsync()
+        {
+            List<Proveedor> lista = new List<Proveedor>();
+            try
+            {
+                string url = apiUrl + "/proveedores";
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<Proveedor>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                throw e;
             }
             return lista;
         }

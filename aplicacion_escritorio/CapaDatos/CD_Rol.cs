@@ -1,4 +1,4 @@
-﻿using CapaEntidad; 
+﻿using CapaEntidad;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -18,6 +18,10 @@ namespace CapaDatos
         // HttpClient es recomendable que sea estático y reutilizable
         private static readonly HttpClient client = new HttpClient();
 
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener la lista de roles.
+        /// </summary>
+        /// <returns>Una lista de objetos Rol si la solicitud es exitosa; de lo contrario, una excepcion.</returns>
         public async Task<List<Rol>> ListarRolAsync()
         {
             List<Rol> lista = new List<Rol>();
@@ -41,7 +45,7 @@ namespace CapaDatos
         {
             List<Rol> lista = new List<Rol>();
 
-            
+
             using (SqlConnection con = new SqlConnection(Conexion.cadena))
             {
                 try
@@ -71,13 +75,13 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                   
+
                     lista = new List<Rol>();
                 }
             }
             return lista;
         }
 
-        
+
     }
 }

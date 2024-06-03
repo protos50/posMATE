@@ -19,15 +19,20 @@ namespace CapaNegocio
             return ocd_proveedor.ObtenerProveedores();
         }
 
+        public async Task<List<Proveedor>> ListarProveedorAsync()
+        {
+            return await ocd_proveedor.ListarProveedorAsync();
+        }
+        
         public bool AgregarProveedor(Proveedor proveedor)
         {
-           
+
             return ocd_proveedor.AgregarProveedor(proveedor);
         }
 
         public bool EditarProveedor(Proveedor proveedor)
         {
-            
+
             return ocd_proveedor.EditarProveedor(proveedor);
         }
     }

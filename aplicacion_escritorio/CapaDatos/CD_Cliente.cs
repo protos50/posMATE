@@ -7,11 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using Newtonsoft.Json;
+using System.Net.Http;
+
+
 namespace CapaDatos
 {
     public class CD_Cliente
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
 
         public List<Cliente> ObtenerClientes()
         {
@@ -44,6 +53,28 @@ namespace CapaDatos
                     lista = new List<Cliente>();
                     // Manejar la excepción si es necesario
                 }
+            }
+            return lista;
+        }
+
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener la lista de clientes.
+        /// </summary>
+        /// <returns>Una lista de objetos Cliente si la solicitud es exitosa; de lo contrario, una excepcion.</returns>
+        public async Task<List<Cliente>> ListarClienteAsync()
+        {
+            List<Cliente> lista = new List<Cliente>();
+            try
+            {
+                string url = apiUrl + "/clientes";
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<Cliente>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                throw e;
             }
             return lista;
         }
