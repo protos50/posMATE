@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { showStatus } = require('./utils');
 
 
 // Mock data for DetalleCompra
@@ -105,11 +106,14 @@ router.get('/detallescompra', (req, res) => {
                 FechaRegistro: detalle.FechaRegistro
             }));
             res.json(respuesta);
+            showStatus(res);
         } else {
             res.status(404).send('El IdCompra no fue encontrado');
+            showStatus(res);
         }
     } else {
         res.status(400).send('El IdCompra es inválido');
+        showStatus(res);
     }
 });
 

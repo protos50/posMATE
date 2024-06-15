@@ -27,7 +27,7 @@ namespace CapaPresentacion
 
         }
 
-        private void frmProductos_Load(object sender, EventArgs e)
+        private async void frmProductos_Load(object sender, EventArgs e)
         {
             if(usuarioActual.oRol.IdRol == 2)
             {
@@ -78,10 +78,11 @@ namespace CapaPresentacion
             cboBusqueda.SelectedIndex = 0;
 
 
-
-
             CN_Producto negocioProducto = new CN_Producto();
-            List<Producto> productos = negocioProducto.ObtenerProductos();
+            
+            // obtener producto async desde la api
+            List<Producto> productos = await new CN_Producto().ObtenerProductosAsync();
+
             foreach (Producto producto in productos)
             {
                 dgvData.Rows.Add(
@@ -163,7 +164,7 @@ namespace CapaPresentacion
 
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private async void btnGuardar_Click(object sender, EventArgs e)
         {
             // Validar que se hayan completado los campos necesarios
             if (string.IsNullOrWhiteSpace(txtPrecioVenta.Text) || string.IsNullOrWhiteSpace(txtCantidad.Text) || cboEstado.SelectedIndex == -1 || cboCateg.SelectedIndex == -1)
@@ -182,7 +183,11 @@ namespace CapaPresentacion
                 int idProducto = int.Parse(txtId.Text);
 
                 // Obtener el producto completo desde la base de datos
-                Producto producto = negocioProducto.ObtenerProductos().FirstOrDefault(p => p.IdProducto == idProducto);
+                //Producto producto1 = negocioProducto.ObtenerProductos().FirstOrDefault(p => p.IdProducto == idProducto);
+                // Obtener el producto completo desde la base de datos de forma asincrónica
+                List<Producto> productos = await negocioProducto.ObtenerProductosAsync();
+                Producto producto = productos.FirstOrDefault(p => p.IdProducto == idProducto);
+
 
                 // Actualizar los campos del producto con los datos del formulario
                 producto.oCategoria = new Categoria() { IdCategoria = Convert.ToInt32(((OpcionCombo)cboCateg.SelectedItem).Valor) };
@@ -203,10 +208,10 @@ namespace CapaPresentacion
             }
         }
 
-        private void ActualizarDataGridView()
+        private async void ActualizarDataGridView()
         {
             // Obtener una nueva lista de proveedores y actualizar el DataGridView
-            List<Producto> productos = new CN_Producto().ObtenerProductos();
+            List<Producto> productos = await new CN_Producto().ObtenerProductosAsync();
             dgvData.Rows.Clear();
 
             foreach (Producto producto in productos)

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 
 //ejemplo del retorno de permisos cuando IdUsuario = '2'
 const modelo_json_permiso = [
@@ -62,11 +63,10 @@ router.get('/permisos', (req, res) => {
 
     if (permisos) {
         res.json(permisos);
-
-        console.log("Mensaje de estado: " + res.statusMessage);
-        console.log("Codigo de estado: " + res.statusCode);
+        showStatus(res);
     } else {
         res.status(404).json({ message: 'Usuario no encontrado' });
+        showStatus(res);
     }
 });
 

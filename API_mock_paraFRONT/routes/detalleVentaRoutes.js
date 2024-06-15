@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 
 // Mock data for DetalleVenta
 const modelo_json_detallesVenta = [
@@ -97,17 +98,14 @@ router.get('/detallesventa', (req, res) => {
                 FechaRegistro: detalle.FechaRegistro
             }));
             res.json(respuesta);
-            console.log("Mensaje de estado: " + res.statusMessage);
-            console.log("Codigo de estado: " + res.statusCode);
+            showStatus(res);
         } else {
             res.status(404).send('El IdCompra no fue encontrado');
-            console.log("Mensaje de estado: " + res.statusMessage);
-            console.log("Codigo de estado: " + res.statusCode);
+            showStatus(res);
         }
     } else {
         res.status(400).send('El IdCompra es inválido');
-        console.log("Mensaje de estado: " + res.statusMessage);
-        console.log("Codigo de estado: " + res.statusCode);
+        showStatus(res);
     }
 });
 

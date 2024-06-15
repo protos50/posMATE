@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 
 const modelo_json_roles = [
     { 
@@ -19,8 +20,7 @@ router.get('/roles', (req, res) => {
         { "IdRol": 3, "Descripcion": "Encargado" }
     ]
     res.json(roles);
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
 })
 
 module.exports = router;

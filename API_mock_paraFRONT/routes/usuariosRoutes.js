@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 const path = require('path'); // Importa el módulo 'path'
 
 const modelo_json_usuario = [
@@ -26,9 +27,7 @@ router.get('/', (req, res) => {
   console.log("GET : /");
   // Envía el archivo HTML como respuesta
   res.sendFile(path.join(__dirname, '../index.html'));
-
-  console.log("Mensaje de estado: " + res.statusMessage);
-  console.log("Codigo de estado: " + res.statusCode);
+  showStatus(res);
 });
 
 
@@ -135,8 +134,7 @@ router.get('/usuarios', (req, res) => {
   ];
 
   res.json(usuarios);
-  console.log("Mensaje de estado: " + res.statusMessage);
-  console.log("Codigo de estado: " + res.statusCode);
+  showStatus(res);
 });
 
 // Endpoint para simular el login de un usuario
@@ -166,9 +164,7 @@ router.post('/auth/login', (req, res) => {
     };
 
     res.json(usuario);
-
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
   } else if (DNI === '1234' && Clave === '1234') {
     // Datos del segundo usuario
     const usuario = {
@@ -188,9 +184,7 @@ router.post('/auth/login', (req, res) => {
       }
     };
     res.json(usuario);
-
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
   } else if (DNI === '12345' && Clave === '12345') {
     // Datos del tercer usuario
     const usuario = {
@@ -211,12 +205,11 @@ router.post('/auth/login', (req, res) => {
       
     };
     res.json(usuario);
-
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
   } else {
     // Respuesta si las credenciales son incorrectas
     res.status(401).json({ message: 'Credenciales incorrectas!!!' });
+    showStatus(res);
   }
 }
 );
@@ -244,9 +237,7 @@ router.post('/usuarios/registrar', (req, res) => {
     "Mensaje": "No se puede repetir el DNI para mas de un usuario"
   });
   */
-
-  console.log("Mensaje de estado: " + res.statusMessage);
-  console.log("Codigo de estado: " + res.statusCode);
+  showStatus(res);
 });
 
 
@@ -260,12 +251,13 @@ router.put('/usuarios/editar', (req, res) => {
   usuarioEditado = true;
   if (usuarioEditado) {
     res.json({ Respuesta: 1, Mensaje: 'Usuario editado correctamente' });
+    showStatus(res);
   } else {
     res.json({ Respuesta: 0, Mensaje: 'Usuario no encontrado o no se pudo editar el DNI' });
+    showStatus(res);
   }
 
-  console.log("Mensaje de estado: " + res.statusMessage);
-  console.log("Codigo de estado: " + res.statusCode);
+  showStatus(res);
 });
 
 // Ruta para obtener un usuario por nombre
@@ -291,12 +283,12 @@ router.get('/usuarios/obtener-por-nombre', (req, res) => {
   if (usuarioEncontrado) {
     const idUsuario_encontrado = 1;
     res.json({ IdUsuario: idUsuario_encontrado }); // Devuelve solo el IdUsuario como respuesta
+    showStatus(res);
   } else {
     res.json({}); // No se encontró ningún usuario, devuelve un objeto vacío
   }
 
-  console.log("Mensaje de estado: " + res.statusMessage);
-  console.log("Codigo de estado: " + res.statusCode);
+  showStatus(res);
 });
 
 module.exports = router;

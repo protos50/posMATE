@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 
 const modelo_json_proveedore = [
     {
@@ -39,8 +40,7 @@ router.get('/proveedores', (req, res) => {
 
     ]
     res.json(proveedores);
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
 })
 
 module.exports = router;

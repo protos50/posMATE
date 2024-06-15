@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {showStatus} = require('./utils.js');
 
 // ATENCION: ESTE ES EL MODELO DE DATOS DE PRUEBA
 // En compras su almacenamiento almacenado puede mandarse opcionalmente el idusuario como parametro
@@ -76,8 +77,7 @@ router.get('/compras', (req, res) => {
 
     //  Filtrar las compras segun el IdUsuario se se proporciona
     res.json(compras);
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
 })
 
 module.exports = router;

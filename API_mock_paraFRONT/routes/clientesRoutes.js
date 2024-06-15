@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const showStatus = require('./utils');
 
 const modelo_json_cliente = [
     { 
@@ -21,8 +22,7 @@ router.get('/clientes', (req, res) => {
         { "IdCliente": 4, "DNI": 30123981, "Nombre": "Marcos", "Apellido": "Ruben" }
     ]
     res.json(clientes);
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
 })
 
 module.exports = router;
