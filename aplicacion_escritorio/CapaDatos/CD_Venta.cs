@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaEntidad;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace CapaDatos
 {
     public class CD_Venta
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
 
         public List<Venta> ObtenerVentas(int? IdUsuario = null)
         {
@@ -21,7 +28,7 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    
+
                     using (SqlCommand cmd = new SqlCommand("SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
                                                   "FROM Venta v " +
                                                   "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
@@ -51,7 +58,7 @@ namespace CapaDatos
                                     {
                                         Nombre = reader["NombreCliente"].ToString()
                                     },
-                                   
+
                                     MontoPago = Convert.ToDecimal(reader["MontoPago"]),
                                     MontoCambio = Convert.ToDecimal(reader["MontoCambio"]),
                                     MontoTotal = Convert.ToDecimal(reader["MontoTotal"]),
@@ -63,12 +70,36 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     lista = new List<Venta>();
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
 
+            return lista;
+        }
+
+        public async Task<List<Venta>> ObtenerVentasAsync(int? idUsuario = null)
+        {
+            List<Venta> lista = new List<Venta>();
+            
+            try
+            {
+                string url = apiUrl + "/ventas";
+                if (idUsuario.HasValue)
+                {
+                    url += "?idusuario=" + idUsuario.Value;
+                }
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<Venta>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                throw e;
+            }
             return lista;
         }
 
@@ -83,8 +114,8 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@IdUsuario", venta.oUsuario.IdUsuario);
                     cmd.Parameters.AddWithValue("@IdCliente", venta.oCliente.IdCliente);
-                    
-                   
+
+
                     cmd.Parameters.AddWithValue("@MontoPago", venta.MontoPago);
                     cmd.Parameters.AddWithValue("@MontoCambio", venta.MontoCambio);
                     cmd.Parameters.AddWithValue("@MontoTotal", venta.MontoTotal);
@@ -97,7 +128,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
             }
@@ -126,7 +157,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
             }
 
@@ -178,7 +209,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
@@ -232,7 +263,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }
@@ -266,7 +297,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show("Se produjo un error: " + ex.Message);
                 }
             }

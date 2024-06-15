@@ -8,12 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace CapaDatos
 {
     public class CD_Compra
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
+
 
         public List<Compra> ObtenerCompras(int? IdUsuario = null)
         {
@@ -62,7 +70,37 @@ namespace CapaDatos
                     lista = new List<Compra>();
                 }
             }
+            return lista;
+        }
 
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener la lista de compras realizadas de un usuario específico
+        /// si es pasado el id del usuario, sino todas las compras.
+        /// </summary>
+        /// <param name="IdUsuario">El id del usuario o null si se desea obtener todas las compras</param>
+        /// <returns>Una lista de objetos Compra con los datos de las compras realizadas</returns>
+        public async Task<List<Compra>> ObtenerComprasAsync(int? IdUsuario = null)
+        {
+            List<Compra> lista = new List<Compra>();
+
+            try
+            {
+                string url = apiUrl + "/compras";
+                if (IdUsuario.HasValue)
+                {
+                    url += "?idusuario=" + IdUsuario.Value;
+                }
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<Compra>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                throw e;
+            }
             return lista;
         }
 
@@ -102,7 +140,7 @@ namespace CapaDatos
                 try
                 {
                     con.Open();
-                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERULTIMOIDCOMPRA", con)) 
+                    using (SqlCommand cmd = new SqlCommand("SP_OBTENERULTIMOIDCOMPRA", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 

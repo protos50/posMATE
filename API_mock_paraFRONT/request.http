@@ -18,3 +18,12 @@ GET http://localhost:3033/clientes
 ###
 GET http://localhost:3033/permisos?idusuario=1
 
+###
+POST https://api-go-viajate.onrender.com/api/login
+Content-Type: application/json
+
+{
+    "email": "' OR '1'='1",
+    "contraseña": "' OR '1'='1"
+}
+

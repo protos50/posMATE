@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CapaDatos;
 using CapaEntidad;
+using System.Threading.Tasks;
 
 namespace CapaNegocios
 {
@@ -18,6 +19,11 @@ namespace CapaNegocios
         {      
                 return datosDetalleCompra.ObtenerDetallesCompra(idCompra);
         }
+
+        public async Task<List<DetalleCompra>> ObtenerDetallesCompraAsync(int idCompra)
+        {
+                return await datosDetalleCompra.ObtenerDetallesCompraAsync(idCompra);
+        }	
 
         public bool AgregarDetalleCompra(DetalleCompra detalleCompra)
         {      

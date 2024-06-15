@@ -7,12 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using System.Net.Http;
+using Newtonsoft.Json;
+
 
 namespace CapaDatos
 {
     public class CD_DetalleVenta
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
+
         public List<DetalleVenta> ObtenerDetallesVenta(int idVenta)
         {
             List<DetalleVenta> lista = new List<DetalleVenta>();

@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaEntidad;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace CapaDatos
 {
     public class CD_DetalleCompra
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["cadena_conexion"].ConnectionString;
+        // Get the API URL from ApiConfigManager
+        readonly string apiUrl = ApiConfigManager.ApiUrl;
+        // HttpClient es recomendable que sea estático y reutilizable
+        private static readonly HttpClient client = new HttpClient();
 
         public List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
         {
@@ -58,6 +64,32 @@ namespace CapaDatos
 
             return lista;
         }
+
+        /// <summary>
+        /// Realiza una solicitud asincrónica a la API para obtener los detalles de una compra específica
+        /// </summary>
+        /// <param name="idCompra">El id de la compra</param>
+        /// <returns>Una lista de objetos DetalleCompra con los datos de los detalles de la compra</returns>
+        public async Task<List<DetalleCompra>> ObtenerDetallesCompraAsync(int idCompra)
+        {
+            List<DetalleCompra> lista = new List<DetalleCompra>();
+
+            try
+            {
+                string url = apiUrl + "/detallescompra?idCompra=" + idCompra;
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<DetalleCompra>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                throw e;
+            }
+            return lista;
+        }
+
 
 
         public bool AgregarDetalleCompra(DetalleCompra detalleCompra)
