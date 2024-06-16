@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { showStatus } = require('./utils');
 
 const modelo_json_venta = [
     {
@@ -158,8 +159,7 @@ router.get('/ventas', (req, res) => {
     }));
 
     res.json(ventas);
-    console.log("Mensaje de estado: " + res.statusMessage);
-    console.log("Codigo de estado: " + res.statusCode);
+    showStatus(res);
 })
 
 module.exports = router;

@@ -20,10 +20,11 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void frmVerStock_Load(object sender, EventArgs e)
+        private async void frmVerStock_Load(object sender, EventArgs e)
         {
             CN_Producto negocioProducto = new CN_Producto();
-            List<Producto> productos = negocioProducto.ObtenerProductos();
+            List<Producto> productos = await negocioProducto.ObtenerProductosAsync();
+
             foreach (Producto producto in productos)
             {
                 dgvStock.Rows.Add(
@@ -57,7 +58,7 @@ namespace CapaPresentacion
 
         }
 
-        private void txtStockMin_TextChanged(object sender, EventArgs e)
+        private async void txtStockMin_TextChanged(object sender, EventArgs e)
         {
             // Obtiene el valor mínimo de stock del cuadro de texto
             int stockMin;
@@ -72,7 +73,7 @@ namespace CapaPresentacion
             CN_Producto negocioProducto = new CN_Producto();
 
             // Obtiene la lista de productos desde la capa de negocio
-            List<Producto> productos = negocioProducto.ObtenerProductos();
+            List<Producto> productos = await negocioProducto.ObtenerProductosAsync();
 
             // Limpia las filas existentes en dgvStockMin
             dgvStockMin.Rows.Clear();

@@ -30,7 +30,7 @@ router.get('/productos', (req, res) => {
 
         res.json(productos);
         showStatus(res);
-    }, 100);
+    }, 1);
 
 
 })

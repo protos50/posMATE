@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaPresentacion.exe" size="15326144">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CapaPresentacion.exe" size="15331264">
       <assemblyIdentity name="CapaPresentacion" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l738LN/N9zg4pnR8n1S1mlWoWpwDKoIpK11hc7rQc8M=</dsig:DigestValue>
+        <dsig:DigestValue>X71zT50Z3K0kQx8x0rjyPZTpmV4ooj2VY5cnULYjTo0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

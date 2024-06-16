@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const showStatus = require('./utils');
+const { showStatus } = require('./utils');
 
 //ejemplo del retorno de permisos cuando IdUsuario = '2'
 const modelo_json_permiso = [

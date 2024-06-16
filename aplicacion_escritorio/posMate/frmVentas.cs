@@ -40,15 +40,15 @@ namespace CapaPresentacion
 
 
 
-        private void frmVentas_Load(object sender, EventArgs e)
+        private async void frmVentas_Load(object sender, EventArgs e)
         {
 
             //La fecha siempre la actual
             dtpFecha.Value = DateTime.Now;
             verificarCheck();
-
+            
             //obtener los productos
-            List <Producto> listaProducto = new CN_Producto().ObtenerProductos();
+            List<Producto> listaProducto = await new CN_Producto().ObtenerProductosAsync();
             foreach (var producto in listaProducto)
             {
                 if(producto.Estado != false)
@@ -270,7 +270,7 @@ namespace CapaPresentacion
         }
 
 
-        private void btnConfirmarCompra_Click(object sender, EventArgs e)
+        private async void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtPago.Text))
             {
@@ -307,7 +307,7 @@ namespace CapaPresentacion
                 if (idVenta > 0)
                 {
                     List<DetalleVenta> detallesVenta = new List<DetalleVenta>();
-                    List<Producto> productosDisponibles = negocioProducto.ObtenerProductos();
+                    List<Producto> productosDisponibles = await negocioProducto.ObtenerProductosAsync();
 
                     foreach (Producto productoEnCarrito in carrito)
                     {

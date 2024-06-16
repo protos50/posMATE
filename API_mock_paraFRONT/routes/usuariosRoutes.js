@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const showStatus = require('./utils');
+const { showStatus } = require('./utils');
 const path = require('path'); // Importa el módulo 'path'
 
 const modelo_json_usuario = [

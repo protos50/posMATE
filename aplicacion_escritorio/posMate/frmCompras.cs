@@ -235,7 +235,7 @@ namespace CapaPresentacion
         }
 
 
-        private void btnConfirmarCompra_Click(object sender, EventArgs e)
+        private  async void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
             // Obtenemos el id del proveedor a través del item valor del combobox
             int idProveedor = Convert.ToInt32(((OpcionCombo)cboProveedor.SelectedItem).Valor);
@@ -268,7 +268,7 @@ namespace CapaPresentacion
                 {
                     // Inicializamos listas y obtenemos productos disponibles
                     List<DetalleCompra> detallesCompra = new List<DetalleCompra>();
-                    List<Producto> productosDisponibles = negocioProducto.ObtenerProductos();
+                    List<Producto> productosDisponibles = await negocioProducto.ObtenerProductosAsync();  
 
                     // Iteramos sobre los productos en el carrito
                     foreach (Producto productoEnCarrito in carrito)
