@@ -36,3 +36,34 @@ curl -X POST http://localhost:3033/productos -H "Content-Type: application/json"
     "FechaRegistro": "2023-11-14T16:17:16.607",
     "codigoProducto": "NP123"
 }'
+
+###
+curl -X PUT http://localhost:3033/productos/1 -H "Content-Type: application/json" -d '{
+    "oCategoria": {
+        "IdCategoria": 1
+    },
+    "Nombre": "Producto Editado",
+    "Descripcion": "Descripción del producto editado",
+    "Stock": 150,
+    "PrecioCompra": 55.00,
+    "PrecioVenta": 65.00,
+    "Estado": "Activo",
+    "FechaRegistro": "2023-11-14T16:17:16.607",
+    "codigoProducto": "NP12345"
+}'
+
+###
+GET  http://localhost:3033/productos/codigo/P004 HTTP/1.1
+
+###
+GET http://localhost:3033/productos/1 HTTP/1.1
+
+###
+curl -X PUT http://localhost:3033/productos/1/actualizarStock -H "Content-Type: application/json" -d '{"cantidad": 10}'
+
+###
+curl -X PUT http://localhost:3033/productos/1/actualizarStockVenta -H "Content-Type: application/json" -d '{"cantidad": 5}'
+
+###
+curl -X GET "http://localhost:3033/productos/masvendidos?topN=5&fechaDesde=2023-01-01&fechaHasta=2023-12-31" -H "Content-Type: application/json"
+

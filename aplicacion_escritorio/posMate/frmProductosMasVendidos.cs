@@ -21,11 +21,11 @@ namespace CapaPresentacion
             CargarProductosMasVendidos(1); // Cargar con cantidad predeterminada (1)
         }
 
-        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        private async void txtCantidad_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtCantidad.Text, out int cantidad))
             {
-                List<Producto> productosMasVendidos = negocioProducto.ObtenerProductoMasVendido(cantidad,dtpFechaDesde.Value, dtpFechaHasta.Value);
+                List<Producto> productosMasVendidos = await negocioProducto.ObtenerProductosMasVendidosAsync(cantidad,dtpFechaDesde.Value, dtpFechaHasta.Value);
 
                 dgvData.Rows.Clear();
 
@@ -40,9 +40,9 @@ namespace CapaPresentacion
             }
         }
 
-        private void CargarProductosMasVendidos(int cantidad)
+        private async void CargarProductosMasVendidos(int cantidad)
         {
-            List<Producto> productosMasVendidos = negocioProducto.ObtenerProductoMasVendido(cantidad, dtpFechaDesde.Value, dtpFechaHasta.Value);
+            List<Producto> productosMasVendidos = await negocioProducto.ObtenerProductosMasVendidosAsync(cantidad, dtpFechaDesde.Value, dtpFechaHasta.Value);
 
             dgvData.Rows.Clear();
 

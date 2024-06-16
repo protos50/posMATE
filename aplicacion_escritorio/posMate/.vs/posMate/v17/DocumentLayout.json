@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\posmate\\frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capanegocio\\cn_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capanegocio\\cn_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\posmate\\frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -77,7 +77,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -89,13 +89,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "frmCompras.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmCompras.cs",
               "RelativeDocumentMoniker": "frmCompras.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmCompras.cs",
               "RelativeToolTip": "frmCompras.cs",
-              "ViewState": "AQIAAAEBAAAAAAAAAAAawLwAAAANAAAA",
+              "ViewState": "AQIAAAEBAAAAAAAAAAAawAoBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-16T02:07:40.821Z",
               "EditorCaption": ""
@@ -110,8 +110,7 @@
               "RelativeToolTip": "frmVerStock.cs",
               "ViewState": "AQIAADgAAAAAAAAAAAApwEsAAABVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T23:46:06.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-15T23:46:06.537Z"
             },
             {
               "$type": "Document",
@@ -123,8 +122,7 @@
               "RelativeToolTip": "..\\CapaEntidad\\Producto.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAywBIAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T00:53:22.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-15T00:53:22.906Z"
             },
             {
               "$type": "Document",
@@ -200,13 +198,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CN_Producto.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_Producto.cs",
               "RelativeDocumentMoniker": "..\\CapaNegocio\\CN_Producto.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_Producto.cs",
               "RelativeToolTip": "..\\CapaNegocio\\CN_Producto.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAQwB4AAAAJAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAUwEQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T08:44:36.666Z",
               "EditorCaption": ""
@@ -221,8 +219,7 @@
               "RelativeToolTip": "..\\CapaDatos\\CD_Producto.cs",
               "ViewState": "AQIAAIkAAAAAAAAAAAAwwIoAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-03T08:44:43.833Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-03T08:44:43.833Z"
             },
             {
               "$type": "Document",
@@ -246,8 +243,7 @@
               "RelativeToolTip": "..\\CapaDatos\\CD_Compra.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAAFgAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-06T02:31:07.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T02:31:07.311Z"
             },
             {
               "$type": "Document",
@@ -259,8 +255,7 @@
               "RelativeToolTip": "..\\CapaDatos\\CD_Usuario.cs",
               "ViewState": "AQIAAJIAAAAAAAAAAAAwwFwAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T20:03:28.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T20:03:28.004Z"
             },
             {
               "$type": "Document",

@@ -197,7 +197,7 @@ namespace CapaPresentacion
                 producto.Estado = Convert.ToInt32(((OpcionCombo)cboEstado.SelectedItem).Valor) == 1 ? true : false;
 
 
-                if (negocioProducto.EditarProducto(producto))
+                if (await negocioProducto.EditarProductoAsync(producto))
                 {
                     MessageBox.Show("El producto se ha editado correctamente.");
                     

@@ -4,67 +4,182 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenidos a Francoz APIs</title>
+    <!-- Importando Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Importando Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(59, 13, 145);
+            color: rgb(241, 230, 130);
+        }
+        a {
+            color: rgb(224, 192, 48);
+        }
+        .card {
+            background-color: rgb(79, 34, 153); /* Color de fondo oscuro para las tarjetas */
+        }
+        .card-content {
+            color: rgb(241, 230, 130); /* Color claro para el texto de las tarjetas */
+        }
+    </style>
 </head>
-<body style="background-color: rgb(59, 13, 145); color:rgb(241, 230, 130);;">
-    <h1>Bienvenidos a Francoz APIs</h1>
-    <p>Endpoints disponibles:</p>
-    <ul>
-        <h2>Usuarios</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/usuarios">/usuarios</a> : [GET] Obtener la lista de usuarios</li>
-        <li><a style="color: rgb(224, 192, 48);" href="/usuarios/registrar">/usuarios/registrar</a> : [POST] Simula la creación de un usuario</li>
-        <li><a style="color: rgb(224, 192, 48);" href="/auth/login">/auth/login</a> : [POST] Simula la verificación de credenciales</li>
-        <li><a style="color: rgb(224, 192, 48);" href="/usuarios/editar">/usuarios/editar</a> : [PUT] Simula la edicion de datos de un usuario</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Categorias</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/categorias">/categorias</a> : [GET] Obtener la lista de categorías</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Roles</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/roles">/roles</a> : [GET] Obtener la lista de roles</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Productos</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/productos">/productos</a> : [GET] Obtener la lista de productos</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Clientes</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/clientes">/clientes</a> : [GET] Obtener la lista de clientes</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Proveedores</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/proveedores">/proveedores</a> : [GET] Obtener la lista de proveedores</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Ventas</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/ventas">/ventas</a> : [GET] Obtener la lista de ventas</li>
-        <li><a style="color: rgb(224, 192, 48);" href="/ventas?idusuario=5">/ventas?idusuario=5</a> : [GET] Obtener la lista de ventas  para el IdUsuario = 5</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Compras</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/compras">/compras</a> : [GET] Obtener la lista de compras</li>
-        <li><a style="color: rgb(224, 192, 48);" href="/compras?idusuario=3">/compras?idusuario=3</a> : [GET] Obtener la lista de compras para el IdUsuario = 3</li>
-        <br>
-        <hr>
-        <br>
-        <h2>Permisos</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/permisos?idusuario=1">/permisos?idusuario=1</a> : [GET] Obtener la lista de permisos para el IdUsuario = 1</li>
-        <br>
-        <hr>
-        <br>
-        <h2>DetalleCompras</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/detallescompra?idCompra=1">/detallescompra?idCompra=1</a> : [GET] Obtener la lista de DetalleCompras para el IdCompra = 1</li>
-        <br>
-        <h2>DetalleVentas</h2>
-        <li><a style="color: rgb(224, 192, 48);" href="/detallesventa?idVenta=1">/detallesventa?idVenta=1</a> : [GET] Obtener la lista de DetalleVentas para el IdVenta = 1</li>
-        <br>
-    </ul>
+<body>
+    <div class="container">
+        <h1 class="center-align">Bienvenidos a Francoz APIs</h1>
+        <p>Endpoints disponibles:</p>
+
+        <!-- Grid de Tarjetas -->
+        <div class="row">
+
+            <!-- Usuarios -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Usuarios</span>
+                        <ul>
+                            <li><a href="/usuarios">/usuarios</a> : [GET] Obtener la lista de usuarios</li>
+                            <li><a href="/usuarios/registrar">/usuarios/registrar</a> : [POST] Simula la creación de un usuario</li>
+                            <li><a href="/auth/login">/auth/login</a> : [POST] Simula la verificación de credenciales</li>
+                            <li><a href="/usuarios/editar">/usuarios/editar</a> : [PUT] Simula la edicion de datos de un usuario</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorias -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Categorias</span>
+                        <ul>
+                            <li><a href="/categorias">/categorias</a> : [GET] Obtener la lista de categorías</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roles -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Roles</span>
+                        <ul>
+                            <li><a href="/roles">/roles</a> : [GET] Obtener la lista de roles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Productos</span>
+                        <ul>
+                            <li><a href="/productos">/productos</a> : [GET] Obtener la lista de productos</li>
+                            <li><a href="/productos">/productos</a> : [POST] Simula la creacion de un nuevo producto en la bd</li>
+                            <li><a href="/productos/1">/productos/1</a> : [PUT] Simula la edicion del producto id = 1</li>
+                            <li><a href="/productos/codigo/P001">/productos/codigo/P001</a> : [GET] Obtener producto por Codigo de Producto codigoProducto = P001</li>
+                            <li><a href="/productos/masvendidos?topN=5&fechaDesde=2023-01-01&fechaHasta=2023-12-31">/productos/masvendidos</a> : [GET] Obtener productos más vendidos dependiendo de la fecha de inicio - fin y topN dado a la query param</li>
+                            <li><a href="/productos/1">/productos/id</a> : [GET] Obtener producto por ID = 1</li>
+                            <li><a href="/productos/1/actualizarStock">/productos/id/actualizarStock</a> : [PUT] Actualizar stock de (compra - incrementar) del IdProducto = 1 dado la cantidad especificada en el body del JSON </li>
+                            <li><a href="/productos/1/actualizarStockVenta">/productos/id/actualizarStockVenta</a> : [PUT] Actualizar stock de (venta - incrementar) del IdProducto = 1 dado la cantidad especificada en el body del JSON </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clientes -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Clientes</span>
+                        <ul>
+                            <li><a href="/clientes">/clientes</a> : [GET] Obtener la lista de clientes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proveedores -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Proveedores</span>
+                        <ul>
+                            <li><a href="/proveedores">/proveedores</a> : [GET] Obtener la lista de proveedores</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ventas -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Ventas</span>
+                        <ul>
+                            <li><a href="/ventas">/ventas</a> : [GET] Obtener la lista de ventas</li>
+                            <li><a href="/ventas?idusuario=5">/ventas?idusuario=5</a> : [GET] Obtener la lista de ventas para el IdUsuario = 5</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compras -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Compras</span>
+                        <ul>
+                            <li><a href="/compras">/compras</a> : [GET] Obtener la lista de compras</li>
+                            <li><a href="/compras?idusuario=3">/compras?idusuario=3</a> : [GET] Obtener la lista de compras para el IdUsuario = 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permisos -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Permisos</span>
+                        <ul>
+                            <li><a href="/permisos?idusuario=1">/permisos?idusuario=1</a> : [GET] Obtener la lista de permisos para el IdUsuario = 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DetalleCompras -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">DetalleCompras</span>
+                        <ul>
+                            <li><a href="/detallescompra?idCompra=1">/detallescompra?idCompra=1</a> : [GET] Obtener la lista de DetalleCompras para el IdCompra = 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DetalleVentas -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">DetalleVentas</span>
+                        <ul>
+                            <li><a href="/detallesventa?idVenta=1">/detallesventa?idVenta=1</a> : [GET] Obtener la lista de DetalleVentas para el IdVenta = 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Importando Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

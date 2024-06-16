@@ -201,6 +201,35 @@ namespace CapaDatos
             }
         }
 
+        public async Task<bool> EditarProductoAsync(Producto producto)
+        {
+            try
+            {
+                string url = $"{apiUrl}/productos/{producto.IdProducto}";
+
+                var jsonContent = JsonConvert.SerializeObject(producto);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
+        }
+
+
 
         public Producto ObtenerProductoPorCodigoProducto(string codigoProducto)
         {
@@ -253,6 +282,33 @@ namespace CapaDatos
             }
         }
 
+        public async Task<Producto> ObtenerProductoPorCodigoProductoAsync(string codigoProducto)
+        {
+            try
+            {
+                string url = $"{apiUrl}/productos/codigo/{codigoProducto}";
+
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    Producto producto = JsonConvert.DeserializeObject<Producto>(jsonResponse);
+                    return producto;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return null;
+            }
+        }
+
         public bool ActualizarStockProducto(int productoId, int cantidad)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -279,6 +335,25 @@ namespace CapaDatos
             }
         }
 
+        public async Task<bool> ActualizarStockProductoAsync(int productoId, int cantidad)
+        {
+            try
+            {
+                string url = $"{apiUrl}/productos/{productoId}/actualizarStock";
+                var content = new StringContent(JsonConvert.SerializeObject(new { cantidad }), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
+        }
+
+
         public bool ActualizarStockProductoVenta(int productoId, int cantidad)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -304,6 +379,25 @@ namespace CapaDatos
                 }
             }
         }
+
+        public async Task<bool> ActualizarStockProductoVentaAsync(int productoId, int cantidad)
+        {
+            try
+            {
+                string url = $"{apiUrl}/productos/{productoId}/actualizarStockVenta";
+                var content = new StringContent(JsonConvert.SerializeObject(new { cantidad }), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return false;
+            }
+        }
+
 
         public Producto ObtenerProductoPorId(int id)
         {
@@ -356,6 +450,34 @@ namespace CapaDatos
             }
         }
 
+        public async Task<Producto> ObtenerProductoPorIdAsync(int id)
+        {
+            try
+            {
+                string url = $"{apiUrl}/productos/{id}";
+
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    Producto producto = JsonConvert.DeserializeObject<Producto>(jsonResponse);
+                    return producto;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return null;
+            }
+        }
+
+
         public List<Producto> ObtenerProductosMasVendidos(int topN, DateTime fechaDesde, DateTime fechaHasta)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -401,6 +523,32 @@ namespace CapaDatos
             }
         }
 
+        public async Task<List<Producto>> ObtenerProductosMasVendidosAsync(int topN, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                var url = $"{apiUrl}/productos/masvendidos?topN={topN}&fechaDesde={fechaDesde:yyyy-MM-dd}&fechaHasta={fechaHasta:yyyy-MM-dd}";
+
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    List<Producto> productosMasVendidos = JsonConvert.DeserializeObject<List<Producto>>(jsonResponse);
+                    return productosMasVendidos;
+                }
+                else
+                {
+                    // Manejar el caso de una respuesta no exitosa
+                    return new List<Producto>();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción
+                return new List<Producto>();
+            }
+        }
 
 
     }

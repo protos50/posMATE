@@ -198,14 +198,14 @@ namespace CapaPresentacion
             else
             {
                 int idProducto = int.Parse(txtId.Text);
-                Producto productoExistente = negocioProducto.ObtenerProductoPorCodigoProducto(txtCodigoBarra.Text);
+                Producto productoExistente = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(txtCodigoBarra.Text);
 
                 if (productoExistente != null)
                 {
                     productoExistente.PrecioCompra = decimal.Parse(txtPrecioCompra.Text);
                     int cantidadNueva = int.Parse(txtCantidad.Text);
 
-                    if (negocioProducto.EditarProducto(productoExistente) && negocioProducto.ActualizarStockProducto(idProducto, cantidadNueva))
+                    if (await negocioProducto.EditarProductoAsync(productoExistente) && await negocioProducto.ActualizarStockProductoAsync(idProducto, cantidadNueva))
                     {
                         MessageBox.Show("El producto se ha editado correctamente.");
                         ActualizarDataGridView(carrito);
@@ -360,7 +360,7 @@ namespace CapaPresentacion
 
 
         //BOTON VERIFICAR
-        private void iconButton2_Click(object sender, EventArgs e)
+        private async void iconButton2_Click(object sender, EventArgs e)
         {
           if(string.IsNullOrWhiteSpace(txtCodigoBarra.Text))
             {
@@ -375,7 +375,7 @@ namespace CapaPresentacion
             string codigoProducto = txtCodigoBarra.Text;
 
             //obtenemos un producto por el codigo de barras
-            Producto productoCargado = negocioProducto.ObtenerProductoPorCodigoProducto(codigoProducto);
+            Producto productoCargado = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(codigoProducto);
 
             //Si este existe se rellenan los textBox correspondientes y solo nos permite usar cantidad y precio compra
             if (productoCargado != null)

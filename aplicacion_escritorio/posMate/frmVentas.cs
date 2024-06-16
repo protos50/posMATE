@@ -171,7 +171,7 @@ namespace CapaPresentacion
 
         }
 
-        private void btnCarrito_Click(object sender, EventArgs e)
+        private async void btnCarrito_Click(object sender, EventArgs e)
         {
             // Validación de campos obligatorios
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
@@ -210,12 +210,12 @@ namespace CapaPresentacion
             int idProducto = (int)productoSeleccionado.Valor; // ID del producto
             int cantidad = Convert.ToInt32(txtCantidad.Text);
 
-            Producto producto = negocioProducto.ObtenerProductoPorId(idProducto);
+            Producto producto = await negocioProducto.ObtenerProductoPorIdAsync(idProducto);
             // Verificar si el producto existe y la cantidad es válida
             if (producto != null && cantidad > 0 && cantidad <= producto.Stock)
             {
 
-                negocioProducto.ActualizarStockProductoVenta(idProducto, cantidad);
+                await negocioProducto.ActualizarStockProductoVentaAsync(idProducto, cantidad);
                 carrito.Add(producto);
 
 
@@ -421,7 +421,7 @@ namespace CapaPresentacion
 
 
         //Eliminar
-        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             CN_Producto cnProducto = new CN_Producto();
             if (e.ColumnIndex == dgvData.Columns["Eliminar"].Index && e.RowIndex >= 0)
@@ -438,7 +438,7 @@ namespace CapaPresentacion
 
                 // Llama a la función de la capa de negocio para actualizar el stock del producto
                 int cantidadEliminada = Convert.ToInt32(dgvData.Rows[e.RowIndex].Cells["Cantidad"].Value);
-                if (cnProducto.ActualizarStockProducto(idProducto, cantidadEliminada))
+                if (await cnProducto.ActualizarStockProductoAsync(idProducto, cantidadEliminada))
                 {
                     // Actualiza el monto total restando el total del producto eliminado
                     montoTotal -= Convert.ToDecimal(dgvData.Rows[e.RowIndex].Cells["Total"].Value);
