@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { showStatus } = require('./utils');
 
+// Middleware para parsear el body de las solicitudes como JSON
+router.use(express.json());
+
+
 const modelo_json_producto = [
     {
         "IdProducto": 1,
@@ -31,8 +35,22 @@ router.get('/productos', (req, res) => {
         res.json(productos);
         showStatus(res);
     }, 1);
-
-
 })
+
+// Endpoint para simular la inserción de un producto
+router.post('/productos', (req, res) => {
+    const producto = req.body;
+
+    console.log("Producto recibido:", producto);
+
+    // Simular una inserción exitosa
+    res.status(201).json({
+        message: "Producto insertado correctamente",
+        producto: producto
+    });
+
+    // Mostrar el estado de la respuesta
+    showStatus(res);
+});
 
 module.exports = router;

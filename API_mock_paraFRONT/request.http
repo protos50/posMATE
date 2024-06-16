@@ -18,12 +18,21 @@ GET http://localhost:3033/clientes
 ###
 GET http://localhost:3033/permisos?idusuario=1
 
+
 ###
-POST https://api-go-viajate.onrender.com/api/login
-Content-Type: application/json
+GET http://localhost:3033/detallescompra?idCompra=1
 
-{
-    "email": "' OR '1'='1",
-    "contraseña": "' OR '1'='1"
-}
-
+###
+curl -X POST http://localhost:3033/productos -H "Content-Type: application/json" -d '{
+    "oCategoria": {
+        "IdCategoria": 1
+    },
+    "Nombre": "Nuevo Producto",
+    "Descripcion": "Descripción del nuevo producto",
+    "Stock": 100,
+    "PrecioCompra": 50.00,
+    "PrecioVenta": 60.00,
+    "Estado": "Activo",
+    "FechaRegistro": "2023-11-14T16:17:16.607",
+    "codigoProducto": "NP123"
+}'

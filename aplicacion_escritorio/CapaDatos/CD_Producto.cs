@@ -65,7 +65,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     lista = new List<Producto>();
                 }
             }
@@ -130,9 +130,37 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
+            }
+        }
+
+        public async Task<bool> AgregarProductoAsync(Producto producto)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar un producto
+                string url = $"{apiUrl}/productos";
+
+                // Convertir el objeto Producto a JSON
+                string jsonProducto = JsonConvert.SerializeObject(producto);
+                StringContent content = new StringContent(jsonProducto, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                // Asegurarse de que la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
             }
         }
 
@@ -167,7 +195,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
             }
@@ -214,12 +242,12 @@ namespace CapaDatos
                         }
                     }
 
-                    
+
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return null;
                 }
             }
@@ -271,7 +299,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
             }
@@ -317,12 +345,12 @@ namespace CapaDatos
                         }
                     }
 
-                   
+
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return null;
                 }
             }
@@ -367,7 +395,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                   
+
                     return new List<Producto>();
                 }
             }

@@ -139,7 +139,7 @@ namespace CapaPresentacion
 
 
         //boton agregar carrito
-        private void btnCarrito_Click(object sender, EventArgs e)
+        private async void btnCarrito_Click(object sender, EventArgs e)
         {
             //Verificamos que se ingresen los datos
             if (string.IsNullOrWhiteSpace(txtCodigoBarra.Text) ||
@@ -187,7 +187,7 @@ namespace CapaPresentacion
             //Si el producto no existe hacemos la insercion
             if (txtCodigoBarra.Enabled)
             {
-                if (negocioProducto.AgregarProducto(nuevoProducto))
+                if (await negocioProducto.AgregarProductoAsync(nuevoProducto))
                 {
                     MessageBox.Show("Producto insertado en la base de datos correctamente.");
                     ActualizarDataGridView(carrito);
