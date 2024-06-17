@@ -4,6 +4,7 @@ import authRouter from "./routes/authRouter";
 import clientesRouter from "./routes/clientesRouter";
 import usuariosRouter from "./routes/usuariosRouter";
 import { database } from "./config/database";
+import rolesRouter from "./routes/rolesRouters";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ const port = process.env.PORT;
 app.use("/auth", authRouter);
 app.use("/clientes", clientesRouter);
 app.use("/usuarios", usuariosRouter);
+app.use("/roles", rolesRouter);
 
 app.get("/", (_req: express.Request, _res: express.Response) => {
   _res.send("Hola");
