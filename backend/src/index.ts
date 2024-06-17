@@ -6,6 +6,7 @@ import usuariosRouter from "./routes/usuariosRouter";
 import { database } from "./config/database";
 import rolesRouter from "./routes/rolesRouter";
 import permisosRouter from "./routes/permisosRouter";
+import comprasRouter from "./routes/comprasRouter";
 dotenv.config();
 
 function checkDBConnection() {
@@ -40,7 +41,7 @@ app.use("/clientes", clientesRouter);
 app.use("/usuarios", usuariosRouter);
 app.use("/roles", rolesRouter);
 app.use("/permisos",permisosRouter);
-
+app.use("/compras",comprasRouter);
 app.get("/", (_req: express.Request, _res: express.Response) => {
   _res.send("Hola");
 });
