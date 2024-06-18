@@ -3,8 +3,28 @@ import {
   SP_LISTARUSUARIOS,
   SP_REGISTRARUSUARIO,
   SP_EDITARUSUARIO,
+  SP_OBTENERUSUARIOPORNOMBRE,
 } from "../procedures";
 
+export const obtenerUsuarioPorNombre = async (req: Request, res: Response) => {
+  try {
+    if (!req.query?.nombre)
+      return res.status(400).json({ message: "nombre es requerido" });
+
+    const result = await SP_OBTENERUSUARIOPORNOMBRE({
+      Nombre: req?.query?.nombre.toString(),
+    });
+
+    if (result.recordset.length > 0) {
+      res.json(result.recordset);
+    } else {
+      res.status(401).json({ message: "No existen usuario con ese nombre" });
+    }
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).json({ message: error.message || "Error desconocido" });
+  }
+};
 export const listarUsuarios = async (req: Request, res: Response) => {
   try {
     const result = await SP_LISTARUSUARIOS();
