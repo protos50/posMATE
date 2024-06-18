@@ -71,7 +71,7 @@ export const obtenerProductoPorId = async (req: Request, res: Response) => {
             FechaRegistro: producto.FechaRegistro,
             codigoProducto: producto.codigoProducto,
           };
-        })
+        })[0]
       );
     } else {
       res.status(401).json({ message: "Producto no encontrado" });
@@ -109,7 +109,7 @@ export const obtenerProductoPorCodigo = async (req: Request, res: Response) => {
             FechaRegistro: producto.FechaRegistro,
             codigoProducto: producto.codigoProducto,
           };
-        })
+        })[0]
       );
     } else {
       res.status(401).json({ message: "Producto no encontrado" });
