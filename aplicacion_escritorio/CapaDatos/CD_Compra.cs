@@ -130,7 +130,7 @@ namespace CapaDatos
             }
         }
 
-        public bool AgregarCompraAsync(Compra compra)
+        public async Task<bool> AgregarCompraAsync(Compra compra)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace CapaDatos
                 StringContent content = new StringContent(jsonCompra, Encoding.UTF8, "application/json");
 
                 // Realizar la solicitud POST
-                HttpResponseMessage response = client.PostAsync(url, content).Result;
+                HttpResponseMessage response = await client.PostAsync(url, content);
 
                 // Asegurarse de que la solicitud fue exitosa
                 response.EnsureSuccessStatusCode();
@@ -157,6 +157,7 @@ namespace CapaDatos
                 return false;
             }
         }
+
 
 
         public int ObtenerUltimoIDCompra()
@@ -184,6 +185,41 @@ namespace CapaDatos
                 {
                     // Manejo de excepciones
                 }
+            }
+
+            return ultimoID;
+        }
+
+        public async Task<int> ObtenerUltimoIDCompraAsync()
+        {
+            int ultimoID = -1;
+            try
+            {
+                // URL del endpoint de la API para obtener el último ID de venta
+                string url = $"{apiUrl}/compras/ultimoid";
+
+                // Realizar la solicitud GET de manera asincrónica
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                // Verificar si la solicitud fue exitosa
+                if (response.IsSuccessStatusCode)
+                {
+                    // Leer el contenido de la respuesta como string de manera asincrónica
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    // Convertir el string JSON a un entero
+                    ultimoID = JsonConvert.DeserializeObject<int>(responseBody);
+                }
+                else
+                {
+                    // Manejar el caso cuando el estado no es exitoso
+                    Console.WriteLine($"Error en la solicitud: {response.StatusCode}");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
             }
 
             return ultimoID;

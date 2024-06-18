@@ -122,12 +122,12 @@
             this.bunifuLabel1.AutoEllipsis = false;
             this.bunifuLabel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.bunifuLabel1.CursorType = System.Windows.Forms.Cursors.Default;
-            this.bunifuLabel1.Font = new System.Drawing.Font("Century Gothic", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.bunifuLabel1.Location = new System.Drawing.Point(209, 0);
             this.bunifuLabel1.Name = "bunifuLabel1";
             this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel1.Size = new System.Drawing.Size(127, 39);
+            this.bunifuLabel1.Size = new System.Drawing.Size(119, 38);
             this.bunifuLabel1.TabIndex = 39;
             this.bunifuLabel1.Text = "sección";
             this.bunifuLabel1.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -139,12 +139,12 @@
             this.bunifuLabel2.AutoEllipsis = false;
             this.bunifuLabel2.Cursor = System.Windows.Forms.Cursors.Default;
             this.bunifuLabel2.CursorType = System.Windows.Forms.Cursors.Default;
-            this.bunifuLabel2.Font = new System.Drawing.Font("Century Gothic", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(8)))), ((int)(((byte)(55)))));
             this.bunifuLabel2.Location = new System.Drawing.Point(342, 0);
             this.bunifuLabel2.Name = "bunifuLabel2";
             this.bunifuLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel2.Size = new System.Drawing.Size(143, 39);
+            this.bunifuLabel2.Size = new System.Drawing.Size(133, 38);
             this.bunifuLabel2.TabIndex = 40;
             this.bunifuLabel2.Text = "compras";
             this.bunifuLabel2.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
@@ -371,6 +371,7 @@
             this.txtCodigoBarra.TextPlaceholder = "Codigo barra";
             this.txtCodigoBarra.UseSystemPasswordChar = false;
             this.txtCodigoBarra.WordWrap = true;
+            this.txtCodigoBarra.TextChanged += new System.EventHandler(this.txtCodigoBarra_TextChanged);
             // 
             // cboCategoria
             // 
@@ -1485,11 +1486,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.label4.Location = new System.Drawing.Point(3, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 16);
+            this.label4.Size = new System.Drawing.Size(133, 15);
             this.label4.TabIndex = 52;
             this.label4.Text = "Carrito de compras:";
             // 
@@ -1505,11 +1506,11 @@
             // aviso
             // 
             this.aviso.AutoSize = true;
-            this.aviso.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aviso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aviso.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(39)))), ((int)(((byte)(40)))));
             this.aviso.Location = new System.Drawing.Point(528, 58);
             this.aviso.Name = "aviso";
-            this.aviso.Size = new System.Drawing.Size(156, 16);
+            this.aviso.Size = new System.Drawing.Size(166, 15);
             this.aviso.TabIndex = 58;
             this.aviso.Text = "Cargar codigo de barras:";
             // 

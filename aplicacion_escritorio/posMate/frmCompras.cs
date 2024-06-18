@@ -198,7 +198,7 @@ namespace CapaPresentacion
             else
             {
                 int idProducto = int.Parse(txtId.Text);
-                Producto productoExistente = negocioProducto.ObtenerProductoPorCodigoProducto(txtCodigoBarra.Text);
+                Producto productoExistente = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(txtCodigoBarra.Text);
 
                 if (productoExistente != null)
                 {
@@ -258,10 +258,10 @@ namespace CapaPresentacion
             CN_Producto negocioProducto = new CN_Producto();
 
             // Intentamos agregar la compra
-            if (negocioCompra.AgregarCompra(nuevoCompra))
+            if (await negocioCompra.AgregarCompraAsync(nuevoCompra))
             {
                 // Obtenemos el último id de compra registrado
-                int idCompra = negocioCompra.obtenerUltimoIdCompra();
+                int idCompra = await negocioCompra.ObtenerUltimoIDCompraAsync();
 
                 // Si se obtiene un id válido
                 if (idCompra > 0)
@@ -293,7 +293,7 @@ namespace CapaPresentacion
                             };
 
                             // Intentamos agregar el detalle de compra
-                            if (negocioDetalle.AgregarDetalleCompra(detalle))
+                            if (await negocioDetalle.AgregarDetalleCompraAsync(detalle))
                             {
                                 detallesCompra.Add(detalle);
                             }
@@ -375,7 +375,7 @@ namespace CapaPresentacion
             string codigoProducto = txtCodigoBarra.Text;
 
             //obtenemos un producto por el codigo de barras
-            Producto productoCargado = negocioProducto.ObtenerProductoPorCodigoProducto(codigoProducto);
+            Producto productoCargado = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(codigoProducto);
 
             //Si este existe se rellenan los textBox correspondientes y solo nos permite usar cantidad y precio compra
             if (productoCargado != null)
@@ -449,6 +449,11 @@ namespace CapaPresentacion
             txtPrecioVenta.Clear();
 
             verificarCheck();
+        }
+
+        private void txtCodigoBarra_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

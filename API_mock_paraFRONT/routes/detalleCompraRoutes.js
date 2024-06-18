@@ -86,7 +86,7 @@ router.get('/detallescompra', (req, res) => {
         { "IdCompra": 3, "DetallesCompra": [{ "IdDetalleCompra": 6, "oProducto": { "IdProducto": 9, "Nombre": "Juego de Construcción" }, "PrecioCompra": 60.00, "PrecioVenta": 24.99, "Cantidad": 5, "MontoTotal": 300.00, "FechaRegistro": "2023-11-14T16:47:02.627" }] },
         { "IdCompra": 5, "DetallesCompra": [{ "IdDetalleCompra": 7, "oProducto": { "IdProducto": 1, "Nombre": "Smartphone XYZ" }, "PrecioCompra": 80.00, "PrecioVenta": 499.99, "Cantidad": 2, "MontoTotal": 160.00, "FechaRegistro": "2023-11-14T22:28:23.713" }] }
     ];
-    
+
     if (!isNaN(idCompra)) {
         // Filtrar los detalles de compra por IdCompra
         const detallesCompraFiltrados = detallesCompra.find(compra => compra.IdCompra === idCompra);
@@ -115,6 +115,30 @@ router.get('/detallescompra', (req, res) => {
         res.status(400).send('El IdCompra es inválido');
         showStatus(res);
     }
+});
+
+
+
+// Endpoint para agregar un detalle de compra
+router.post('/detallecompra', (req, res) => {
+    // Lista de detalles de compra (simulación)
+    let detallesCompra = [];
+
+    console.log("POST : /detallecompra");
+    const detalleCompra = req.body;
+
+    console.log("DetalleCompra recibido:", detalleCompra);
+
+    // Simular la inserción de un detalle de compra
+    detallesCompra.push(detalleCompra);
+
+    res.status(201).json({
+        message: "Detalle de compra insertado correctamente",
+        detalleCompra: detalleCompra
+    });
+
+    // Mostrar el estado de la respuesta
+    showStatus(res);
 });
 
 

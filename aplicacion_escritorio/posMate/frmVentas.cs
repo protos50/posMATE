@@ -210,7 +210,8 @@ namespace CapaPresentacion
             int idProducto = (int)productoSeleccionado.Valor; // ID del producto
             int cantidad = Convert.ToInt32(txtCantidad.Text);
 
-            Producto producto = negocioProducto.ObtenerProductoPorId(idProducto);
+            Producto producto = await negocioProducto.ObtenerProductoPorIdAsync(idProducto);
+
             // Verificar si el producto existe y la cantidad es válida
             if (producto != null && cantidad > 0 && cantidad <= producto.Stock)
             {
@@ -301,9 +302,9 @@ namespace CapaPresentacion
             CN_DetalleVenta negocioDetalle = new CN_DetalleVenta();
             CN_Producto negocioProducto = new CN_Producto();
 
-            if (negocioVenta.AgregarVenta(nuevaVenta))
+            if (await negocioVenta.AgregarVentaAsync(nuevaVenta))
             {
-                int idVenta = negocioVenta.ObtenerUltimoIDVenta();
+                int idVenta = await negocioVenta.ObtenerUltimoIDVentaAsync();
                 if (idVenta > 0)
                 {
                     List<DetalleVenta> detallesVenta = new List<DetalleVenta>();
@@ -346,7 +347,7 @@ namespace CapaPresentacion
 
 
                     //******FACTURA**********
-                    int idVentaFactura = negocioVenta.ObtenerUltimoIDVenta();
+                    int idVentaFactura = await negocioVenta.ObtenerUltimoIDVentaAsync();
 
                     DialogResult result = MessageBox.Show("¿Desea imprimir la factura?", "Imprimir Factura", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)

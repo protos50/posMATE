@@ -83,7 +83,7 @@ namespace CapaDatos
         public async Task<List<Venta>> ObtenerVentasAsync(int? idUsuario = null)
         {
             List<Venta> lista = new List<Venta>();
-            
+
             try
             {
                 string url = apiUrl + "/ventas";
@@ -116,7 +116,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@IdUsuario", venta.oUsuario.IdUsuario);
                     cmd.Parameters.AddWithValue("@IdCliente", venta.oCliente.IdCliente);
 
-                    
+
                     cmd.Parameters.AddWithValue("@MontoPago", venta.MontoPago);
                     cmd.Parameters.AddWithValue("@MontoCambio", venta.MontoCambio);
                     cmd.Parameters.AddWithValue("@MontoTotal", venta.MontoTotal);
@@ -135,7 +135,7 @@ namespace CapaDatos
             }
         }
 
-        public bool AgregarVentaAsync(Venta venta)
+        public async Task<bool> AgregarVentaAsync(Venta venta)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace CapaDatos
                 StringContent content = new StringContent(jsonVenta, Encoding.UTF8, "application/json");
 
                 // Realizar la solicitud POST
-                HttpResponseMessage response = client.PostAsync(url, content).Result;
+                HttpResponseMessage response = await client.PostAsync(url, content);
 
                 // Asegurarse de que la solicitud fue exitosa
                 response.EnsureSuccessStatusCode();
@@ -162,6 +162,7 @@ namespace CapaDatos
                 return false;
             }
         }
+
 
         public int ObtenerUltimoIDVenta()
         {
@@ -188,6 +189,41 @@ namespace CapaDatos
                 {
 
                 }
+            }
+
+            return ultimoID;
+        }
+
+        public async Task<int> ObtenerUltimoIDVentaAsync()
+        {
+            int ultimoID = -1;
+            try
+            {
+                // URL del endpoint de la API para obtener el último ID de venta
+                string url = $"{apiUrl}/ventas/ultimoid";
+
+                // Realizar la solicitud GET de manera asincrónica
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                // Verificar si la solicitud fue exitosa
+                if (response.IsSuccessStatusCode)
+                {
+                    // Leer el contenido de la respuesta como string de manera asincrónica
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    // Convertir el string JSON a un entero
+                    ultimoID = JsonConvert.DeserializeObject<int>(responseBody);
+                }
+                else
+                {
+                    // Manejar el caso cuando el estado no es exitoso
+                    Console.WriteLine($"Error en la solicitud: {response.StatusCode}");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
             }
 
             return ultimoID;

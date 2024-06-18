@@ -85,7 +85,7 @@ namespace CapaDatos
             catch (HttpRequestException e)
             {
                 // Manejo de excepciones en caso de error en la solicitud HTTP
-                throw e;
+                return null;
             }
             return lista;
         }
@@ -122,6 +122,35 @@ namespace CapaDatos
                 }
             }
         }
+
+        public async Task<bool> AgregarDetalleCompraAsync(DetalleCompra detalleCompra)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar un detalle de compra
+                string url = $"{apiUrl}/detallecompra";
+
+                // Convertir el objeto DetalleCompra a JSON
+                string jsonDetalleCompra = JsonConvert.SerializeObject(detalleCompra);
+                StringContent content = new StringContent(jsonDetalleCompra, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST de manera asincrónica
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                // Verificar si la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
+            }
+        }
+
 
     }
 

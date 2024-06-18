@@ -21,9 +21,19 @@ namespace CapaNegocio
             return ocd_compra.AgregarCompra(compra);
         }
 
+        public async Task<bool> AgregarCompraAsync(Compra compra)
+        {
+            return await ocd_compra.AgregarCompraAsync(compra);
+        }
+
         public int obtenerUltimoIdCompra()
         {
             return ocd_compra.ObtenerUltimoIDCompra();
+        }
+
+        public async Task<int> ObtenerUltimoIDCompraAsync()
+        {
+            return await ocd_compra.ObtenerUltimoIDCompraAsync();
         }
 
         public decimal CalcularMontoTotalComprasPorFecha(DateTime fechaDesde, DateTime fechaHasta)

@@ -35,31 +35,30 @@ const modelo_json_compra = [
     }
 ];
 
+let compras = [
+    {
+        "IdCompra": 1,
+        "oUsuario":
+        {
+            "IdUsuario": 3,
+            "Nombre": "EncargadoLuis"
+        },
+        "oProveedor":
+        {
+            "IdProveedor": 35,
+            "Nombre": "Librería Conocimiento"
+        },
+        "MontoTotal": 980.00,
+        "FechaRegistro": "2023-11-14T16:32:02.383"
+    },
+    { "IdCompra": 2, "oUsuario": { "IdUsuario": 3, "Nombre": "EncargadoLuis" }, "oProveedor": { "IdProveedor": 31, "Nombre": "Casa Hogar Mía" }, "MontoTotal": 770.00, "FechaRegistro": "2023-11-14T16:38:33.820" },
+    { "IdCompra": 3, "oUsuario": { "IdUsuario": 4, "Nombre": "EncargadoPedro" }, "oProveedor": { "IdProveedor": 32, "Nombre": "Juguetería Sonrisas" }, "MontoTotal": 300.00, "FechaRegistro": "2023-11-14T16:47:02.627" },
+    { "IdCompra": 5, "oUsuario": { "IdUsuario": 3, "Nombre": "EncargadoLuis" }, "oProveedor": { "IdProveedor": 47, "Nombre": "Software Solutions" }, "MontoTotal": 160.00, "FechaRegistro": "2023-11-14T22:28:23.713" }
+];
 
 router.get('/compras', (req, res) => {
     const idUsuario = parseInt(req.query.idusuario); // Obtener el idusuario desde la URL
     console.log("GET : /compras?idusuario=" + idUsuario) 
-
-    let compras = [
-        {
-            "IdCompra": 1,
-            "oUsuario":
-            {
-                "IdUsuario": 3,
-                "Nombre": "EncargadoLuis"
-            },
-            "oProveedor":
-            {
-                "IdProveedor": 35,
-                "Nombre": "Librería Conocimiento"
-            },
-            "MontoTotal": 980.00,
-            "FechaRegistro": "2023-11-14T16:32:02.383"
-        },
-        { "IdCompra": 2, "oUsuario": { "IdUsuario": 3, "Nombre": "EncargadoLuis" }, "oProveedor": { "IdProveedor": 31, "Nombre": "Casa Hogar Mía" }, "MontoTotal": 770.00, "FechaRegistro": "2023-11-14T16:38:33.820" },
-        { "IdCompra": 3, "oUsuario": { "IdUsuario": 4, "Nombre": "EncargadoPedro" }, "oProveedor": { "IdProveedor": 32, "Nombre": "Juguetería Sonrisas" }, "MontoTotal": 300.00, "FechaRegistro": "2023-11-14T16:47:02.627" },
-        { "IdCompra": 5, "oUsuario": { "IdUsuario": 3, "Nombre": "EncargadoLuis" }, "oProveedor": { "IdProveedor": 47, "Nombre": "Software Solutions" }, "MontoTotal": 160.00, "FechaRegistro": "2023-11-14T22:28:23.713" }
-    ];
 
     // Si el IdUsuario es un numero
     if (!isNaN(idUsuario)) {  
@@ -92,6 +91,19 @@ router.post('/compras', (req, res) => {
         message: "Compra insertada correctamente",
         compra: compra
     });
+
+    // Mostrar el estado de la respuesta
+    showStatus(res);
+});
+
+// Endpoint para obtener el último ID de venta
+router.get('/compras/ultimoid', (req, res) => {
+    console.log("GET : /compras/ultimoid");
+
+    // Simular la obtención del último ID de venta
+    let ultimoIdCompra = compras.length > 0 ? compras[compras.length - 1].IdCompra : -1;
+
+    res.status(200).json(ultimoIdCompra);
 
     // Mostrar el estado de la respuesta
     showStatus(res);

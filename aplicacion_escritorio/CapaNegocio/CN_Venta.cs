@@ -20,13 +20,23 @@ namespace CapaNegocio
 
         public bool AgregarVenta(Venta venta)
         {
-            
+
             return ocd_venta.AgregarVenta(venta);
+        }
+
+        public async Task<bool> AgregarVentaAsync(Venta venta)
+        {
+            return await ocd_venta.AgregarVentaAsync(venta);
         }
 
         public int ObtenerUltimoIDVenta()
         {
             return ocd_venta.ObtenerUltimoIDVenta();
+        }
+
+        public async Task<int> ObtenerUltimoIDVentaAsync()
+        {
+            return await ocd_venta.ObtenerUltimoIDVentaAsync();
         }
 
         public List<Venta> ObtenerVentasPorIdUsuario(int usuario)
@@ -41,7 +51,7 @@ namespace CapaNegocio
 
         public decimal CalcularMontoTotalVentasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
-            return ocd_venta.CalcularMontoTotalVentasPorFecha(fechaDesde,fechaHasta);
+            return ocd_venta.CalcularMontoTotalVentasPorFecha(fechaDesde, fechaHasta);
         }
     }
 }

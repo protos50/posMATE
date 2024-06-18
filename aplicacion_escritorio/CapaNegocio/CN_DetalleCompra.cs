@@ -29,5 +29,10 @@ namespace CapaNegocios
         {      
                 return datosDetalleCompra.AgregarDetalleCompra(detalleCompra);                    
         }
+
+        public async Task<bool> AgregarDetalleCompraAsync(DetalleCompra detalleCompra)
+        {
+                return await datosDetalleCompra.AgregarDetalleCompraAsync(detalleCompra);
+        }
     }
 }
