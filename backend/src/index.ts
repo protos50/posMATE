@@ -8,6 +8,8 @@ import rolesRouter from "./routes/rolesRouter";
 import permisosRouter from "./routes/permisosRouter";
 import comprasRouter from "./routes/comprasRouter";
 import productosRouter from "./routes/productosRouter";
+import categoriasRouter from "./routes/categoriasRouter";
+import proveedoresRouter from "./routes/proveedoresRouter";
 dotenv.config();
 
 function checkDBConnection() {
@@ -16,8 +18,9 @@ function checkDBConnection() {
     database
       .connect()
       .then((conn: any) => {
-
-        console.log(`Connected to database ${conn.config.database} on server ${conn.config.server}:${conn.config.port}`);
+        console.log(
+          `Connected to database ${conn.config.database} on server ${conn.config.server}:${conn.config.port}`
+        );
       })
       .catch((err: any) => {
         console.log("Error connecting to database", err.message);
@@ -41,10 +44,11 @@ app.use("/auth", authRouter);
 app.use("/clientes", clientesRouter);
 app.use("/usuarios", usuariosRouter);
 app.use("/roles", rolesRouter);
-app.use("/permisos",permisosRouter);
-app.use("/compras",comprasRouter);
-app.use("/productos",productosRouter);
-
+app.use("/permisos", permisosRouter);
+app.use("/compras", comprasRouter);
+app.use("/productos", productosRouter);
+app.use("/categorias", categoriasRouter);
+app.use("/proveedores", proveedoresRouter);
 app.get("/", (_req: express.Request, _res: express.Response) => {
   _res.send("Hola");
 });
