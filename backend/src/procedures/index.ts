@@ -4,6 +4,14 @@
  * WARNING: If you change anything in this file it may be automatically overwriten!
  */
 
+export { execute as SP_OBTENERPRODUCTOS } from './impl/SP_OBTENERPRODUCTOS';
+export { execute as SP_AGREGARPRODUCTO } from './impl/SP_AGREGARPRODUCTO';
+export { execute as SP_EDITARPRODUCTO } from './impl/SP_EDITARPRODUCTO';
+export { execute as SP_OBTENERPRODUCTOPORCODIGOPRODUCTO } from './impl/SP_OBTENERPRODUCTOPORCODIGOPRODUCTO';
+export { execute as SP_ACTUALIZARSTOCKPRODUCTO } from './impl/SP_ACTUALIZARSTOCKPRODUCTO';
+export { execute as SP_ACTUALIZARSTOCKPRODUCTOVENTA } from './impl/SP_ACTUALIZARSTOCKPRODUCTOVENTA';
+export { execute as SP_OBTENERPRODUCTOPORID } from './impl/SP_OBTENERPRODUCTOPORID';
+export { execute as SP_OBTENERPRODUCTOSMASVENDIDOS } from './impl/SP_OBTENERPRODUCTOSMASVENDIDOS';
 export { execute as SP_REGISTRARUSUARIO } from './impl/SP_REGISTRARUSUARIO';
 export { execute as SP_OBTENERUSUARIOPORNOMBRE } from './impl/SP_OBTENERUSUARIOPORNOMBRE';
 export { execute as SP_OBTENERULTIMOIDCOMPRA } from './impl/SP_OBTENERULTIMOIDCOMPRA';
