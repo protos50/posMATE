@@ -1,7 +1,7 @@
 import { Router } from "express";
- import {  listarDetalleCompra } from "../controllers/detalleCompraController";
+ import {  agregarDetalleCompra, listarDetalleCompra } from "../controllers/detalleCompraController";
 const detalleComprasRouter = Router();
 
 detalleComprasRouter.get("/", listarDetalleCompra); 
-
+detalleComprasRouter.post("/", agregarDetalleCompra)
 export default detalleComprasRouter;

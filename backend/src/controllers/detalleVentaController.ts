@@ -43,14 +43,30 @@ export const listarDetalleVenta = async (req: Request, res: Response) => {
   }
 };
 
-export const listarDeetalleVenta = async (req: Request, res: Response) => {
+export const agregarDetalleVenta = async (req: Request, res: Response) => {
   try {
-    const result = await database.query("SELECT * FROM PROVEEDOR");
+    var request = new sql.Request(database);
+    request.input("IdVenta", sql.Int(), req.body.IdVenta);
+    request.input("IdProducto", sql.Int(), req.body.oProducto.IdProducto);
+    request.input("PrecioVenta", sql.Decimal(18, 2), req.body.PrecioVenta);
+    request.input("Cantidad", sql.Int(), req.body.Cantidad);
+    request.input("Subtotal", sql.Decimal(18, 2), req.body.Subtotal);
+    request.input("FechaRegistro", sql.DateTime(), req.body.FechaRegistro);
 
-    if (result.recordset.length > 0) {
-      res.json(result.recordset);
+    const result = await request.query(
+      "INSERT INTO DETALLE_VENTA(IdVenta, IdProducto, PrecioVenta, Cantidad, Subtotal, FechaRegistro) " +
+        "VALUES(@IdVenta, @IdProducto, @PrecioVenta, @Cantidad, @Subtotal, @FechaRegistro)"
+    );
+
+    if (result.rowsAffected[0] == 1) {
+      res.status(201).json({
+        message: "Detalle de venta insertado correctamente",
+        producto: {},
+      });
     } else {
-      res.status(401).json({ message: "No existen proveedores" });
+      res
+        .status(401)
+        .json({ message: "No se pudo agregar el detalle de venta" });
     }
   } catch (error: any) {
     console.error(error);
