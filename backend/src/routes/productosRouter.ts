@@ -6,14 +6,15 @@ import {
   editarProducto,
   actualizarStock,
   actualizarStockVenta,
-  masVendidos
+  masVendidos,
+  obtenerProductoPorCodigo
 } from "../controllers/productoController";
 const productosRouter = Router();
 
 productosRouter.get("/", listarProductos);
-productosRouter.get("/codigo/:codigoProducto", obtenerProductoPorId);
+productosRouter.get("/codigo/:codigoProducto", obtenerProductoPorCodigo);
 productosRouter.get('/masvendidos', masVendidos)
-productosRouter.get('/:codigoProducto', obtenerProductoPorId)
+productosRouter.get('/:id', obtenerProductoPorId)
 
 productosRouter.post("/", insertarProducto);
 productosRouter.put("/:id",editarProducto)

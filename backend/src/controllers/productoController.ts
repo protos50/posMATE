@@ -5,6 +5,7 @@ import {
   SP_ACTUALIZARSTOCKPRODUCTOVENTA,
   SP_AGREGARPRODUCTO,
   SP_EDITARPRODUCTO,
+  SP_OBTENERPRODUCTOPORCODIGOPRODUCTO,
   SP_OBTENERPRODUCTOPORID,
   SP_OBTENERPRODUCTOS,
   SP_OBTENERPRODUCTOSMASVENDIDOS,
@@ -35,7 +36,7 @@ export const listarProductos = async (req: Request, res: Response) => {
         })
       );
     } else {
-      res.status(401).json({ message: "Usuario no encontrado" });
+      res.status(401).json({ message: "Producto no encontrado" });
     }
   } catch (error: any) {
     console.error(error);
@@ -45,11 +46,11 @@ export const listarProductos = async (req: Request, res: Response) => {
 
 export const obtenerProductoPorId = async (req: Request, res: Response) => {
   try {
-    if (!req.params.codigoProducto)
+    if (!req.params.id)
       return res.status(400).json({ message: "id es requerido" });
 
     const result = await SP_OBTENERPRODUCTOPORID({
-      Id: parseInt(req?.params?.codigoProducto.toString()),
+      Id: parseInt(req?.params?.id.toString()),
     });
 
     if (result.recordset.length > 0) {
@@ -73,7 +74,45 @@ export const obtenerProductoPorId = async (req: Request, res: Response) => {
         })
       );
     } else {
-      res.status(401).json({ message: "Usuario no encontrado" });
+      res.status(401).json({ message: "Producto no encontrado" });
+    }
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).json({ message: error.message || "Error desconocido" });
+  }
+};
+
+export const obtenerProductoPorCodigo = async (req: Request, res: Response) => {
+  try {
+    if (!req.params.codigoProducto)
+      return res.status(400).json({ message: "codigoProducto es requerido" });
+
+    const result = await SP_OBTENERPRODUCTOPORCODIGOPRODUCTO({
+      CodigoProducto: req?.params?.codigoProducto.toString(),
+    });
+
+    if (result.recordset.length > 0) {
+      res.json(
+        result.recordset.map((producto: any) => {
+          return {
+            IdProducto: producto.IdProducto,
+            oCategoria: {
+              IdCategoria: producto.IdCategoria,
+              Descripcion: producto.CategoriaDescripcion,
+            },
+            Nombre: producto.Nombre,
+            Descripcion: producto.Descripcion,
+            Stock: producto.Stock,
+            PrecioCompra: producto.PrecioCompra,
+            PrecioVenta: producto.PrecioVenta,
+            Estado: producto.Estado,
+            FechaRegistro: producto.FechaRegistro,
+            codigoProducto: producto.codigoProducto,
+          };
+        })
+      );
+    } else {
+      res.status(401).json({ message: "Producto no encontrado" });
     }
   } catch (error: any) {
     console.error(error);
@@ -102,7 +141,7 @@ export const insertarProducto = async (req: Request, res: Response) => {
         producto: {},
       });
     } else {
-      res.status(401).json({ message: "Usuario no encontrado" });
+      res.status(401).json({ message: "No se pudo agregar el producto" });
     }
   } catch (error: any) {
     console.error(error);
@@ -132,7 +171,7 @@ export const editarProducto = async (req: Request, res: Response) => {
         producto: {},
       });
     } else {
-      res.status(401).json({ message: "Error al insertar producto" });
+      res.status(401).json({ message: "Error al editar producto" });
     }
   } catch (error: any) {
     console.error(error);

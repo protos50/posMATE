@@ -10,6 +10,7 @@ import comprasRouter from "./routes/comprasRouter";
 import productosRouter from "./routes/productosRouter";
 import categoriasRouter from "./routes/categoriasRouter";
 import proveedoresRouter from "./routes/proveedoresRouter";
+import ventasRouter from "./routes/ventasRouter";
 dotenv.config();
 
 function checkDBConnection() {
@@ -49,6 +50,7 @@ app.use("/compras", comprasRouter);
 app.use("/productos", productosRouter);
 app.use("/categorias", categoriasRouter);
 app.use("/proveedores", proveedoresRouter);
+app.use("/ventas", ventasRouter);
 app.get("/", (_req: express.Request, _res: express.Response) => {
   _res.send("Hola");
 });
