@@ -11,6 +11,7 @@ namespace CapaNegocio
     public class CN_Permiso
     {
         private CD_Permiso ocd_permiso = new CD_Permiso();
+        
         public List<Permiso> Listar(int IdUsuario)
         {
             return ocd_permiso.Listar(IdUsuario);

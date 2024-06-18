@@ -198,7 +198,7 @@ namespace CapaPresentacion
             else
             {
                 int idProducto = int.Parse(txtId.Text);
-                Producto productoExistente = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(txtCodigoBarra.Text);
+                Producto productoExistente = negocioProducto.ObtenerProductoPorCodigoProducto(txtCodigoBarra.Text);
 
                 if (productoExistente != null)
                 {
@@ -375,7 +375,7 @@ namespace CapaPresentacion
             string codigoProducto = txtCodigoBarra.Text;
 
             //obtenemos un producto por el codigo de barras
-            Producto productoCargado = await negocioProducto.ObtenerProductoPorCodigoProductoAsync(codigoProducto);
+            Producto productoCargado = negocioProducto.ObtenerProductoPorCodigoProducto(codigoProducto);
 
             //Si este existe se rellenan los textBox correspondientes y solo nos permite usar cantidad y precio compra
             if (productoCargado != null)

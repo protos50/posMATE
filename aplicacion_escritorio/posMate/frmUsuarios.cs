@@ -47,7 +47,7 @@ namespace CapaPresentacion
             cboEstado.SelectedIndex = 0;
 
             // Obtener una lista de roles y agregarlos al ComboBox cboRol
-            List<Rol> listaRol = new CN_Rol().Listar();
+            List<Rol> listaRol = await new CN_Rol().ListarRolAsync();
             foreach (var item in listaRol)
             {
                 cboRol.Items.Add(new OpcionCombo() { Valor = item.IdRol, Texto = item.Descripcion });

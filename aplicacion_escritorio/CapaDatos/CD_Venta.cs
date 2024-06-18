@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -115,7 +116,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@IdUsuario", venta.oUsuario.IdUsuario);
                     cmd.Parameters.AddWithValue("@IdCliente", venta.oCliente.IdCliente);
 
-
+                    
                     cmd.Parameters.AddWithValue("@MontoPago", venta.MontoPago);
                     cmd.Parameters.AddWithValue("@MontoCambio", venta.MontoCambio);
                     cmd.Parameters.AddWithValue("@MontoTotal", venta.MontoTotal);
@@ -131,6 +132,34 @@ namespace CapaDatos
 
                     return false;
                 }
+            }
+        }
+
+        public bool AgregarVentaAsync(Venta venta)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar una venta
+                string url = $"{apiUrl}/ventas";
+
+                // Convertir el objeto Venta a JSON
+                string jsonVenta = JsonConvert.SerializeObject(venta);
+                StringContent content = new StringContent(jsonVenta, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST
+                HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+                // Asegurarse de que la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
             }
         }
 

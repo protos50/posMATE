@@ -162,4 +162,22 @@ router.get('/ventas', (req, res) => {
     showStatus(res);
 })
 
+// Endpoint para simular la inserción de una venta
+router.post('/ventas', (req, res) => {
+    console.log("POST : /ventas");
+    const venta = req.body;
+
+    console.log("Venta recibida:", venta);
+
+    // Simular una inserción exitosa
+    res.status(201).json({
+        message: "Venta insertada correctamente",
+        venta: venta
+    });
+
+    // Mostrar el estado de la respuesta
+    showStatus(res);
+});
+
+
 module.exports = router;

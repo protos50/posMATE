@@ -130,6 +130,34 @@ namespace CapaDatos
             }
         }
 
+        public bool AgregarCompraAsync(Compra compra)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar una compra
+                string url = $"{apiUrl}/compras";
+
+                // Convertir el objeto Compra a JSON
+                string jsonCompra = JsonConvert.SerializeObject(compra);
+                StringContent content = new StringContent(jsonCompra, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST
+                HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+                // Asegurarse de que la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
+            }
+        }
+
 
         public int ObtenerUltimoIDCompra()
         {

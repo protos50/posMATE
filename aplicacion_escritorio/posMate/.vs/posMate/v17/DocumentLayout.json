@@ -3,10 +3,19 @@
   "WorkspaceRootPath": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capanegocio\\cn_producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\posmate\\frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|solutionrelative:frmcompras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -14,9 +23,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00E83E2B-6BF3-40C7-8B24-97B7A81690FF}|CapaPresentacion.csproj|E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmverstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,12 +53,6 @@
       "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capaentidad\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7658CC3-F52B-432D-913F-E889B8352206}|..\\CapaEntidad\\CapaEntidad.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capaentidad\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39EA568F-BF67-4D93-AE80-AE543AD90701}|..\\CapaDatos\\CapaDatos.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capadatos\\cd_rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{611159C9-D7F6-4BE1-9F4B-C5DD6F958EC9}|..\\CapaNegocio\\CapaNegocio.csproj|e:\\proyecto_ing2_postmate\\posmate\\aplicacion_escritorio\\capanegocio\\cn_permiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -77,7 +77,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -89,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "frmCompras.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmCompras.cs",
               "RelativeDocumentMoniker": "frmCompras.cs",
@@ -97,12 +97,11 @@
               "RelativeToolTip": "frmCompras.cs",
               "ViewState": "AQIAAAEBAAAAAAAAAAAawAoBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T02:07:40.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T02:07:40.821Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "frmVerStock.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\posMate\\frmVerStock.cs",
               "RelativeDocumentMoniker": "frmVerStock.cs",
@@ -114,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Producto.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\Producto.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\Producto.cs",
@@ -126,7 +125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "CN_DetalleVenta.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_DetalleVenta.cs",
               "RelativeDocumentMoniker": "..\\CapaNegocio\\CN_DetalleVenta.cs",
@@ -138,7 +137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CN_DetalleCompra.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_DetalleCompra.cs",
               "RelativeDocumentMoniker": "..\\CapaNegocio\\CN_DetalleCompra.cs",
@@ -150,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "CD_DetalleVenta.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_DetalleVenta.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_DetalleVenta.cs",
@@ -162,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "CD_DetalleCompra.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_DetalleCompra.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_DetalleCompra.cs",
@@ -174,7 +173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "DetalleVenta.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\DetalleVenta.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\DetalleVenta.cs",
@@ -186,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "DetalleCompra.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\DetalleCompra.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\DetalleCompra.cs",
@@ -198,20 +197,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "CN_Producto.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_Producto.cs",
               "RelativeDocumentMoniker": "..\\CapaNegocio\\CN_Producto.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaNegocio\\CN_Producto.cs",
               "RelativeToolTip": "..\\CapaNegocio\\CN_Producto.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAUwEQAAAAJAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAywEQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T08:44:36.666Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "CD_Producto.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Producto.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Producto.cs",
@@ -223,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "Compra.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\Compra.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\Compra.cs",
@@ -235,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "CD_Compra.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Compra.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Compra.cs",
@@ -247,27 +246,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "CD_Usuario.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Usuario.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Usuario.cs",
               "RelativeToolTip": "..\\CapaDatos\\CD_Usuario.cs",
-              "ViewState": "AQIAAJIAAAAAAAAAAAAwwFwAAAAzAAAA",
+              "ViewState": "AQIAADoAAAAAAAAAAAAgwFIAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T20:03:28.004Z"
+              "WhenOpened": "2024-04-29T20:03:28.004Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 0,
               "Title": "CD_Rol.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Rol.cs",
               "RelativeDocumentMoniker": "..\\CapaDatos\\CD_Rol.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaDatos\\CD_Rol.cs",
               "RelativeToolTip": "..\\CapaDatos\\CD_Rol.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAUwCMAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-03T07:47:39.233Z"
+              "WhenOpened": "2024-06-03T07:47:39.233Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -329,15 +330,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 2,
               "Title": "Usuario.cs",
               "DocumentMoniker": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\Usuario.cs",
               "RelativeDocumentMoniker": "..\\CapaEntidad\\Usuario.cs",
               "ToolTip": "E:\\proyecto_ing2_postMATE\\posMATE\\aplicacion_escritorio\\CapaEntidad\\Usuario.cs",
               "RelativeToolTip": "..\\CapaEntidad\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAsAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAwAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-01T21:01:48.514Z"
+              "WhenOpened": "2024-05-01T21:01:48.514Z",
+              "EditorCaption": ""
             }
           ]
         }

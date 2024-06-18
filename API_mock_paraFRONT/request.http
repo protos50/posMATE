@@ -23,18 +23,18 @@ GET http://localhost:3033/permisos?idusuario=1
 GET http://localhost:3033/detallescompra?idCompra=1
 
 ###
-curl -X POST http://localhost:3033/productos -H "Content-Type: application/json" -d '{
+curl -X POST https://posmatebackend.matiasb.net/productos -H "Content-Type: application/json" -d '{
     "oCategoria": {
         "IdCategoria": 1
     },
-    "Nombre": "Nuevo Producto",
+    "Nombre": "Nuevo Producto11",
     "Descripcion": "Descripción del nuevo producto",
     "Stock": 100,
     "PrecioCompra": 50.00,
     "PrecioVenta": 60.00,
     "Estado": "Activo",
     "FechaRegistro": "2023-11-14T16:17:16.607",
-    "codigoProducto": "NP123"
+    "codigoProducto": "NP125"
 }'
 
 ###
@@ -58,6 +58,7 @@ GET  http://localhost:3033/productos/codigo/P004 HTTP/1.1
 ###
 GET http://localhost:3033/productos/1 HTTP/1.1
 
+
 ###
 curl -X PUT http://localhost:3033/productos/1/actualizarStock -H "Content-Type: application/json" -d '{"cantidad": 10}'
 
@@ -66,4 +67,22 @@ curl -X PUT http://localhost:3033/productos/1/actualizarStockVenta -H "Content-T
 
 ###
 curl -X GET "http://localhost:3033/productos/masvendidos?topN=5&fechaDesde=2023-01-01&fechaHasta=2023-12-31" -H "Content-Type: application/json"
+
+###
+curl -X POST http://localhost:3033/compras -H "Content-Type: application/json" -d '{
+    "oUsuario": { "IdUsuario": 1 },
+    "oProveedor": { "IdProveedor": 2 },
+    "MontoTotal": 150.00,
+    "FechaRegistro": "2023-11-14T16:17:16.607"
+}'
+
+###
+curl -X POST http://localhost:3033/ventas -H "Content-Type: application/json" -d '{
+    "oUsuario": { "IdUsuario": 1 },
+    "oCliente": { "IdCliente": 2 },
+    "MontoPago": 200.00,
+    "MontoCambio": 50.00,
+    "MontoTotal": 150.00,
+    "FechaRegistro": "2023-11-14T16:17:16.607"
+}'
 

@@ -31,10 +31,10 @@ namespace posMate
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
 
-            List<Permiso> ListaPermisos = new CN_Permiso().Listar(usuarioActual.IdUsuario);
+            List<Permiso> ListaPermisos = await new CN_Permiso().ListarAsync(usuarioActual.IdUsuario);
 
             //Recorre los permisos para habilitar menus
             foreach (Control control in panel1.Controls)

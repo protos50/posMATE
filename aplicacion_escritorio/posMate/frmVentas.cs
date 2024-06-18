@@ -210,7 +210,7 @@ namespace CapaPresentacion
             int idProducto = (int)productoSeleccionado.Valor; // ID del producto
             int cantidad = Convert.ToInt32(txtCantidad.Text);
 
-            Producto producto = await negocioProducto.ObtenerProductoPorIdAsync(idProducto);
+            Producto producto = negocioProducto.ObtenerProductoPorId(idProducto);
             // Verificar si el producto existe y la cantidad es válida
             if (producto != null && cantidad > 0 && cantidad <= producto.Stock)
             {

@@ -47,8 +47,8 @@ const rolesMenus = {
         { oRol: { IdRol: 3 }, NombreMenu: "btnReportes" }
     ],
     5: [
-        { oRol: { IdRol: 2 }, NombreMenu: "btnUsuario" },
-        { oRol: { IdRol: 2 }, NombreMenu: "btnBackup" },
+        { oRol: { IdRol: 2 }, NombreMenu: "btnProductos" },
+        { oRol: { IdRol: 2 }, NombreMenu: "btnVentas" },
         { oRol: { IdRol: 2 }, NombreMenu: "btnReportes" },
         { oRol: { IdRol: 2 }, NombreMenu: "btnCerrarSesion" }
     ]

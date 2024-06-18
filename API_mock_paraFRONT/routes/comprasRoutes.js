@@ -80,4 +80,22 @@ router.get('/compras', (req, res) => {
     showStatus(res);
 })
 
+// Endpoint para simular la inserción de una compra
+router.post('/compras', (req, res) => {
+    console.log("POST : /compras");
+    const compra = req.body;
+
+    console.log("Compra recibida:", compra);
+
+    // Simular una inserción exitosa
+    res.status(201).json({
+        message: "Compra insertada correctamente",
+        compra: compra
+    });
+
+    // Mostrar el estado de la respuesta
+    showStatus(res);
+});
+
+
 module.exports = router;

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
+using System.Windows.Forms;
 
 namespace CapaDatos
 {
@@ -29,14 +31,32 @@ namespace CapaDatos
             {
                 string url = apiUrl + "/roles";
                 HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                lista = JsonConvert.DeserializeObject<List<Rol>>(responseBody);
+
+                // Verificar si la respuesta fue exitosa
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    lista = JsonConvert.DeserializeObject<List<Rol>>(responseBody);
+                }
+                else
+                {
+                    // Obtener el mensaje de error del servidor
+                    string errorBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error en la autenticación: {errorBody}");
+                    MessageBox.Show($"Error en la autenticación: {errorBody}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return null;
+                }
             }
             catch (HttpRequestException e)
             {
-                throw e;
+                // Manejo de excepciones de HttpRequestException
+                Console.WriteLine($"Excepción al hacer la solicitud HTTP: {e.Message}");
+                MessageBox.Show($"Excepción al hacer la solicitud HTTP: {e.Message}", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return null;
             }
+
             return lista;
         }
 
