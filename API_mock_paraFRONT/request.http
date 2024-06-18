@@ -16,6 +16,9 @@ GET http://localhost:3033/productos
 GET http://localhost:3033/clientes
 
 ###
+GET http://localhost:3033/ventas HTTP/1.1
+
+###
 GET http://localhost:3033/permisos?idusuario=1
 
 
@@ -53,10 +56,12 @@ curl -X PUT http://localhost:3033/productos/1 -H "Content-Type: application/json
 }'
 
 ###
-GET  http://localhost:3033/productos/codigo/P004 HTTP/1.1
+GET  https://posmatebackend.matiasb.net/productos/codigo/P001 HTTP/1.1
+###
+GET  http://localhost:3033/productos/codigo/P001 HTTP/1.1
 
 ###
-GET http://localhost:3033/productos/1 HTTP/1.1
+GET https://posmatebackend.matiasb.net/productos/1 HTTP/1.1
 
 
 ###
@@ -85,4 +90,38 @@ curl -X POST http://localhost:3033/ventas -H "Content-Type: application/json" -d
     "MontoTotal": 150.00,
     "FechaRegistro": "2023-11-14T16:17:16.607"
 }'
+
+###
+curl -X GET "http://localhost:3033/ventas/ultimoid"
+###
+curl -X GET "http://localhost:3033/compras/ultimoid"
+
+###
+curl -X POST "http://localhost:3033/detallecompra" -H "Content-Type: application/json" -d '{
+    "IdCompra": 1,
+    "oProducto": {
+        "IdProducto": 1
+    },
+    "PrecioCompra": 10.00,
+    "PrecioVenta": 15.00,
+    "Cantidad": 5,
+    "MontoTotal": 50.00,
+    "FechaRegistro": "2023-01-01T00:00:00"
+}'
+
+###
+curl -X GET "http://localhost:3033/detallesventa?idVenta=1"
+###
+curl -X POST "http://localhost:3033/detalleventa" -H "Content-Type: application/json" -d '{
+    "IdVenta": 1,
+    "oProducto": {
+        "IdProducto": 1
+    },
+    "PrecioVenta": 15.00,
+    "Cantidad": 2,
+    "Subtotal": 30.00,
+    "FechaRegistro": "2023-01-01T00:00:00"
+}'
+
+
 

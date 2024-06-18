@@ -61,14 +61,35 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     lista = new List<DetalleVenta>();
                 }
             }
 
             return lista;
         }
-        
+
+        public async Task<List<DetalleVenta>> ObtenerDetallesVentaAsync(int idVenta)
+        {
+            List<DetalleVenta> lista = new List<DetalleVenta>();
+
+            try
+            {
+                string url = $"{apiUrl}/detallesventa?idVenta=" + idVenta;
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                lista = JsonConvert.DeserializeObject<List<DetalleVenta>>(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejo de excepciones en caso de error en la solicitud HTTP
+                return null;
+            }
+            return lista;
+        }
+
+
         public bool AgregarDetalleVenta(DetalleVenta detalleVenta)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -92,12 +113,40 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     return false;
                 }
             }
         }
-        
+
+        public async Task<bool> AgregarDetalleVentaAsync(DetalleVenta detalleVenta)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar un detalle de venta
+                string url = $"{apiUrl}/detalleventa";
+
+                // Convertir el objeto DetalleVenta a JSON
+                string jsonDetalleVenta = JsonConvert.SerializeObject(detalleVenta);
+                StringContent content = new StringContent(jsonDetalleVenta, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST de manera asincrónica
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                // Verificar si la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
+            }
+        }
+
 
         public Dictionary<string, decimal> ObtenerGananciasPorCategoria(FranjaHoraria franjaHoraria)
         {
@@ -154,7 +203,7 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    
+
                     gananciasPorCategoria = new Dictionary<string, decimal>();
                 }
             }

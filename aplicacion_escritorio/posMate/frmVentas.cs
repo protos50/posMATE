@@ -335,7 +335,7 @@ namespace CapaPresentacion
                                 FechaRegistro = dtpFecha.Value
                             };
 
-                            if (negocioDetalle.AgregarDetalleVenta(detalle))
+                            if (await negocioDetalle.AgregarDetalleVentaAsync(detalle))
                             {
                                 detallesVenta.Add(detalle);
                             }

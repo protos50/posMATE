@@ -53,7 +53,7 @@ namespace CapaPresentacion
         }
 
 
-        private void dgvDataVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvDataVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Obtén el índice de la fila seleccionada
             int index = e.RowIndex;
@@ -68,7 +68,7 @@ namespace CapaPresentacion
                 CN_DetalleVenta negocioDetalleVenta = new CN_DetalleVenta();
 
                 // Obtén los detalles de la compra desde la capa de negocio
-                List<DetalleVenta> detallesVenta = negocioDetalleVenta.ObtenerDetallesVenta(idVenta);
+                List<DetalleVenta> detallesVenta = await negocioDetalleVenta.ObtenerDetallesVentaAsync(idVenta);
 
                 // Calcula la suma total de los detalles de la compra
                 decimal subtotal = detallesVenta.Sum(dc => dc.Subtotal);
