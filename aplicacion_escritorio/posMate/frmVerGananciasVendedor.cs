@@ -17,7 +17,7 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void frmVerGananciasVendedor_Load(object sender, EventArgs e)
+        private async void frmVerGananciasVendedor_Load(object sender, EventArgs e)
         {
 
 
@@ -38,11 +38,11 @@ namespace CapaPresentacion
             ActualizarReporte();
         }
 
-        private void ActualizarReporte()
+        private async void ActualizarReporte()
         {
             // Obtiene las ventas y los usuarios
-            var ventas = cnVenta.ObtenerVentas();
-            var usuarios = cnUsuario.Listar();
+            var ventas = await cnVenta.ObtenerVentasAsync();
+            var usuarios = await cnUsuario.ListarAsync();
 
             // Obtiene el año y el mes seleccionados
             int añoSeleccionado;

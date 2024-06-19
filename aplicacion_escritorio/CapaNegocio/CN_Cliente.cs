@@ -28,7 +28,12 @@ namespace CapaNegocio
             return ocd_cliente.AgregarCliente(cliente);
         }
 
-        public Cliente BuscarClientePorDNI(int dni)
+        public async Task<bool> AgregarClienteAsync(Cliente cliente)
+        {
+            return await ocd_cliente.AgregarClienteAsync((Cliente)cliente);
+        }
+
+            public Cliente BuscarClientePorDNI(int dni)
         {
             return ocd_cliente.BuscarClientePorDNI(dni);
         }

@@ -128,7 +128,7 @@ namespace CapaDatos
             try
             {
                 // URL del endpoint de la API para agregar un detalle de compra
-                string url = $"{apiUrl}/detallecompra";
+                string url = $"{apiUrl}/detallescompra";
 
                 // Convertir el objeto DetalleCompra a JSON
                 string jsonDetalleCompra = JsonConvert.SerializeObject(detalleCompra);

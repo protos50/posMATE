@@ -46,7 +46,7 @@ namespace CapaPresentacion
             // Establecer la opción seleccionada inicialmente como "Activo"
             cboEstado.SelectedIndex = 0;
 
-            List<Categoria> listaCat = new CN_Categoria().ObtenerCategorias();
+            List<Categoria> listaCat = await new CN_Categoria().ObtenerCategoriasAsync();
             foreach (var item in listaCat)
             {
                 cboCateg.Items.Add(new OpcionCombo() { Valor = item.IdCategoria, Texto = item.Descripcion });

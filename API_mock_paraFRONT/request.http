@@ -16,13 +16,20 @@ GET http://localhost:3033/productos
 GET http://localhost:3033/clientes
 
 ###
-GET http://localhost:3033/ventas HTTP/1.1
+GET https://posmatebackend.matiasb.net/ventas HTTP/1.1
+###
+GET https://posmatebackend.matiasb.net/ventas?idusuario=5 HTTP/1.1
 
 ###
-GET http://localhost:3033/permisos?idusuario=1
-
+GET https://posmatebackend.matiasb.net/permisos?idusuario=1
 
 ###
+GET https://posmatebackend.matiasb.net/compras?idusuario=1 HTTP/1.1
+
+###
+GET https://posmatebackend.matiasb.net/compras HTTP/1.1
+###
+
 GET http://localhost:3033/detallescompra?idCompra=1
 
 ###

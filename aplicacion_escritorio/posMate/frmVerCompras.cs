@@ -20,12 +20,12 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void frmVerCompras_Load(object sender, EventArgs e)
+        private async void frmVerCompras_Load(object sender, EventArgs e)
         {
             CN_Usuario negocioUsuario = new CN_Usuario();
 
             // Obtener la lista de usuarios desde la capa de negocio
-            List<Usuario> usuarios = negocioUsuario.Listar();
+            List<Usuario> usuarios = await negocioUsuario.ListarAsync();
 
             // Llena el control desplegable con los nombres de los usuarios
             foreach (Usuario usuario in usuarios)
@@ -117,7 +117,7 @@ namespace CapaPresentacion
 
         }
 
-        private void ddlUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        private async void ddlUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Limpia el DataGridView y los labels
             dgvData.Rows.Clear();
@@ -133,7 +133,7 @@ namespace CapaPresentacion
                 CN_Compra negocioCompra = new CN_Compra();
 
                 // Obtener la lista de compras desde la capa de negocio
-                List<Compra> compras = negocioCompra.ObtenerCompras();
+                List<Compra> compras = await negocioCompra.ObtenerComprasAsync();
 
                 // Calcula la suma total de las ventas
                 decimal totalCompras = compras.Sum(v => v.MontoTotal);
@@ -165,14 +165,14 @@ namespace CapaPresentacion
             {
                 // Obtén el IdUsuario del usuario seleccionado
                 CN_Usuario negocioUsuario = new CN_Usuario();
-                Usuario usuario = negocioUsuario.ObtenerUsuarioPorNombre(usuarioSeleccionado);
+                Usuario usuario = await negocioUsuario.ObtenerUsuarioPorNombreAsync(usuarioSeleccionado);
                 int idUsuario = usuario.IdUsuario;
 
 
 
                 // Filtra las compras por el usuario seleccionado
                 CN_Compra negocioCompra = new CN_Compra();
-                List<Compra> compras = negocioCompra.ObtenerCompras(idUsuario);
+                List<Compra> compras = await negocioCompra.ObtenerComprasAsync(idUsuario);
 
 
                 // Calcula la suma total de las compras

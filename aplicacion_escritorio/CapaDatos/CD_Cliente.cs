@@ -104,6 +104,35 @@ namespace CapaDatos
             }
         }
 
+        public async Task<bool> AgregarClienteAsync(Cliente cliente)
+        {
+            try
+            {
+                // URL del endpoint de la API para agregar un cliente
+                string url = $"{apiUrl}/clientes";
+
+                // Convertir el objeto Cliente a JSON
+                string jsonCliente = JsonConvert.SerializeObject(cliente);
+                StringContent content = new StringContent(jsonCliente, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud POST de manera asincrónica
+                HttpResponseMessage response = await client.PostAsync(url, content);
+
+                // Verificar si la solicitud fue exitosa
+                response.EnsureSuccessStatusCode();
+
+                // Opcionalmente, puedes verificar el código de estado o el contenido de la respuesta
+                return response.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException e)
+            {
+                // Manejar excepciones en caso de error en la solicitud HTTP
+                Console.WriteLine($"Request error: {e.Message}");
+                return false;
+            }
+        }
+
+
         public Cliente BuscarClientePorDNI(int dni)
         {
             Cliente clienteEncontrado = null;

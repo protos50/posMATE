@@ -27,7 +27,7 @@ namespace CapaPresentacion
             txtBusqueda.TextChanged += new EventHandler(txtBusqueda_TextChanged);
         }
 
-        private void frmProveedores_Load(object sender, EventArgs e)
+        private async void frmProveedores_Load(object sender, EventArgs e)
         {
             // Agregar opciones "Activo" y "No Activo" al ComboBox cboEstado2
             cboEstado2.Items.Add(new OpcionCombo() { Valor = 1, Texto = "Activo" });
@@ -41,7 +41,7 @@ namespace CapaPresentacion
             cboEstado2.SelectedIndex = 0;
 
             // Obtener una lista de proveedores y mostrarlos en el dgvData
-            List<Proveedor> ObtenerProveedores = new CN_Proveedor().ObtenerProveedores();
+            List<Proveedor> ObtenerProveedores = await new CN_Proveedor().ListarProveedorAsync();
 
 
             foreach (DataGridViewColumn columna in dgvData.Columns)
@@ -206,10 +206,10 @@ namespace CapaPresentacion
             }
         }
 
-        private void ActualizarDataGridView()
+        private async void ActualizarDataGridView()
         {
             // Obtener una nueva lista de proveedores y actualizar el DataGridView
-            List<Proveedor> proveedores = new CN_Proveedor().ObtenerProveedores();
+            List<Proveedor> proveedores = await new CN_Proveedor().ListarProveedorAsync();
             dgvData.Rows.Clear();
 
             foreach (Proveedor proveedor in proveedores)

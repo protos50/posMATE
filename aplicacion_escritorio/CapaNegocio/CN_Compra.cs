@@ -11,9 +11,15 @@ namespace CapaNegocio
     public class CN_Compra
     {
         private CD_Compra ocd_compra = new CD_Compra();
+        
         public List<Compra> ObtenerCompras(int? IdUsuario = null)
         {
             return ocd_compra.ObtenerCompras(IdUsuario);
+        }
+
+        public async Task<List<Compra>> ObtenerComprasAsync(int? IdUsuario = null)
+        {
+            return await ocd_compra.ObtenerComprasAsync(IdUsuario);
         }
 
         public bool AgregarCompra(Compra compra)

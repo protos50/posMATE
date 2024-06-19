@@ -17,6 +17,10 @@ namespace CapaNegocio
             return ocd_venta.ObtenerVentas(IdUsuario);
         }
 
+        public async Task<List<Venta>> ObtenerVentasAsync(int? idUsuario = null)
+        {
+            return await ocd_venta.ObtenerVentasAsync(idUsuario);
+        }
 
         public bool AgregarVenta(Venta venta)
         {

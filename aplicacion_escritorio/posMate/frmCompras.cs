@@ -91,7 +91,7 @@ namespace CapaPresentacion
 
 
         //al cargar el form
-        private void frmCompras_Load(object sender, EventArgs e)
+        private async void frmCompras_Load(object sender, EventArgs e)
         {
             //la fecha se carga a la acutal
             dtpFecha.Value = DateTime.Now; 
@@ -106,7 +106,7 @@ namespace CapaPresentacion
 
 
             //obtenemos los proveedores y agregamos al cboProveedor, guardamos id y nombre
-            List<Proveedor> listaProveedor = new CN_Proveedor().ObtenerProveedores();
+            List<Proveedor> listaProveedor = await new CN_Proveedor().ListarProveedorAsync();
             foreach (var item in listaProveedor)
             {
                 if (item.Estado != false)
@@ -121,7 +121,7 @@ namespace CapaPresentacion
 
            
             //obtenemos las categorias y guardamos id y nombre
-            List<Categoria> listaCategoria = new CN_Categoria().ObtenerCategorias();
+            List<Categoria> listaCategoria = await new CN_Categoria().ObtenerCategoriasAsync();
             foreach (var item in listaCategoria)
             {
                 if (item.estado != false)

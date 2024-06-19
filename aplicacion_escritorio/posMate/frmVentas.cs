@@ -194,7 +194,7 @@ namespace CapaPresentacion
                 Apellido = txtApellido.Text
             };
 
-            negocioCliente.AgregarCliente(nuevoCliente);
+            await negocioCliente.AgregarClienteAsync(nuevoCliente);
 
 
             if (txtId.Text == "0")
@@ -302,7 +302,10 @@ namespace CapaPresentacion
             CN_DetalleVenta negocioDetalle = new CN_DetalleVenta();
             CN_Producto negocioProducto = new CN_Producto();
 
-            if (await negocioVenta.AgregarVentaAsync(nuevaVenta))
+            // muestra messagebox del resultado agregarDetalleVenta
+            bool agregarVenta1 = await negocioVenta.AgregarVentaAsync(nuevaVenta);
+
+            if (agregarVenta1)
             {
                 int idVenta = await negocioVenta.ObtenerUltimoIDVentaAsync();
                 if (idVenta > 0)
@@ -335,7 +338,9 @@ namespace CapaPresentacion
                                 FechaRegistro = dtpFecha.Value
                             };
 
-                            if (await negocioDetalle.AgregarDetalleVentaAsync(detalle))
+                            bool agregarDetalleVenta = await negocioDetalle.AgregarDetalleVentaAsync(detalle);
+                            
+                            if (agregarDetalleVenta)
                             {
                                 detallesVenta.Add(detalle);
                             }

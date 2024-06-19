@@ -15,7 +15,7 @@ namespace CapaPresentacion
             txtBusqueda.TextChanged += new EventHandler(txtBusqueda_TextChanged);
         }
 
-        private void frmCategorias_Load(object sender, EventArgs e)
+        private async void frmCategorias_Load(object sender, EventArgs e)
         {
             // Agregar opciones "Activo" y "No Activo" al ComboBox cboEstado
             cboEstado.Items.Add(new OpcionCombo() { Valor = 1, Texto = "Activo" });
@@ -29,7 +29,7 @@ namespace CapaPresentacion
             cboEstado.SelectedIndex = 0;
 
             // Obtener una lista de categorias y mostrarlos en el dgv
-            List<Categoria> ObtenerCategorias = new CN_Categoria().ObtenerCategorias();
+            List<Categoria> ObtenerCategorias = await new CN_Categoria().ObtenerCategoriasAsync();
 
             foreach (DataGridViewColumn columna in dgvData.Columns)
             {
@@ -192,10 +192,10 @@ namespace CapaPresentacion
         }
 
 
-        private void ActualizarDataGridView()
+        private async void ActualizarDataGridView()
         {
             // Obtener una nueva lista de categorías y actualizar el DataGridView
-            List<Categoria> categorias = new CN_Categoria().ObtenerCategorias();
+            List<Categoria> categorias = await new CN_Categoria().ObtenerCategoriasAsync();
             dgvData.Rows.Clear();
 
             foreach (Categoria categoria in categorias)
