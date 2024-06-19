@@ -5,6 +5,7 @@ import {
   SP_EDITARUSUARIO,
   SP_OBTENERUSUARIOPORNOMBRE,
 } from "../procedures";
+import { hashPassword } from  "./authController"
 
 export const obtenerUsuarioPorNombre = async (req: Request, res: Response) => {
   try {
@@ -25,6 +26,7 @@ export const obtenerUsuarioPorNombre = async (req: Request, res: Response) => {
     res.status(400).json({ message: error.message || "Error desconocido" });
   }
 };
+
 export const listarUsuarios = async (req: Request, res: Response) => {
   try {
     const result = await SP_LISTARUSUARIOS();
@@ -37,7 +39,7 @@ export const listarUsuarios = async (req: Request, res: Response) => {
             IdUsuario: usr.IdUsuario,
             Nombre: usr.Nombre,
             Apellido: usr.Apellido,
-            Clave: usr.Clave,
+            Clave: "********",
             Email: usr.Email,
             DNI: usr.DNI,
             Direccion: usr.Direccion,
@@ -77,7 +79,10 @@ export const agregarUsuario = async (req: Request, res: Response) => {
 
 Si el registro fue exitoso, IdUsuarioResultado es el ID del nuevo usuario*/
   try {
-    const result = await SP_REGISTRARUSUARIO(req.body);
+    let usuario = req.body;
+    usuario.Clave = hashPassword(usuario.Clave);
+    
+    const result = await SP_REGISTRARUSUARIO(usuario);
     console.log("RESULTADO USUARIO", result);
     res.json(result.output);
   } catch (error: any) {
@@ -107,7 +112,15 @@ export const editarUsuario = async (req: Request, res: Response) => {
 
 Si el registro fue exitoso, IdUsuarioResultado es el ID del nuevo usuario*/
   try {
-    const result = await SP_EDITARUSUARIO(req.body);
+    //Si req.body.Clave es igual a ********, eliminar Clave de body
+    let usuario = req.body;
+    if(usuario.Clave === "********"){
+      delete usuario.Clave;
+    }else{
+      usuario.Clave = hashPassword(usuario.Clave);
+    }
+
+    const result = await SP_EDITARUSUARIO(usuario);
     console.log("RESULTADO EDITAR USUARIO", result);
     res.json(result.output);
   } catch (error: any) {
@@ -117,4 +130,5 @@ Si el registro fue exitoso, IdUsuarioResultado es el ID del nuevo usuario*/
       Mensaje: error.message || "Error desconocido",
     });
   }
-};
+}; 
+
