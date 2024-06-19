@@ -16,7 +16,7 @@ export const obtenerUsuarioPorNombre = async (req: Request, res: Response) => {
     });
 
     if (result.recordset.length > 0) {
-      res.json(result.recordset);
+      res.json(result.recordset[0]);
     } else {
       res.status(401).json({ message: "No existen usuario con ese nombre" });
     }

@@ -4,11 +4,12 @@ import { SP_AGREGARCOMPRA, SP_OBTENERCOMPRAS, SP_OBTENERULTIMOIDCOMPRA } from ".
 
 export const listarCompras = async (req: Request, res: Response) => {
   try {
-    if (!req.query.idusuario)
-      return res.status(400).json({ message: "idusuario es requerido" });
+    //if (!req.query.idusuario)
+    //  return res.status(400).json({ message: "idusuario es requerido" });
 
+    
     const result = await SP_OBTENERCOMPRAS({
-      IdUsuario: parseInt(req?.query?.idusuario.toString()),
+      IdUsuario: (req?.query?.idusuario ? parseInt(req.query.idusuario.toString()) : undefined),
     });
 
     if (result.recordset.length > 0) {

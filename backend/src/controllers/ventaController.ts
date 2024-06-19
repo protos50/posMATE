@@ -4,13 +4,18 @@ import sql from "mssql";
 
 export const listarVentas = async (req: Request, res: Response) => {
   try {
-    const result = await database.query(
+    var request = new sql.Request(database);
+
+    if (req.query?.idusuario) request.input("IdUsuario", req.query.idusuario);
+
+    const result = await request.query(
       "SELECT v.IdVenta, u.IdUsuario, u.Nombre AS NombreUsuario, c.Nombre AS NombreCliente,v.MontoPago, v.MontoCambio, v.MontoTotal, v.FechaRegistro " +
         "FROM Venta v " +
         "INNER JOIN USUARIO u ON v.IdUsuario = u.IdUsuario " +
-        "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente"
-    ); /*+
-                                                  (IdUsuario.HasValue ? " WHERE v.IdUsuario = @IdUsuario" : ""))*/
+        "INNER JOIN Cliente c ON v.IdCliente = c.IdCliente" +
+        (req.query?.idusuario ? " WHERE v.IdUsuario = @IdUsuario" : "")
+    );
+
     console.log(result);
     if (result.recordset.length > 0) {
       res.json(
@@ -78,7 +83,7 @@ export const agregarVenta = async (req: Request, res: Response) => {
     request.input("MontoPago", req.body.MontoPago);
     request.input("MontoCambio", req.body.MontoCambio);
     request.input("MontoTotal", req.body.MontoTotal);
-    request.input("FechaRegistro", req.body.FechaRegistro);
+    request.input("FechaRegistro", sql.DateTime, req.body.FechaRegistro);
 
     const result = await request.query(
       "INSERT INTO Venta(IdUsuario, IdCliente, MontoPago, MontoCambio, MontoTotal, FechaRegistro) " +
@@ -95,7 +100,7 @@ export const agregarVenta = async (req: Request, res: Response) => {
       res.status(401).json({ message: "No se pudo agregar la compra" });
     }
   } catch (error: any) {
-    console.error(error);
+    console.error("ERROR VENTA", error);
     res.status(400).json({ message: error.message || "Error desconocido" });
   }
 };
